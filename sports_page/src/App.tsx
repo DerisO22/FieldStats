@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import HeaderMenu from './components/HeaderMenu';
 
 let App = () => {
   const [data, setData] = useState<{ message: string | null}>({ message: null });
@@ -13,6 +14,7 @@ let App = () => {
 
   return (
     <>
+      <HeaderMenu />
       {data ? <p>{data.message}</p> : <p>Loading...</p>}
     </>
   )
