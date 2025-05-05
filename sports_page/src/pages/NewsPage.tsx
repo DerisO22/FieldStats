@@ -1,9 +1,14 @@
+import './pageStyles/newspage.css'
+import './pageStyles/common_styles.css'
+
 const NewsPage = () => {
   return (
     <>
-      <h1>News Page</h1>
+        <div className='page_container'>
+            <h1 className='header1'>News Page</h1>
+        </div>
     </>
   )
 }
 
-export default NewsPage
+export default NewsPage;

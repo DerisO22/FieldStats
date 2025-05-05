@@ -8,6 +8,7 @@ import SchoolsPage from './pages/SchoolsPage';
 import NewsPage from './pages/NewsPage';
 import HeaderMenu from './components/HeaderMenu';
 import SubHeader from './components/SubHeader';
+import Footer from './components/Footer';
 
 const App = () => {
   // Login Auth States
@@ -31,6 +32,8 @@ const App = () => {
           <Route path='/news' element={<NewsPage />}/>
           <Route path='/schools' element={<SchoolsPage />}/>
         </Routes>
+
+      <Footer />
     </Router>
     </>
   )
