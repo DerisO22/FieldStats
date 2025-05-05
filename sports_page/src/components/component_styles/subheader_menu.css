@@ -1,0 +1,31 @@
+:root {
+    --header-menu-background: #fff;
+    --header-menu--text-color: #000;
+    --header-menu-border: #ccc;
+    --header-menu-border-radius: 0.5em;
+    --header-menu-padding: 1rem;
+    --header-menu-title-font-size: 1.7rem;
+    --header-menu-text-font-size: 1.2rem;
+    --header-menu-gap: 30px;
+    --header-menu-font-weight: 750;
+    --main-color: #384670;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
+}
+
+.subheaderMenuContainer {
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    margin-top: 4.2rem;
+    background-color: #384670;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}

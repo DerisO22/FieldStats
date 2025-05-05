@@ -1,0 +1,108 @@
+:root {
+    --main-color: white;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
+  }
+  
+  .modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .modal_content {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: aliceblue;
+  }
+  
+  .form_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 0.7rem;
+    color: var(--text-color);
+  }
+  
+  .close_button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+    color: #666;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .close_button:hover {
+    font-size: 2.4rem;
+    color: var(--text-color);
+  }
+  
+  .form_fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .form_fields input,
+  .form_fields select {
+    padding: 1rem;
+    border: 1px solid #5a4646;
+    border-radius: 4px;
+    font-size: 13px;
+    color: black;
+    background-color: aliceblue;
+    box-shadow: 0 1px 1px 0px black;
+  }
+  
+  .form_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  .submit_button {
+    text-align: center;
+    width: 5.5rem;
+    height: 2.5rem;
+    color: var(--text-color);
+    background-color: var(--bg4-color);
+    border-radius: 10px;
+    font-weight: 700;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    border: 2px solid rgb(253, 249, 249);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .submit_button:hover {
+    border-radius: 0;
+    color: aliceblue;
+    background-color: var(--text-color);
+  }
+
+  .error_message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
