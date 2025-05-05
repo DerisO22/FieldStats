@@ -4,10 +4,16 @@
     --header-menu-border: #ccc;
     --header-menu-border-radius: 0.5em;
     --header-menu-padding: 1rem;
-    --header-menu-title-font-size: 1.75rem;
-    --header-menu-text-font-size: 1.3rem;
+    --header-menu-title-font-size: 1.25rem;
+    --header-menu-text-font-size: 1.1rem;
     --header-menu-gap: 30px;
     --header-menu-font-weight: 750;
+    --main-color: white;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
 }
 
 body,
@@ -46,16 +52,42 @@ html {
     opacity: 0.5;
 }
 
+.authContainer {
+    position: absolute;
+    right: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+  
+.authButton {
+    background-color: var(--bg2-color);
+    color: var(--text-color);
+    border: none;
+    font-weight: 700;
+    border-radius: 7px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+  
+.authButton:hover {
+    background-color: var(--text-color);
+    color: white;
+    border-radius: 0;
+}
 
 .headerMenu {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: left;
     align-items: center;
     gap: var(--header-menu-gap);
-    padding-right: var(--header-menu-padding);
     height: 5%;
+    margin-left: 1.5rem;
+    overflow: auto;
 }
 
 .headerMenuItem {
@@ -77,10 +109,6 @@ html {
 }
 
 @media (max-width: 968px) {
-    .headerMenu {
-        padding-right: 2rem;
-    }
-
     .headerMenuItem {
         text-align: center; 
     }
