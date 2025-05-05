@@ -3,7 +3,8 @@ import pg from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
-import { authenticationToken } from './middleware/auth.js';
+import { authenticateToken } from './middleware/auth.js';
+import jwt from 'jsonwebtoken'
 dotenv.config();
 
 const app = express();
@@ -28,7 +29,7 @@ async function setupApp() {
     await pgClient.connect();
 
     // Home Page API Endpoints
-    app.get('/data', (req, res) => {
+    app.get('/data', authenticateToken, (req, res) => {
         pgClient.query('SELECT * FROM posts;')
     })
 
@@ -38,7 +39,11 @@ async function setupApp() {
         console.log('Login request received:', req.body);
         
         console.log(`Username: ${username}, Password: ${password}`);
+
+        // Successful Login
         if ( username === "ADMIN" && password === "ADMIN") {
+            const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
+            res.cookie('token', token, { httpOnly: true});
             res.json({ success: true });
         } else { 
             res.status(401).json({ success: false });
