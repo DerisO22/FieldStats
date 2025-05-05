@@ -2,17 +2,21 @@ import express from 'express';
 import pg from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import { errorHandler } from './middleware/errorHandler.js';
+import { authenticationToken } from './middleware/auth.js';
 dotenv.config();
 
 const app = express();
 const port = 3001;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: (process.env.NODE_ENV ? 'domain' : 'http://localhost:5173'),
     credentials: true,
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(errorHandler)
 
 async function setupApp() {
     const pgClient = new pg.Client({
@@ -23,6 +27,7 @@ async function setupApp() {
     
     await pgClient.connect();
 
+    // Home Page API Endpoints
     app.get('/data', (req, res) => {
         pgClient.query('SELECT * FROM posts;')
     })
