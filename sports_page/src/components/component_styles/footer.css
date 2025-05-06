@@ -1,0 +1,51 @@
+:root {
+    --header-menu-background: #fff;
+    --header-menu--text-color: #000;
+    --header-menu-border: #ccc;
+    --header-menu-border-radius: 0.5em;
+    --header-menu-padding: 1rem;
+    --header-menu-title-font-size: 1.7rem;
+    --header-menu-text-font-size: 1.2rem;
+    --header-menu-gap: 30px;
+    --header-menu-font-weight: 750;
+    --main-color: #384670;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
+}
+
+.footer_container {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 1rem;
+}
+
+.footer_container .header1 {
+    color: #fcb900;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.footer_menu {
+    width: 50%;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_menu .headerMenuItem {
+    color: #005eb8;
+}
+
+.copyright {
+    color: var(--text-color);
+    text-align: center;
+    font-size: 1rem;
+}

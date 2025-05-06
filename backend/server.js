@@ -2,17 +2,22 @@ import express from 'express';
 import pg from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import { errorHandler } from './middleware/errorHandler.js';
+import { authenticateToken } from './middleware/auth.js';
+import jwt from 'jsonwebtoken'
 dotenv.config();
 
 const app = express();
 const port = 3001;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: (process.env.NODE_ENV ? 'domain' : 'http://localhost:5173'),
     credentials: true,
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(errorHandler)
 
 async function setupApp() {
     const pgClient = new pg.Client({
@@ -21,11 +26,24 @@ async function setupApp() {
         user: process.env.DATABASE_USERNAME
     });
     
-    await pgClient.connect();
+    try {
+        await pgClient.connect();
+        console.log('Database connected successfully');
+    } catch (err) {
+        console.error('Database connection error:', err);
+    }
 
-    app.get('/data', (req, res) => {
-        pgClient.query('SELECT * FROM posts;')
-    })
+    // Sports Page API Endpoints
+    app.get('/sports_data', async (req, res) => {
+        try {
+            const query = 'SELECT * FROM sports;';
+            const result = await pgClient.query(query);
+            res.json(result.rows);
+        } catch (error) {
+            console.error('Error fetching sports data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    });
 
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
@@ -33,7 +51,11 @@ async function setupApp() {
         console.log('Login request received:', req.body);
         
         console.log(`Username: ${username}, Password: ${password}`);
+
+        // Successful Login
         if ( username === "ADMIN" && password === "ADMIN") {
+            const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
+            res.cookie('token', token, { httpOnly: true});
             res.json({ success: true });
         } else { 
             res.status(401).json({ success: false });

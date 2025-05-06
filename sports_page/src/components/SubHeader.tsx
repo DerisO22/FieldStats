@@ -1,4 +1,5 @@
 import '../components/component_styles/subheader_menu.css'
+import { Link } from 'react-router-dom'
 
 const SubHeader = () => {
 
@@ -9,10 +10,10 @@ const SubHeader = () => {
             </div> */}
 
             <div className="headerMenu">
-                <div className="headerMenuItem">Home</div>
-                <div className="headerMenuItem">Item</div>
-                <div className="headerMenuItem">Item</div>
-                <div className="headerMenuItem">Item</div>
+                <Link to="/" className="headerMenuItem">Home</Link>
+                <Link to="/sports" className="headerMenuItem">Sports</Link>
+                <Link to="/schools" className="headerMenuItem">Schools</Link>
+                <Link to="/news" className="headerMenuItem">News</Link>
             </div>
         </div>
     )
