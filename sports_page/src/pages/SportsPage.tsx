@@ -3,10 +3,10 @@ import './pageStyles/sportspage.css'
 import './pageStyles/common_styles.css'
 
 interface Sport {
-  SportID: number,
-  SportName: string,
-  Description: string,
-  GenderID: number,
+  sport_id: number,
+  sport_name: string,
+  description: string,
+  has_gender_division: boolean,
 }
 
 const SportsPage = () => {
@@ -47,9 +47,9 @@ const SportsPage = () => {
 
               <tbody>
               {!isLoading && sportsData.map((sport) => (
-                <tr key={sport.SportID}>
-                  <td>{sport.SportName}</td>
-                  <td>{sport.Description}</td>
+                <tr key={sport.sport_id}>
+                  <td>{sport.sport_name}</td>
+                  <td>{sport.description}</td>
                 </tr>
               ))}
               </tbody>

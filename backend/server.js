@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
 import { authenticateToken } from './middleware/auth.js';
+import initializeDatabase from './database/db.js';
 import jwt from 'jsonwebtoken'
 dotenv.config();
 
@@ -20,6 +21,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(errorHandler)
 
 async function setupApp() {
+    try {
+        await initializeDatabase();
+    } catch (err) {
+        console.error('Failed to initialize database schema:', err);
+    }
+
     const pgClient = new pg.Client({
         database: process.env.DATABASE_DATABASE,
         password: process.env.DATABASE_PASSWORD,
@@ -44,6 +51,9 @@ async function setupApp() {
             res.status(500).json({ error: error.message });
         }
     });
+
+    // Protected API Endpoints (Editing/Deleting/Adding):
+    
 
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
