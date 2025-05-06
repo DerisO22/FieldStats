@@ -26,12 +26,24 @@ async function setupApp() {
         user: process.env.DATABASE_USERNAME
     });
     
-    await pgClient.connect();
+    try {
+        await pgClient.connect();
+        console.log('Database connected successfully');
+    } catch (err) {
+        console.error('Database connection error:', err);
+    }
 
-    // Home Page API Endpoints
-    app.get('/data', authenticateToken, (req, res) => {
-        pgClient.query('SELECT * FROM posts;')
-    })
+    // Sports Page API Endpoints
+    app.get('/sports_data', async (req, res) => {
+        try {
+            const query = 'SELECT * FROM sports;';
+            const result = await pgClient.query(query);
+            res.json(result.rows);
+        } catch (error) {
+            console.error('Error fetching sports data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    });
 
     app.post('/login', (req, res) => {
         const { username, password } = req.body;

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './pageStyles/homepage.css'
 import './pageStyles/common_styles.css'
 
