@@ -55,6 +55,9 @@ async function setupApp() {
     // Protected API Endpoints (Editing/Deleting/Adding):
     
 
+    /**
+     * Authentication Endpoints
+     */
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
     
@@ -62,7 +65,7 @@ async function setupApp() {
         
         console.log(`Username: ${username}, Password: ${password}`);
 
-        // Successful Login
+        // Check For an Admin Login
         if ( username === "ADMIN" && password === "ADMIN") {
             const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
             res.cookie('token', token, { httpOnly: true});
@@ -70,6 +73,19 @@ async function setupApp() {
         } else { 
             res.status(401).json({ success: false });
         }
+
+        // Check for A Regular Login by checking Database(users table)
+        
+    })
+
+    app.post('/signup', (req, res) => {
+        const { username, password } = req.body;
+
+        console.log('Signup Request Recieved: ', req.body);
+        console.log(`Username: ${username}, Password: ${password}`);
+
+        // Check If username or password exist in the database
+        
     })
     
     app.listen(port, '0.0.0.0', () => {

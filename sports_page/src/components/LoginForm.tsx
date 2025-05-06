@@ -10,6 +10,7 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProps) => {
+    const [isSigningIn, setIsSigningIn] = useState<boolean>(false);
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState('');
@@ -19,6 +20,10 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
         setUsername('');
         setPassword('');
         setError('');
+    }
+
+    const handleSignIn = () => {
+        setIsSigningIn(prev => !prev);
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -32,11 +37,11 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
         try {
             console.log('Submitting with:', { username, password });
             
-            const res = await fetch("http://localhost:3001/login", {
+            const res = await fetch(`http://localhost:3001/${!isSigningIn ? 'login' : 'signup'}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
-                credentials: 'include', // Include cookies if any
+                credentials: 'include', 
             });
 
             const data = await res.json();
@@ -65,13 +70,19 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
             <div className="modal_overlay">
                 <div className="modal_content">
                     <form onSubmit={handleSubmit}>
-                        <div className="form_header">
-                            <h2>User Login</h2>
-                            <button type="button" className="close_button" onClick={onClose}>
-                                ×
-                            </button>
+                        <div className='form_exit_container'>
+                            <button type="button" className="close_button" onClick={onClose}>×</button>
                         </div>
+                    
+                        <div className="form_header">
+                            <h2 className='form_title'>{!isSigningIn ? 'Login' : 'SignUp'}</h2>
 
+                            {!isSigningIn ? 
+                            <button onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
+                            <button onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
+                            }
+                        </div>
+                        
                         <div className="form_fields">
                             <input 
                                 type="text" 
@@ -91,7 +102,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                         </div>
                         <div className="form_actions">
                             <button type="submit" className="submit_button">
-                                Login
+                                {!isSigningIn ? 'Login' : 'SignUp'}
                             </button>
                         </div>
                     </form>

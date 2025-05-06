@@ -28,6 +28,23 @@
     font-size: 3rem;
 }
 
+.logo_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.footer_container .logo_image {
+    padding: 1rem;
+    width: 4.5rem;
+    background-color: rgb(82, 117, 181);
+    border: 2px solid var(--bg2-color);
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
 .footer_menu {
     width: 50%;
     height: fit-content;

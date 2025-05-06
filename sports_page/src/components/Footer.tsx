@@ -5,7 +5,10 @@ const Footer = () => {
   return (
     <>
         <div className='footer_container'>
-            <h1 className='header1'>Logo</h1>
+            <div className='logo_container'>
+                <img className='logo_image' src='page_logo.webp'></img>
+            </div>
+          
             <div className='footer_menu'>
                 <Link to="/" className="headerMenuItem">Home</Link>
                 <Link to="/sports" className="headerMenuItem">Sports</Link>
