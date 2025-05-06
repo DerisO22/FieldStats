@@ -5,7 +5,7 @@ import './pageStyles/common_styles.css'
 interface Sport {
   sport_id: number,
   sport_name: string,
-  description: string,
+  sport_description: string,
   has_gender_division: boolean,
 }
 
@@ -49,7 +49,7 @@ const SportsPage = () => {
               {!isLoading && sportsData.map((sport) => (
                 <tr key={sport.sport_id}>
                   <td>{sport.sport_name}</td>
-                  <td>{sport.description}</td>
+                  <td>{sport.sport_description}</td>
                 </tr>
               ))}
               </tbody>

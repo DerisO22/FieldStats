@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
 import { authenticateToken } from './middleware/auth.js';
 import initializeDatabase from './database/db.js';
+import initializeSampleData from './database/db_data.js';
 import jwt from 'jsonwebtoken'
 dotenv.config();
 
@@ -20,9 +21,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(errorHandler)
 
+async function loadSampleData() {
+    try {
+        initializeSampleData();
+        console.log("Successfully Loaded Sample Data");
+    } catch (err) {
+        console.log(`Error Loading Sample Data: ${err}`);
+    }
+}
+
 async function setupApp() {
     try {
         await initializeDatabase();
+        await loadSampleData();
     } catch (err) {
         console.error('Failed to initialize database schema:', err);
     }
@@ -85,7 +96,7 @@ async function setupApp() {
         console.log(`Username: ${username}, Password: ${password}`);
 
         // Check If username or password exist in the database
-        
+
     })
     
     app.listen(port, '0.0.0.0', () => {
