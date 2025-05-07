@@ -4,7 +4,11 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import { errorHandler } from './middleware/errorHandler.js';
+
+// Middleware Security
 import { authenticateToken } from './middleware/auth.js';
+import { signupLimiter } from './middleware/rate_limiter.js'
+
 import initializeDatabase from './database/db.js';
 import initializeSampleData from './database/db_data.js';
 import jwt from 'jsonwebtoken'
@@ -137,7 +141,7 @@ async function setupApp() {
         
     })
 
-    app.post('/signup', async (req, res) => {
+    app.post('/signup', signupLimiter, async (req, res) => {
         const { username, password } = req.body;
 
         console.log('Signup Request Recieved: ', req.body);
