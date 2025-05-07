@@ -20,6 +20,8 @@
     width: 100%;
     height: fit-content;
     padding-bottom: 1rem;
+    position: relative;
+    margin-top: auto;
 }
 
 .footer_container .header1 {
