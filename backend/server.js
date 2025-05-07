@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
 import { authenticateToken } from './middleware/auth.js';
+import initializeDatabase from './database/db.js';
+import initializeSampleData from './database/db_data.js';
 import jwt from 'jsonwebtoken'
 dotenv.config();
 
@@ -19,7 +21,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(errorHandler)
 
+async function loadSampleData() {
+    try {
+        initializeSampleData();
+        console.log("Successfully Loaded Sample Data");
+    } catch (err) {
+        console.log(`Error Loading Sample Data: ${err}`);
+    }
+}
+
 async function setupApp() {
+    try {
+        await initializeDatabase();
+        await loadSampleData();
+    } catch (err) {
+        console.error('Failed to initialize database schema:', err);
+    }
+
     const pgClient = new pg.Client({
         database: process.env.DATABASE_DATABASE,
         password: process.env.DATABASE_PASSWORD,
@@ -45,6 +63,12 @@ async function setupApp() {
         }
     });
 
+    // Protected API Endpoints (Editing/Deleting/Adding):
+    
+
+    /**
+     * Authentication Endpoints
+     */
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
     
@@ -52,7 +76,7 @@ async function setupApp() {
         
         console.log(`Username: ${username}, Password: ${password}`);
 
-        // Successful Login
+        // Check For an Admin Login
         if ( username === "ADMIN" && password === "ADMIN") {
             const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
             res.cookie('token', token, { httpOnly: true});
@@ -60,6 +84,19 @@ async function setupApp() {
         } else { 
             res.status(401).json({ success: false });
         }
+
+        // Check for A Regular Login by checking Database(users table)
+        
+    })
+
+    app.post('/signup', (req, res) => {
+        const { username, password } = req.body;
+
+        console.log('Signup Request Recieved: ', req.body);
+        console.log(`Username: ${username}, Password: ${password}`);
+
+        // Check If username or password exist in the database
+
     })
     
     app.listen(port, '0.0.0.0', () => {

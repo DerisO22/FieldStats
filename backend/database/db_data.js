@@ -5,9 +5,9 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const dbPath = path.resolve(__dirname, "db.sql")
+const dbPath = path.resolve(__dirname, "sample_data.sql")
 
-async function initializeDatabase() {
+async function initializeSampleData() {
     const client = new pg.Client({
         database: process.env.DATABASE_DATABASE,
         password: process.env.DATABASE_PASSWORD,
@@ -16,17 +16,14 @@ async function initializeDatabase() {
 
     try {
         await client.connect();
-        console.log('Connected to database successfully');
-
         const sqlScript = fs.readFileSync(dbPath, 'utf8');
         await client.query(sqlScript);
-        console.log('Database schema initialized successfully');
     } catch (err) {
-        console.error('Error initializing database:', err);
+        console.log("error Loading Sample Data:", err);
         throw err;
     } finally {
         await client.end();
     }
 }
 
-export default initializeDatabase;
+export default initializeSampleData;

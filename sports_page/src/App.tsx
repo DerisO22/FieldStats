@@ -32,7 +32,6 @@ const App = () => {
           <Route path='/news' element={<NewsPage />}/>
           <Route path='/schools' element={<SchoolsPage />}/>
         </Routes>
-
       <Footer />
     </Router>
     </>
