@@ -1,4 +1,3 @@
-
 import fs from 'fs';
 
 // Helper function to generate random dates

@@ -1,3 +1,4 @@
+-- Create Table Statements
 CREATE TABLE IF NOT EXISTS genders (
     gender_id SERIAL PRIMARY KEY,
     gender VARCHAR(10) NOT NULL

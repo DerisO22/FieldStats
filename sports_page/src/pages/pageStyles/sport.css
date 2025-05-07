@@ -1,0 +1,22 @@
+:root {
+    --main-color: white;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
+}
+
+.sport_detail_container {
+
+}
+
+.sport_description {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.sport_info p {
+    color: var(--text-color);
+    
+}

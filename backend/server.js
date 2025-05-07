@@ -63,6 +63,25 @@ async function setupApp() {
         }
     });
 
+    app.get('/sports_data/:sportName', async(req, res) => {
+        try {
+            const { sportName } = req.params;
+            console.log(sportName)
+            const query = 'SELECT * FROM sports WHERE LOWER(sport_name) = LOWER($1);';
+            const result = await pgClient.query(query, [sportName]);
+            
+            if(result.rows.length === 0){
+                res.status(404).json({ error: "Sport Not Found"});
+            }
+
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        } catch(error) {
+            console.error('Error fetching sports data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    })
+
     // Protected API Endpoints (Editing/Deleting/Adding):
     
 
@@ -85,7 +104,7 @@ async function setupApp() {
             res.status(401).json({ success: false });
         }
 
-        // Check for A Regular Login by checking Database(users table)
+        // Check for A Regular Login by checking Database
         
     })
 

@@ -20,7 +20,7 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen }: 
   return (
     <>
       <div className="headerMenuContainer">
-        <img className='logo_image' src='page_logo.webp'></img>
+        <img className='logo_image' src='/page_logo.webp'></img>
 
         <div className="authContainer">
           {isLoggedIn ? (

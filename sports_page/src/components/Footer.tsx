@@ -6,7 +6,7 @@ const Footer = () => {
     <>
         <div className='footer_container'>
             <div className='logo_container'>
-                <img className='logo_image' src='page_logo.webp'></img>
+                <img className='logo_image' src='/page_logo.webp'></img>
             </div>
           
             <div className='footer_menu'>
