@@ -1,11 +1,6 @@
-
 import './App.css'
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SportsPage from './pages/SportsPage';
-import HomePage from './pages/HomePage';
-import SchoolsPage from './pages/SchoolsPage';
-import NewsPage from './pages/NewsPage';
+import { BrowserRouter as Router} from 'react-router-dom';
 import HeaderMenu from './components/HeaderMenu';
 import SubHeader from './components/SubHeader';
 import Footer from './components/Footer';
