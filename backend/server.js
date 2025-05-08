@@ -107,6 +107,24 @@ async function setupApp() {
         }
     });
 
+    app.get('/players_data/player_profile/:player_id', async (req, res) => {
+        try {
+            const { player_id } = req.params;
+            const query = 'SELECT * FROM players WHERE player_id = $1'
+            const result = await pgClient.query(query, [player_id])
+
+            if(result.rows.length === 0){
+                res.status(404).json({ error: "Player Not Found"});
+            }
+
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        } catch (error) {
+            console.error('Error fetching player data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    })
+
     // Protected API Endpoints (Editing/Deleting/Adding):
     
 

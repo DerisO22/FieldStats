@@ -35,8 +35,8 @@ const Player = () => {
     fetchData();
   }, [])
 
-  const handleSportClick = (sportName: string) => {
-    const playerUrl = `/players/player_profile/${sportName.toLowerCase()}`;
+  const handleSportClick = (player_id: number) => {
+    const playerUrl = `/players/player_profile/${player_id}`;
     console.log("Navigating to:", playerUrl);
     navigate(playerUrl);
 };
@@ -54,7 +54,7 @@ const Player = () => {
                         <button 
                             key={player.player_id}
                             className='sport_button'
-                            onClick={() => handleSportClick(`${player.first_name}-${player.last_name}`)}
+                            onClick={() => handleSportClick(player.player_id)}
                         >
                             {`${player.first_name} ${player.last_name}`}
                         </button>

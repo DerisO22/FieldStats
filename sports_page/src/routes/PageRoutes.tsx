@@ -16,7 +16,7 @@ const PageRoutes = () => {
         <Route path='/news' element={<NewsPage />}/>
         <Route path='/schools' element={<SchoolsPage />}/>
         <Route path='/players' element={<PlayersPage />} />
-        <Route path='/players/player_profile/:playerName' element={<PlayerDetailsPage />} />
+        <Route path='/players/player_profile/:player_id' element={<PlayerDetailsPage />} />
     </Routes>
   )
 }
