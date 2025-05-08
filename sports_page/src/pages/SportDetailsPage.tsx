@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import './pageStyles/common_styles.css'
 import './pageStyles/sport.css'
 import { useParams, useNavigate } from "react-router-dom";
+import { getSportDetails } from "../services/sports_service";
 
 interface Sport {
     sport_id: number;
@@ -17,30 +18,27 @@ const SportDetailPage = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const fetchData = async() => {
         if (!sportName) {
             setError("Sport name not provided");
             setIsLoading(false);
             return;
         }
 
-        fetch(`http://localhost:3001/sports_data/${sportName}`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Sport not found');
-                }
-                return res.json();
-            })
-            .then((data) => {
-                setSportData(data);
-                setIsLoading(false);
-            })
-            .catch((err) => {
-                console.error("Error fetching sport data:", err);
-                setError(err.message);
-                setIsLoading(false);
-            });
-    }, [sportName]);
+        try {
+            const data = await getSportDetails(sportName);
+            setSportData(data);
+        } catch (error) {
+            console.error("Error fetching sport data:", error);
+            setError("Network Error");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [sportName])
 
     if (isLoading) {
         return (

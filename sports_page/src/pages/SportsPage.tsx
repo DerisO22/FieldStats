@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './pageStyles/sportspage.css'
 import './pageStyles/common_styles.css'
 import { useNavigate } from 'react-router-dom'
+import { getSports } from '../services/sports_service'
 
 interface Sport {
     sport_id: number,
@@ -15,24 +16,28 @@ const SportsPage = () => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const fetchData = () => {
+    const fetchData = async () => {
         setIsLoading(true);
-
-        fetch("http://localhost:3001/sports_data") 
-            .then((res) => res.json())
-            .then((data) => {
-                setSportsData(data);
-                setIsLoading(false);
-            })
-            .catch((err) => {
-                console.error('Error fetching sports data:', err);
-                setIsLoading(false);
-            });
+    
+        try {
+            const data = await getSports();
+            setSportsData(data);
+        } catch (error) {
+            console.error('Error fetching sports data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleSportClick = (sportName: string) => {
+        const sportUrl = `/sports/${sportName.toLowerCase()}`;
+        console.log("Navigating to:", sportUrl);
+        navigate(sportUrl);
+    };
 
     return (
         <div className='page_container'>
@@ -46,12 +51,7 @@ const SportsPage = () => {
                         <button 
                             key={sport.sport_id}
                             className='sport_button'
-                            onClick={() => {
-                                // Use consistent casing and add debugging
-                                const sportUrl = `/sports/${sport.sport_name.toLowerCase()}`;
-                                console.log("Navigating to:", sportUrl);
-                                navigate(sportUrl);
-                            }}
+                            onClick={() => handleSportClick(sport.sport_name)}
                         >
                             {sport.sport_name}
                         </button>

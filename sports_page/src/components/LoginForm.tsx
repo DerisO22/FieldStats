@@ -1,6 +1,6 @@
-
 import React, { FormEvent, useState } from 'react'
 import './component_styles/login_form.css'
+import { login } from '../services/authentication_service'
 
 interface LoginFormProps {
     isLoggedIn: boolean;
@@ -9,57 +9,84 @@ interface LoginFormProps {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface FormState {
+    username: string;
+    password: string;
+    isSigningIn: boolean;
+    error: string
+}
+
+const InitialFormState: FormState = {
+    username: '',
+    password: '',
+    isSigningIn: false,
+    error: ''
+}
+
 const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProps) => {
-    const [isSigningIn, setIsSigningIn] = useState<boolean>(false);
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState('');
+    const [ formState, setFormState ] = useState<FormState>(InitialFormState);
 
     const onClose = () => {
         setIsOpen(false);
-        setUsername('');
-        setPassword('');
-        setError('');
+        setFormState(InitialFormState);
     }
 
     const handleSignIn = () => {
-        setIsSigningIn(prev => !prev);
+        setFormState((prev) => ({
+            ...prev,
+            isSigningIn: !prev.isSigningIn
+        }));
     }
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setFormState(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }   
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        const { username, password } = formState;
         
         if (!username || !password) {
-            setError('Please enter both username and password');
+            setFormState((prev) => ({
+                ...prev,
+                error: "Please enter both username and password"
+            }))
             return;
         }
 
         try {
             console.log('Submitting with:', { username, password });
-            
-            const res = await fetch(`http://localhost:3001/${!isSigningIn ? 'login' : 'signup'}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
-                credentials: 'include', 
+            // Use the function in authentication_service.js
+            const res = await login({ 
+                username: username, 
+                password: password, 
+                isSigningIn: formState.isSigningIn
             });
-
             const data = await res.json();
             
             if (res.ok) {
                 console.log('Login successful:', data);
                 setIsLoggedIn(true);
                 setIsOpen(false);
-                setUsername('');
-                setPassword('');
-                setError('');
+                setFormState(InitialFormState);
             } else {
                 console.error('Login failed:', data);
-                setError(data.message || 'Invalid credentials');
+                setFormState((prev) => ({
+                    ...prev,
+                    error: "Invalid Credentials"
+                }))
             }
         } catch (err) {
             console.error('Login error:', err);
-            setError('Network error. Please try again.');
+            setFormState((prev) => ({
+                ...prev,
+                error: "Network error. Please try again"
+            }))
         }
     }
 
@@ -75,7 +102,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                         </div>
                     
                         <div className="form_header">
-                            <h2 className='form_title'>{!isSigningIn ? 'Login' : 'Sign Up'}</h2>
+                            <h2 className='form_title'>{!formState.isSigningIn ? 'Login' : 'Sign Up'}</h2>
                         </div>
                         
                         <div className="form_fields">
@@ -84,26 +111,28 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                                 type="text" 
                                 placeholder="Username" 
                                 className="form_input"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                name='username'
+                                value={formState.username}
+                                onChange={handleInputChange}
                             />
                             <p className='text'>Password</p>
                             <input 
                                 type="password" 
                                 placeholder="Password" 
                                 className="form_input"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name='password'
+                                value={formState.password}
+                                onChange={handleInputChange}
                             />
-                            {error && <div className="error_message">{error}</div>}
+                            {formState.error && <div className="error_message">{formState.error}</div>}
                         </div>
                         <div className="form_actions">
-                            {!isSigningIn ? 
+                            {!formState.isSigningIn ? 
                                 <button onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
                                 <button onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
                             }
                             <button type="submit" className="submit_button">
-                                {!isSigningIn ? 'Login' : 'Sign Up'}
+                                {!formState.isSigningIn ? 'Login' : 'Sign Up'}
                             </button>
                         </div>
                     </form>

@@ -9,14 +9,14 @@
 
 #root {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 2rem;
+  background-color: #9a9a9a22;
 }
 
 body,
 html {
-  background-color: aliceblue;
 }
 
 /* ScrollBar */

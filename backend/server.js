@@ -56,7 +56,9 @@ async function setupApp() {
         console.error('Database connection error:', err);
     }
 
-    // Sports Page API Endpoints
+    /**
+     * Sports Related API Endpoints
+     */
     // All Sports
     app.get('/sports_data', async (req, res) => {
         try {
@@ -85,6 +87,40 @@ async function setupApp() {
             res.json(result.rows[0]);
         } catch(error) {
             console.error('Error fetching sports data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    })
+
+    /**
+     * Player Related API Endpoints
+     */
+    // Pretty sure their's 2000 players so don't load all of them
+    app.get('/players_data', async (req, res) => {
+        try {
+            const query = `SELECT * FROM players
+                           LIMIT 200;`;
+            const result = await pgClient.query(query);
+            res.json(result.rows);
+        } catch (error) {
+            console.error('Error fetching players data:', error);
+            res.status(500).json({ error: error.message });
+        }
+    });
+
+    app.get('/players_data/player_profile/:player_id', async (req, res) => {
+        try {
+            const { player_id } = req.params;
+            const query = 'SELECT * FROM players WHERE player_id = $1'
+            const result = await pgClient.query(query, [player_id])
+
+            if(result.rows.length === 0){
+                res.status(404).json({ error: "Player Not Found"});
+            }
+
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        } catch (error) {
+            console.error('Error fetching player data:', error);
             res.status(500).json({ error: error.message });
         }
     })

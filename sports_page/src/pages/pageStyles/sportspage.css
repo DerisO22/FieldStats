@@ -14,20 +14,24 @@
     grid-template-columns: repeat(5, 5fr);
     justify-content: space-evenly;
     gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 2px solid var(--bg2-color);
+    border-bottom: 2px solid var(--bg2-color);
 }
 
 .sport_button {
     margin: auto;
     width: 10rem;
-    height: 3rem;
-    background-color: #005eb8;
+    height: 2.3rem;
+    background-color: var(--text-color);
     box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.568);
     font-weight: 700;
     border-radius: 5px;
     border: none;
-    border-right: 1px solid black;
+    /* border-right: 1px solid black;
     border-left: 1px solid black;
-    border-top: 1px solid black;
+    border-top: 1px solid black; */
     transition: all 0.3s ease-in-out;
 }
 
