@@ -75,15 +75,11 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                         </div>
                     
                         <div className="form_header">
-                            <h2 className='form_title'>{!isSigningIn ? 'Login' : 'SignUp'}</h2>
-
-                            {!isSigningIn ? 
-                            <button onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
-                            <button onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
-                            }
+                            <h2 className='form_title'>{!isSigningIn ? 'Login' : 'Sign Up'}</h2>
                         </div>
                         
                         <div className="form_fields">
+                            <p className='text'>Email Address</p>
                             <input 
                                 type="text" 
                                 placeholder="Username" 
@@ -91,6 +87,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
+                            <p className='text'>Password</p>
                             <input 
                                 type="password" 
                                 placeholder="Password" 
@@ -101,8 +98,12 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                             {error && <div className="error_message">{error}</div>}
                         </div>
                         <div className="form_actions">
+                            {!isSigningIn ? 
+                                <button onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
+                                <button onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
+                            }
                             <button type="submit" className="submit_button">
-                                {!isSigningIn ? 'Login' : 'SignUp'}
+                                {!isSigningIn ? 'Login' : 'Sign Up'}
                             </button>
                         </div>
                     </form>

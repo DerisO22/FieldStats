@@ -14,6 +14,7 @@ const SubHeader = () => {
                 <Link to="/sports" className="headerMenuItem">Sports</Link>
                 <Link to="/schools" className="headerMenuItem">Schools</Link>
                 <Link to="/news" className="headerMenuItem">News</Link>
+                <Link to='/players' className='headerMenuItem'>Players</Link>
             </div>
         </div>
     )

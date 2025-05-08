@@ -1,14 +1,10 @@
-
 import './App.css'
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SportsPage from './pages/SportsPage';
-import HomePage from './pages/HomePage';
-import SchoolsPage from './pages/SchoolsPage';
-import NewsPage from './pages/NewsPage';
+import { BrowserRouter as Router} from 'react-router-dom';
 import HeaderMenu from './components/HeaderMenu';
 import SubHeader from './components/SubHeader';
 import Footer from './components/Footer';
+import PageRoutes from './routes/PageRoutes';
 
 const App = () => {
   // Login Auth States
@@ -26,12 +22,7 @@ const App = () => {
                 setIsLoginOpen={setIsLoginOpen}
             />
       <SubHeader />
-        <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path='/sports' element={<SportsPage />}/>
-          <Route path='/news' element={<NewsPage />}/>
-          <Route path='/schools' element={<SchoolsPage />}/>
-        </Routes>
+        <PageRoutes />
       <Footer />
     </Router>
     </>

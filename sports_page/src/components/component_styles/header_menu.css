@@ -61,7 +61,7 @@ html {
 }
 
 .authButton {
-    background-color: var(--bg2-color);
+    background-color: var(--bg4-color);
     color: var(--text-color);
     border: none;
     font-weight: 700;
