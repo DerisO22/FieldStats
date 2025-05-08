@@ -104,7 +104,7 @@ async function setupApp() {
 
         try {
             // Check For an Admin Login
-            if ( username === "ADMIN" && password === "ADMIN") {
+            if ( username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
                 const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
                 res.cookie('token', token, { httpOnly: true});
                 res.json({ success: true });
