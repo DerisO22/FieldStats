@@ -68,7 +68,7 @@ const PlayerDetailsPage = () => {
                 </>
             )}
             <button className="sport_button" onClick={() => navigate('/players')}>
-                Back to Sports
+                Back to Players
             </button>
         </div>
     )

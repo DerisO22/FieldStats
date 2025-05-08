@@ -6,3 +6,69 @@
     --bg3-color: #00a9e0;
     --bg4-color: #b4d9e5;
 }
+
+.player_button_container {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 5fr);
+    justify-content: space-evenly;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 2px solid var(--bg2-color);
+    border-bottom: 2px solid var(--bg2-color);
+}
+
+.player_button {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    width: 11rem;
+    height: 4rem;
+    background-color: var(--text-color);
+    box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.568);
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    /* border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black; */
+    transition: all 0.3s ease-in-out;
+}
+
+.player_button:hover {
+    color: var(--text-color);
+    background-color: #b4d9e5;
+    box-shadow: 0 2px 0px 0px var(--bg2-color);
+}
+
+.profile_image {
+    width: 1.5rem;
+    border: 1px solid aliceblue;
+    padding: 0.3rem;
+    border-radius: 50%;
+    margin-left: 0.3rem;
+    box-shadow: 0 0 4px 1px var(--bg4-color);
+}
+
+@media screen and (max-width: 1200px) {
+    .player_button_container {
+        grid-template-columns: repeat(4, 4fr);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .player_button_container {
+        grid-template-columns: repeat(3, 3fr);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .player_button_container {
+        grid-template-columns: repeat(2, 2fr);
+    }
+}

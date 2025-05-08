@@ -46,19 +46,22 @@ const Player = () => {
         <div className='page_container'>
             <h1 className='header1'>Players</h1>
 
-            <div className='sports_container'>
+            <div className='players_container'>
                 {isLoading ? (
                     <p>Loading players...</p>
                 ) : (
-                    playerData && playerData.map((player) => (
+                  <div className='player_button_container'>
+                    {playerData && playerData.map((player) => (
                         <button 
                             key={player.player_id}
-                            className='sport_button'
+                            className='player_button'
                             onClick={() => handleSportClick(player.player_id)}
                         >
+                            <img className='profile_image' src='/empty_user_image.png'></img>
                             {`${player.first_name} ${player.last_name}`}
                         </button>
-                    ))
+                    ))}
+                  </div>
                 )}
             </div>
         </div>
