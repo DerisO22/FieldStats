@@ -1,5 +1,6 @@
-// const url: string = "https://FieldStats.vercel.app/"
-const API_URL: string = "http://localhost:3001"
+const API_URL: string = import.meta.env.NODE_ENVIRONMENT ? 
+    "https://FieldStats.vercel.app" :
+    "http://localhost:3001";
 
 interface AuthInfo {
     username: string;
