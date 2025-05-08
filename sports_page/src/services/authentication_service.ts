@@ -1,4 +1,4 @@
-const API_URL: string = import.meta.env.NODE_ENVIRONMENT ? 
+const API_URL: string = import.meta.env.NODE_ENVIRONMENT === "production" ? 
     "https://FieldStats.vercel.app" :
     "http://localhost:3001";
 

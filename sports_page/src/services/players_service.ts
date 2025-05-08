@@ -2,14 +2,13 @@ const API_URL: string = (import.meta.env.NODE_ENVIRONMENT === "production") ?
     "https://FieldStats.vercel.app" :
     "http://localhost:3001";
 
-const getSports = async () => {
+const getPlayers = async () => {
     try {
-        const res = await fetch(`${API_URL}/sports_data`, {
+        const res = await fetch(`${API_URL}/players_data`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             credentials: 'include',
         });
-        
         
         if (!res.ok) {
             const errorText = await res.text();
@@ -24,4 +23,4 @@ const getSports = async () => {
     }
 }
 
-export { getSports };
+export { getPlayers };

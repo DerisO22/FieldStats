@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './pageStyles/common_styles.css'
 import './pageStyles/playerpage.css'
+import { getPlayers } from '../services/players_service'
 
 interface Player {
   player_id: number,
@@ -15,18 +16,17 @@ const Player = () => {
   const [ playerData, setPlayerData ] = useState<Player[] | null>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
-  const fetchData = () => {
-    try {
-      fetch('http://localhost:3001/player_data')
-        .then((res) => res.json())
-        .then((data) => {
+  const fetchData = async () => {
+    setIsLoading(true);
+    
+      try {
+          const data = await getPlayers();
           setPlayerData(data);
+      } catch (error) {
+          console.error('Error fetching sports data:', error);
+      } finally {
           setIsLoading(false);
-        })
-    } catch (error) {
-      console.error('Error fetching sports data:', error);
-      setIsLoading(false);
-    }
+      }
   }
 
   useEffect(() => {
@@ -35,9 +35,25 @@ const Player = () => {
 
   return (
     <>
-      <div className='page_container'>
-          <h1 className='header1'>Players</h1>
-      </div>
+        <div className='page_container'>
+            <h1 className='header1'>Players</h1>
+
+            <div className='sports_container'>
+                {isLoading ? (
+                    <p>Loading players...</p>
+                ) : (
+                    playerData && playerData.map((player) => (
+                        <button 
+                            key={player.player_id}
+                            className='sport_button'
+                            // onClick={}
+                        >
+                            {`${player.first_name} ${player.last_name}`}
+                        </button>
+                    ))
+                )}
+            </div>
+        </div>
     </>
   )
 }
