@@ -4,6 +4,7 @@ import SportsPage from '../pages/SportsPage'
 import NewsPage from '../pages/NewsPage'
 import SchoolsPage from '../pages/SchoolsPage'
 import SportDetailsPage from '../pages/SportDetailsPage'
+import PlayersPage from '../pages/PlayersPage'
 
 const PageRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const PageRoutes = () => {
         <Route path='/sports/:sportName' element={<SportDetailsPage />} />
         <Route path='/news' element={<NewsPage />}/>
         <Route path='/schools' element={<SchoolsPage />}/>
+        <Route path='/players' element={<PlayersPage />} />
     </Routes>
   )
 }
