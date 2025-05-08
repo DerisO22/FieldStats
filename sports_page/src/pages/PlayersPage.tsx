@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './pageStyles/common_styles.css'
 import './pageStyles/playerpage.css'
 import { getPlayers } from '../services/players_service'
+import { useNavigate } from 'react-router-dom'
 
 interface Player {
   player_id: number,
@@ -15,6 +16,7 @@ interface Player {
 const Player = () => {
   const [ playerData, setPlayerData ] = useState<Player[] | null>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -23,7 +25,7 @@ const Player = () => {
           const data = await getPlayers();
           setPlayerData(data);
       } catch (error) {
-          console.error('Error fetching sports data:', error);
+          console.error('Error fetching players data:', error);
       } finally {
           setIsLoading(false);
       }
@@ -32,6 +34,12 @@ const Player = () => {
   useEffect(() => {
     fetchData();
   }, [])
+
+  const handleSportClick = (sportName: string) => {
+    const playerUrl = `/players/player_profile/${sportName.toLowerCase()}`;
+    console.log("Navigating to:", playerUrl);
+    navigate(playerUrl);
+};
 
   return (
     <>
@@ -46,7 +54,7 @@ const Player = () => {
                         <button 
                             key={player.player_id}
                             className='sport_button'
-                            // onClick={}
+                            onClick={() => handleSportClick(`${player.first_name}-${player.last_name}`)}
                         >
                             {`${player.first_name} ${player.last_name}`}
                         </button>
