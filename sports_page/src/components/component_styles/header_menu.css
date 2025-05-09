@@ -46,6 +46,7 @@ html {
 .logo_image {
     padding-left: 1rem;
     width: 5rem;
+    transition: all 0.2s ease-in-out;
 }
 
 .logo_image:hover {
