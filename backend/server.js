@@ -18,7 +18,7 @@ const app = express();
 const port = 3001;
 
 app.use(cors({
-    origin: (process.env.NODE_ENV ? 'domain' : 'http://localhost:5173'),
+    origin: (process.env.NODE_ENV === "production" ? 'domain' : 'http://localhost:5173'),
     credentials: true,
 }));
 
@@ -122,6 +122,41 @@ async function setupApp() {
         } catch (error) {
             console.error('Error fetching player data:', error);
             res.status(500).json({ error: error.message });
+        }
+    })
+
+    /**
+     * School Related API Endpoints
+     */
+    app.get('/schools_data', async (req, res) => {
+        try {
+            const query = `SELECT * FROM schools
+                           LIMIT 200;`
+            
+            const result = await pgClient.query(query);
+            res.json(result.rows);
+        } catch (error) {
+            console.error('Error fetching school data', error);
+            res.status(500).json({ error: error.message});
+        }
+    })
+
+    app.get('/schools_data/:school_id', async (req, res) => {
+        try {
+            const { school_id } = req.params;
+            const query = 'SELECT * FROM schools WHERE school_id = $1';
+
+            const result = await pgClient.query(query, [school_id])
+
+            if(result.rows.length === 0){
+                res.status(404).json({ error: "School Not Found"});
+            }
+
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        } catch (error) {
+            console.error('Error fetching school data', error);
+            res.status(500).json({ error: error.message});
         }
     })
 

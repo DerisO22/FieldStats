@@ -1,6 +1,7 @@
-const API_URL: string = (import.meta.env.NODE_ENVIRONMENT === "production") ? 
-    "https://FieldStats.vercel.app" :
-    "http://localhost:3001";
+// const API_URL: string = (import.meta.env.NODE_ENVIRONMENT === "production") ? 
+//     "https://FieldStats.vercel.app" :
+//     "http://localhost:3001";
+const API_URL = "http://localhost:3001";
 
 const getSports = async () => {
     try {

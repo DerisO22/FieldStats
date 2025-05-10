@@ -6,6 +6,7 @@ import SchoolsPage from '../pages/SchoolsPage'
 import SportDetailsPage from '../pages/SportDetailsPage'
 import PlayersPage from '../pages/PlayersPage'
 import PlayerDetailsPage from '../pages/PlayerDetailsPage'
+import SchoolDetailsPage from '../pages/SchoolDetailsPage'
 
 const PageRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const PageRoutes = () => {
         <Route path='/sports/:sportName' element={<SportDetailsPage />} />
         <Route path='/news' element={<NewsPage />}/>
         <Route path='/schools' element={<SchoolsPage />}/>
+        <Route path='/schools/:school_id' element={<SchoolDetailsPage />} />
         <Route path='/players' element={<PlayersPage />} />
         <Route path='/players/player_profile/:player_id' element={<PlayerDetailsPage />} />
     </Routes>
