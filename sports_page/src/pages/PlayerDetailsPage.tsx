@@ -43,7 +43,25 @@ const PlayerDetailsPage = () => {
         fetchData();
     }, [player_id])
 
-    console.log(playerData)
+    // Function to render stats object as formatted text
+    const renderStats = (stats: any) => {
+        if (!stats) return <p>No stats data available</p>;
+        
+        if (typeof stats !== 'object' || stats === null) {
+            return <p>{String(stats)}</p>;
+        }
+        
+        return (
+            <div className="stats-details">
+                {Object.entries(stats).map(([key, value]) => (
+                    <p key={key}>
+                        <span className="text">{key.replace(/_/g, ' ')}: </span>
+                        <span className="text">{value !== null && value !== undefined ? String(value) : 'N/A'}</span>
+                    </p>
+                ))}
+            </div>
+        );
+    };
 
     if (isLoading) {
         return (
@@ -75,10 +93,28 @@ const PlayerDetailsPage = () => {
                     <h1 className="header1">{`${playerData.first_name} ${playerData.last_name}`}</h1>
                     <div className="sport_detail_container">
                         <p className="sport_description">{playerData.bio}</p>
-                        <div className="sport_info">
+                        <section className="sport_info">
                             <p>Player ID: {playerData.player_id}</p>
-                            <p>Data of Birth: {playerData.date_of_birth}</p>
-                        </div>
+                            <p>Date of Birth: {playerData.date_of_birth}</p>
+                        </section>
+
+                        <section className="player_stats">
+                            {playerData.stats && playerData.stats.length > 0 ? (
+                                <>
+                                    {playerData.stats
+                                        .filter(stat => stat !== null && stat !== undefined)
+                                        .map((stat, index) => (
+                                            <div key={stat?.stat_id || `stat-${index}`} className="stat-item">
+                                                <h3 className="header1">{stat?.sport_name || 'No sport name'} (Player ID: {stat?.player_id || 'N/A'})</h3>
+                                                <h4 className="header1">Season: {stat?.season || 'N/A'}</h4>
+                                                {stat?.stats ? renderStats(stat.stats) : <p>No detailed stats available</p>}
+                                            </div>
+                                        ))}
+                                </>
+                            ) : (
+                                <p className="header1">No stats available for this player</p>
+                            )}
+                        </section>
                     </div>
                 </>
             )}
