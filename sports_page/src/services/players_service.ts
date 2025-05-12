@@ -45,4 +45,6 @@ const getPlayerDetails = async (player_id: string) => {
     }
 }
 
+// const getPlayerStats = async ()
+
 export { getPlayers, getPlayerDetails };

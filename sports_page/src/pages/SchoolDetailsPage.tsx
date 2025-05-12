@@ -64,7 +64,7 @@ const SchoolDetails = () => {
                 <>
                     <h1 className="header1">{`${schoolData.school_name}`}</h1>
                     <div className="sport_detail_container">
-                        <a target='_blank' href={`${schoolData.website}`} className="sport_description">{schoolData.website}</a>
+                        <a target='_blank' href={`https://${schoolData.website}`} className="sport_description">{schoolData.website}</a>
                         <div className="sport_info">
                             <p>Location: {`${schoolData.address} ${schoolData.city}, ${schoolData.state}`}</p>
                             <p>School Type: { schoolData.school_type_id === 2 ? 
