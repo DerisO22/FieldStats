@@ -353,17 +353,36 @@ ON CONFLICT DO NOTHING;\n\n`;
 sql += newsSql;
 
 // Generate 500 events
-let eventSql = `INSERT INTO events (event_name, event_date, location, description, sport_id) VALUES\n`;
+// Wait for sports to be inserted
+sql += `DO $$
+BEGIN
+    PERFORM FROM sports;
+END $$;\n\n`;
+
+let eventSql = `INSERT INTO events (event_name, event_date, location, description, sport_id)
+SELECT 
+  e.event_name,
+  e.event_date,
+  e.location,
+  e.description,
+  s.sport_id
+FROM (
+  VALUES\n`;
 const locations = ['Main Stadium', 'Sports Complex', 'City Arena', 'Memorial Field', 'University Stadium'];
 
 for (let i = 1; i <= 500; i++) {
-  const sportId = Math.floor(Math.random() * 20) + 1;
   const location = locations[Math.floor(Math.random() * locations.length)];
   const eventDate = randomDate(new Date(2023, 0, 1), new Date(2024, 11, 31)).toISOString().split('.')[0];
 
-  eventSql += `('Tournament ${i}', '${eventDate}', '${location}', 'Description for event ${i}', ${sportId})`;
-  eventSql += i === 500 ? '\nON CONFLICT DO NOTHING;\n\n' : ',\n';
+  eventSql += `    ('Tournament ${i}', TIMESTAMP '${eventDate}', '${location}', 'Description for event ${i}')`;
+  eventSql += i === 500 ? '\n' : ',\n';
 }
+
+eventSql += `) AS e(event_name, event_date, location, description)
+CROSS JOIN (
+  SELECT sport_id FROM sports ORDER BY random() LIMIT 1
+) s
+ON CONFLICT DO NOTHING;\n\n`;
 sql += eventSql;
 
 fs.writeFileSync('database/sample_data.sql', sql);

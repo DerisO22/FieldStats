@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPlayerDetails } from "../services/players_service";
 
+interface PlayerStats {
+    stat_id: number,
+    player_id: number,
+    sport_name: string,
+    season: string,
+    stats: any
+}
+
 interface Player {
     player_id: number,
     first_name: string,
     last_name: string,
     date_of_birth: string,
     gender_id: number,
-    bio: string
-  }
+    bio: string,
+    stats?: PlayerStats[]
+}
 
 const PlayerDetailsPage = () => {
     const { player_id } = useParams();
@@ -33,6 +42,8 @@ const PlayerDetailsPage = () => {
     useEffect(() => {
         fetchData();
     }, [player_id])
+
+    console.log(playerData)
 
     if (isLoading) {
         return (
