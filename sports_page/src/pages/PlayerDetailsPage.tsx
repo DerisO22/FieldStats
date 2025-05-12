@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPlayerDetails } from "../services/players_service";
+import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 interface PlayerStats {
     stat_id: number,
@@ -18,6 +19,11 @@ interface Player {
     gender_id: number,
     bio: string,
     stats?: PlayerStats[]
+}
+
+interface ChartDataEntry {
+    name: string;
+    value: number;
 }
 
 const PlayerDetailsPage = () => {
@@ -63,6 +69,30 @@ const PlayerDetailsPage = () => {
         );
     };
 
+    const organizeChartData = (statsArray: PlayerStats[]): ChartDataEntry[] => {
+        const chartData: ChartDataEntry[] = [];
+
+        if(!Array.isArray(statsArray)) return chartData;
+
+        statsArray.forEach(statEntry => {
+            const stats = statEntry?.stats;
+
+            if (stats && typeof stats === 'object'){
+                Object.entries(stats).forEach(([key, value]) => {
+                    if(key === 'stat_id') return;
+                    if (typeof value === 'number'){
+                        chartData.push({
+                            name: key.replace(/_/g, ' '),
+                            value: value
+                        })
+                    }
+                })
+            }
+        })
+
+        return chartData;
+    }
+
     if (isLoading) {
         return (
             <div className="page_container">
@@ -85,6 +115,9 @@ const PlayerDetailsPage = () => {
             </div>
         );
     }
+
+    console.log(playerData?.stats?.length)
+    console.log(playerData?.stats)
   
     return (
         <div className="page_container">
@@ -94,25 +127,63 @@ const PlayerDetailsPage = () => {
                     <div className="sport_detail_container">
                         <p className="sport_description">{playerData.bio}</p>
                         <section className="sport_info">
-                            <p>Player ID: {playerData.player_id}</p>
-                            <p>Date of Birth: {playerData.date_of_birth}</p>
+                            <p className="text">Player ID: {playerData.player_id}</p>
+                            <p className="text">Date of Birth: {(playerData.date_of_birth).substring(0,10)}</p>
                         </section>
 
                         <section className="player_stats">
-                            {playerData.stats && playerData.stats.length > 0 ? (
+                            {!playerData.stats || playerData.stats.filter(stat => stat !== null && stat !== undefined).length === 0 ? (
+                                <p className="header1">No stats available for this player</p>
+                            ) : (
                                 <>
                                     {playerData.stats
+                                        // Filter any null stats
                                         .filter(stat => stat !== null && stat !== undefined)
                                         .map((stat, index) => (
                                             <div key={stat?.stat_id || `stat-${index}`} className="stat-item">
-                                                <h3 className="header1">{stat?.sport_name || 'No sport name'} (Player ID: {stat?.player_id || 'N/A'})</h3>
+                                                <h3 className="header1">{stat?.sport_name || 'No sport name'}</h3>
                                                 <h4 className="header1">Season: {stat?.season || 'N/A'}</h4>
-                                                {stat?.stats ? renderStats(stat.stats) : <p>No detailed stats available</p>}
                                             </div>
-                                        ))}
+                                        ))
+                                    }
+                                    {playerData.stats && (
+                                        <ResponsiveContainer className="chart_container" width='100%' height={400}>
+                                            <PieChart width={500} height={500}>
+                                                <Pie 
+                                                    data={organizeChartData(playerData.stats)} 
+                                                    dataKey="value" 
+                                                    nameKey="name" 
+                                                    cx="50%" 
+                                                    cy="50%" 
+                                                    outerRadius={80} 
+                                                    fill="#005eb8" 
+                                                    label={({ name, value, x, y, cx, cy, midAngle, outerRadius, percent }) => {
+                                                        const RADIAN = Math.PI / 180;
+                                                        const radius = outerRadius + 30;
+                                                        const xPos = cx + radius * Math.cos(-midAngle * RADIAN);
+                                                        const yPos = cy + radius * Math.sin(-midAngle * RADIAN);
+                                                  
+                                                        return (
+                                                          <text
+                                                            x={xPos}
+                                                            y={yPos}
+                                                            fill="black"
+                                                            textAnchor={xPos > cx ? "start" : "end"}
+                                                            dominantBaseline="central"
+                                                            fontSize={12}
+                                                            fontWeight="bold"
+                                                          >
+                                                            {`${name}: ${value}`}
+                                                          </text>
+                                                        );
+                                                    }}
+                                                />
+                                                <Tooltip />
+                                                <Legend />
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    )}
                                 </>
-                            ) : (
-                                <p className="header1">No stats available for this player</p>
                             )}
                         </section>
                     </div>

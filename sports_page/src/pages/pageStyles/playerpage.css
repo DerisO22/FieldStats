@@ -55,6 +55,10 @@
     box-shadow: 0 0 4px 1px var(--bg4-color);
 }
 
+.chart_container {
+    transform: scale(.9);
+}
+
 @media screen and (max-width: 1200px) {
     .player_button_container {
         grid-template-columns: repeat(4, 4fr);
