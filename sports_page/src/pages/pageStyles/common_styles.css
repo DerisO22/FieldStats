@@ -40,13 +40,21 @@
     transition: all 0.1s ease-in-out;
 }
 
+.header2 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 800;
+    transition: all 0.1s ease-in-out;
+}
+
 .header1:hover {
     color: var(--bg3-color);
 }
 
-.header2 {
-
+.header2:hover { 
+    color: var(--bg3-color);
 }
+
 
 .text {
 

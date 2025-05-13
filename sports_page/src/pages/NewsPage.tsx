@@ -53,10 +53,12 @@ const NewsPage = () => {
                 newsData.length > 0 ? (
                   <div className='news_card_container'>
                     {newsData.slice(newsData.length - 21, newsData.length).map((news) => (
-                      <div key={news.news_id}>
-                        <p className='text'>{news.news_id}</p>
-                        <p className='text'>{news.headline}</p>
-                        <p className='text'>{news.author}</p>
+                      <div className='news_card' key={news.news_id}>
+                        <img className='card_image' src='baseball_img.webp'></img>
+                        <div className='card_text_container'>
+                          <h1 className='header2'>{news.headline}</h1>
+                          <p className='text'>Author - {news.author}</p>
+                        </div>
                       </div>
                     ))}
                   </div>
