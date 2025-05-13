@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Component_Styles/header_menu.css'
 import LoginForm from './LoginForm';
 import ProfileDetails from './ProfileDetails';
@@ -11,6 +12,8 @@ interface HeaderMenuProps {
 }
 
 const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, setNotification }: HeaderMenuProps) => {
+  const [ currentUsername, setCurrentUsername ] = useState<string>('');
+
   const handleLoginClick = () => {
     setIsLoginOpen(true);
   };
@@ -19,6 +22,10 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
     setIsLoggedIn(false);
   };
 
+  const retrieveCurrentUsername = (username: string) => {
+    setCurrentUsername(username);
+  }
+
   return (
     <>
       <div className="headerMenuContainer">
@@ -26,7 +33,7 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
 
         <div className="authContainer">
             <ProfileDetails 
-              username='Deris'
+              username={currentUsername === '' ? 'Not Signed In' : `Hey ${currentUsername}`}
               isLoggedIn={isLoggedIn}
               handleLogoutClick={handleLogoutClick}
               handleLoginClick={handleLoginClick}
@@ -39,6 +46,7 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
               isOpen={isLoginOpen}
               setIsOpen={setIsLoginOpen}
               setNotification={setNotification}
+              retrieveCurrentUsername = {retrieveCurrentUsername}
           />
       </div>
     </>
