@@ -11,7 +11,7 @@
     width: 10rem;
     height: 1rem;
     position:fixed;
-    top: 10px;
+    top: 8px;
     right: 10px;
     padding: 1rem;
     border-radius: 8px;
@@ -26,12 +26,14 @@
     background-color: #4CAF50;
     color: aliceblue;
     font-weight: 800;
+    border: 1px solid white;
 }
 
 .popup_notification.error {
     background-color: #f44336;
     color: aliceblue;
     font-weight: 800;
+    border: 1px solid white;
 }
 
 .popup_notification.info {
@@ -55,7 +57,6 @@
     color: var(--text-color);
     font-size: 25px;
 }
-
 
 @keyframes slideIn {
     from {

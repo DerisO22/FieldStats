@@ -1,5 +1,6 @@
 import './Component_Styles/header_menu.css'
 import LoginForm from './LoginForm';
+import ProfileDetails from './ProfileDetails';
 
 interface HeaderMenuProps {
   isLoggedIn: boolean;
@@ -24,24 +25,21 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
         <img className='logo_image' src='/page_logo.webp'></img>
 
         <div className="authContainer">
-          {isLoggedIn ? (
-            <button className="authButton" onClick={handleLogoutClick}>
-              Logout
-            </button>
-          ) : (
-            <button className="authButton" onClick={handleLoginClick}>
-              Login
-            </button>
-          )}
+            <ProfileDetails 
+              username='Deris'
+              isLoggedIn={isLoggedIn}
+              handleLogoutClick={handleLogoutClick}
+              handleLoginClick={handleLoginClick}
+            />
         </div>
 
         <LoginForm 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          isOpen={isLoginOpen}
-          setIsOpen={setIsLoginOpen}
-          setNotification={setNotification}
-        />
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              isOpen={isLoginOpen}
+              setIsOpen={setIsLoginOpen}
+              setNotification={setNotification}
+          />
       </div>
     </>
   )

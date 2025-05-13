@@ -54,9 +54,10 @@
     color: var(--bg3-color);
 }
 
-
 .text {
-
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 550;
 }
 
 button {
