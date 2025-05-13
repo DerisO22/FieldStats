@@ -18,5 +18,8 @@
 
 .sport_info p {
     color: var(--text-color);
-    
+}
+
+.sport_detail_image {
+    width: 5rem;
 }
