@@ -14,7 +14,6 @@ const ProfileDetails = ({username, isLoggedIn, handleLogoutClick, handleLoginCli
     const handleOpen = (e: React.MouseEvent) => {
         e.preventDefault();
         setIsMenuOpen(prev => !prev);
-        console.log(isMenuOpen)
     }
 
     return (
@@ -25,6 +24,8 @@ const ProfileDetails = ({username, isLoggedIn, handleLogoutClick, handleLoginCli
                 <div className={`menu_details_container_${isMenuOpen ? 'open' : 'closed'}`}>
                     <h2 className="menu_header">Hey {username}</h2>
                     <div className="menu_item_container">
+                        <button className="menu_item">MenuItem</button>
+                        <button className="menu_item">MenuItem</button>
                         <button className="menu_item">MenuItem</button>
                     </div>
 
