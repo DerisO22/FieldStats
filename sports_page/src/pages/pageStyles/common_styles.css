@@ -31,6 +31,7 @@
     border-radius: 5px;
     padding: 0.01rem 1.5rem 2.5rem 1.5rem;
     box-shadow: 0 0 3px 0px var(--text-color);
+    overflow: auto;
 }
 
 .header1 {
@@ -39,13 +40,21 @@
     transition: all 0.1s ease-in-out;
 }
 
+.header2 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 800;
+    transition: all 0.1s ease-in-out;
+}
+
 .header1:hover {
     color: var(--bg3-color);
 }
 
-.header2 {
-
+.header2:hover { 
+    color: var(--bg3-color);
 }
+
 
 .text {
 

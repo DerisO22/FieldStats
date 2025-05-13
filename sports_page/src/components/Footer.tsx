@@ -33,6 +33,11 @@ const Footer = () => {
     };
   }, []);
 
+  const handleScrollTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
   return (
     <div className='footer_container' style={{ marginTop: `${marginTop}px` }}>
       <div className='logo_container'>
@@ -40,10 +45,10 @@ const Footer = () => {
       </div>
       
       <div className='footer_menu'>
-        <Link to="/" className="headerMenuItem">Home</Link>
-        <Link to="/sports" className="headerMenuItem">Sports</Link>
-        <Link to="/schools" className="headerMenuItem">Schools</Link>
-        <Link to="/news" className="headerMenuItem">News</Link>
+        <Link onClick={() => handleScrollTop()} to="/" className="headerMenuItem">Home</Link>
+        <Link onClick={() => handleScrollTop()} to="/sports" className="headerMenuItem">Sports</Link>
+        <Link onClick={() => handleScrollTop()} to="/schools" className="headerMenuItem">Schools</Link>
+        <Link onClick={() => handleScrollTop()} to="/news" className="headerMenuItem">News</Link>
       </div>
 
       <h1 className='copyright'>© Deris O'Malley</h1>

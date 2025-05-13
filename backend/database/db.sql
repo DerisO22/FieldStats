@@ -139,6 +139,263 @@ CREATE TABLE IF NOT EXISTS event_teams (
     FOREIGN KEY (team_id) REFERENCES teams(team_id)
 );
 
+--
+-- Stats related tables
+--
+CREATE TABLE IF NOT EXISTS player_stats (
+    stat_id SERIAL PRIMARY KEY NOT NULL,
+    player_id INTEGER NOT NULL,
+    sport_id INTEGER NOT NULL,
+    season VARCHAR(20),
+
+    FOREIGN KEY (player_id) REFERENCES players (player_id),
+    FOREIGN KEY (sport_id) REFERENCES sports (sport_id)
+);
+
+-- Sport-specific stats tables
+CREATE TABLE IF NOT EXISTS basketball_stats (
+    stat_id INTEGER PRIMARY KEY,
+    points INTEGER DEFAULT 0,
+    rebounds INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    steals INTEGER DEFAULT 0,
+    blocks INTEGER DEFAULT 0,
+    three_pointers INTEGER DEFAULT 0,
+    field_goal_percentage DECIMAL(5,2),
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS baseball_stats (
+    stat_id INTEGER PRIMARY KEY,
+    at_bats INTEGER DEFAULT 0,
+    hits INTEGER DEFAULT 0,
+    runs INTEGER DEFAULT 0,
+    rbi INTEGER DEFAULT 0,
+    stolen_bases INTEGER DEFAULT 0,
+    home_runs INTEGER DEFAULT 0,
+    batting_average DECIMAL(4,3),
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS football_stats (
+    stat_id INTEGER PRIMARY KEY,
+    touchdowns INTEGER DEFAULT 0,
+    rushing_yards INTEGER DEFAULT 0,
+    passing_yards INTEGER DEFAULT 0,
+    tackles INTEGER DEFAULT 0,
+    sacks INTEGER DEFAULT 0,
+    interceptions INTEGER DEFAULT 0,
+    field_goals INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS soccer_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    shots_on_goal INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    yellow_cards INTEGER DEFAULT 0,
+    red_cards INTEGER DEFAULT 0,
+    clean_sheets INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS volleyball_stats (
+    stat_id INTEGER PRIMARY KEY,
+    kills INTEGER DEFAULT 0,
+    blocks INTEGER DEFAULT 0,
+    digs INTEGER DEFAULT 0,
+    aces INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    service_errors INTEGER DEFAULT 0,
+    hitting_percentage DECIMAL(4,3),
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS tennis_stats (
+    stat_id INTEGER PRIMARY KEY,
+    aces INTEGER DEFAULT 0,
+    double_faults INTEGER DEFAULT 0,
+    first_serve_percentage DECIMAL(5,2),
+    break_points_saved INTEGER DEFAULT 0,
+    winners INTEGER DEFAULT 0,
+    unforced_errors INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS track_stats (
+    stat_id INTEGER PRIMARY KEY,
+    event_name VARCHAR(50),
+    finish_time DECIMAL(8,2),
+    place INTEGER,
+    personal_best BOOLEAN DEFAULT FALSE,
+    points_earned INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS swimming_stats (
+    stat_id INTEGER PRIMARY KEY,
+    event_name VARCHAR(50),
+    finish_time DECIMAL(8,2),
+    distance INTEGER,
+    stroke_type VARCHAR(30),
+    place INTEGER,
+    personal_best BOOLEAN DEFAULT FALSE,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS wrestling_stats (
+    stat_id INTEGER PRIMARY KEY,
+    weight_class VARCHAR(20),
+    wins INTEGER DEFAULT 0,
+    losses INTEGER DEFAULT 0,
+    pins INTEGER DEFAULT 0,
+    technical_falls INTEGER DEFAULT 0,
+    major_decisions INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS golf_stats (
+    stat_id INTEGER PRIMARY KEY,
+    score INTEGER,
+    par INTEGER,
+    fairways_hit INTEGER DEFAULT 0,
+    greens_in_regulation INTEGER DEFAULT 0,
+    putts INTEGER DEFAULT 0,
+    eagles INTEGER DEFAULT 0,
+    birdies INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS softball_stats (
+    stat_id INTEGER PRIMARY KEY,
+    at_bats INTEGER DEFAULT 0,
+    hits INTEGER DEFAULT 0,
+    runs INTEGER DEFAULT 0,
+    rbi INTEGER DEFAULT 0,
+    stolen_bases INTEGER DEFAULT 0,
+    batting_average DECIMAL(4,3),
+    fielding_percentage DECIMAL(4,3),
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS lacrosse_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    ground_balls INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    face_offs_won INTEGER DEFAULT 0,
+    shots_on_goal INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS field_hockey_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    shots_on_goal INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    defensive_saves INTEGER DEFAULT 0,
+    penalty_corners INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS cross_country_stats (
+    stat_id INTEGER PRIMARY KEY,
+    distance DECIMAL(5,2),
+    finish_time DECIMAL(8,2),
+    place INTEGER,
+    personal_best BOOLEAN DEFAULT FALSE,
+    course_name VARCHAR(100),
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS hockey_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    shots_on_goal INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    penalties_in_minutes INTEGER DEFAULT 0,
+    plus_minus INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS ultimate_frisbee_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    completions INTEGER DEFAULT 0,
+    drops INTEGER DEFAULT 0,
+    defensive_plays INTEGER DEFAULT 0,
+    turnovers INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS gymnastics_stats (
+    stat_id INTEGER PRIMARY KEY,
+    event_name VARCHAR(50),
+    difficulty_score DECIMAL(4,2),
+    execution_score DECIMAL(4,2),
+    final_score DECIMAL(4,2),
+    place INTEGER,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS rugby_stats (
+    stat_id INTEGER PRIMARY KEY,
+    tries INTEGER DEFAULT 0,
+    conversions INTEGER DEFAULT 0,
+    penalty_goals INTEGER DEFAULT 0,
+    tackles INTEGER DEFAULT 0,
+    meters_gained INTEGER DEFAULT 0,
+    lineouts_won INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS water_polo_stats (
+    stat_id INTEGER PRIMARY KEY,
+    goals INTEGER DEFAULT 0,
+    assists INTEGER DEFAULT 0,
+    steals INTEGER DEFAULT 0,
+    blocks INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    turnovers INTEGER DEFAULT 0,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
+CREATE TABLE IF NOT EXISTS cheerleading_stats (
+    stat_id INTEGER PRIMARY KEY,
+    routine_difficulty DECIMAL(4,2),
+    execution_score DECIMAL(4,2),
+    total_score DECIMAL(4,2),
+    deductions INTEGER DEFAULT 0,
+    place INTEGER,
+    
+    FOREIGN KEY (stat_id) REFERENCES player_stats(stat_id)
+);
+
 -- 
 -- Junction Tables
 --
@@ -152,6 +409,7 @@ CREATE TABLE IF NOT EXISTS school_sports (
     FOREIGN KEY (sport_id) REFERENCES sports (sport_id)
 );
 
+-- Many-to-many relationship between schools and players
 CREATE TABLE IF NOT EXISTS school_player (
     school_id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
@@ -161,6 +419,7 @@ CREATE TABLE IF NOT EXISTS school_player (
     FOREIGN KEY (player_id) REFERENCES players(player_id)
 );
 
+-- Many-to-many relationship between schools, sports, and team
 CREATE TABLE IF NOT EXISTS news_school_sport_team (
     news_id INTEGER NOT NULL,
     school_id INTEGER NOT NULL,

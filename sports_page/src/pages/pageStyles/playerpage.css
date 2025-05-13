@@ -28,7 +28,7 @@
     align-items: center;
     gap: 1rem;
     width: 11rem;
-    height: 4rem;
+    height: 3.3rem;
     background-color: var(--text-color);
     box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.568);
     font-weight: 700;
@@ -55,6 +55,10 @@
     box-shadow: 0 0 4px 1px var(--bg4-color);
 }
 
+.chart_container {
+    transform: scale(.9);
+}
+
 @media screen and (max-width: 1200px) {
     .player_button_container {
         grid-template-columns: repeat(4, 4fr);
@@ -67,8 +71,9 @@
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
     .player_button_container {
         grid-template-columns: repeat(2, 2fr);
     }
 }
+
