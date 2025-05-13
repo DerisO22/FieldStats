@@ -19,6 +19,8 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
   };
 
   const handleLogoutClick = () => {
+    setNotification({isVisible: true, message: 'Logged out', type: "info"});
+    setCurrentUsername('');
     setIsLoggedIn(false);
   };
 
