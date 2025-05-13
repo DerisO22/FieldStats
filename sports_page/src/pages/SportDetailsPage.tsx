@@ -68,6 +68,7 @@ const SportDetailPage = () => {
             {!isLoading && sportData && (
                 <>
                     <h1 className="header1">{sportData.sport_name}</h1>
+                    <img className="sport_detail_image" src={`/sports_logos/${sportData.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
                     <div className="sport_detail_container">
                         <p className="sport_description">{sportData.sport_description}</p>
                         <div className="sport_info">

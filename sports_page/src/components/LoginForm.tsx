@@ -7,6 +7,8 @@ interface LoginFormProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setNotification: any;
+    retrieveCurrentUsername: (username: string) => void;
 }
 
 interface FormState {
@@ -23,7 +25,7 @@ const InitialFormState: FormState = {
     error: ''
 }
 
-const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProps) => {
+const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotification, retrieveCurrentUsername}: LoginFormProps) => {
     const [ formState, setFormState ] = useState<FormState>(InitialFormState);
 
     const onClose = () => {
@@ -74,12 +76,15 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                 setIsLoggedIn(true);
                 setIsOpen(false);
                 setFormState(InitialFormState);
+                setNotification({isVisible: true, message: 'Successful Login', type: "success"});
+                retrieveCurrentUsername(formState.username);
             } else {
                 console.error('Login failed:', data);
                 setFormState((prev) => ({
                     ...prev,
                     error: "Invalid Credentials"
                 }))
+                setNotification({isVisible: true, message: 'Error Logging in', type: "error"});
             }
         } catch (err) {
             console.error('Login error:', err);
@@ -87,6 +92,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                 ...prev,
                 error: "Network error. Please try again"
             }))
+            setNotification({isVisible: true, message: 'Error Logging in', type: "error"});
         }
     }
 

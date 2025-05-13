@@ -55,6 +55,7 @@ const SportsPage = () => {
                             className='sport_button'
                             onClick={() => handleSportClick(sport.sport_name)}
                         >
+                            <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
                             {sport.sport_name}
                         </button>
                     ))

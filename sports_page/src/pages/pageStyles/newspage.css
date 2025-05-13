@@ -41,11 +41,12 @@
     height: fit-content;
     z-index: 10;
     background-color: rgba(240, 248, 255, 0.767);
+    box-shadow: 0 0 5px 1px rgba(46, 118, 134, 0.353);
     transition: all 0.3s ease-in-out;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
 }
 
 .card_image {

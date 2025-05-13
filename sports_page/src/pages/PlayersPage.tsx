@@ -59,7 +59,7 @@ const Player = () => {
                             className='player_button'
                             onClick={() => handleSportClick(player.player_id)}
                         >
-                            <img className='profile_image' src='/empty_user_image.png'></img>
+                            <img className='player_profile_image' src='/empty_user_image.png'></img>
                             {`${player.first_name} ${player.last_name}`}
                         </button>
                     ))}

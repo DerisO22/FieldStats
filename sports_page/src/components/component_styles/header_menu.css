@@ -54,11 +54,13 @@ html {
 }
 
 .authContainer {
+    width: 10rem;
     position: absolute;
     right: 0;
     padding: 1rem;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .authButton {
