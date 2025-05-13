@@ -82,6 +82,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotificatio
                     ...prev,
                     error: "Invalid Credentials"
                 }))
+                setNotification({isVisible: true, message: 'Error Logging in', type: "error"});
             }
         } catch (err) {
             console.error('Login error:', err);
@@ -89,6 +90,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotificatio
                 ...prev,
                 error: "Network error. Please try again"
             }))
+            setNotification({isVisible: true, message: 'Error Logging in', type: "error"});
         }
     }
 

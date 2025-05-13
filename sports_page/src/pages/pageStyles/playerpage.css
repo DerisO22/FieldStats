@@ -52,7 +52,7 @@
     padding: 0.3rem;
     border-radius: 50%;
     margin-left: 0.3rem;
-    box-shadow: 0 0 4px 1px var(--bg4-color);
+    box-shadow: 0 0 3px 0.2px var(--bg4-color);
 }
 
 .chart_container {
