@@ -7,6 +7,7 @@ interface LoginFormProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setNotification: any
 }
 
 interface FormState {
@@ -23,7 +24,7 @@ const InitialFormState: FormState = {
     error: ''
 }
 
-const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProps) => {
+const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotification}: LoginFormProps) => {
     const [ formState, setFormState ] = useState<FormState>(InitialFormState);
 
     const onClose = () => {
@@ -74,6 +75,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen}: LoginFormProp
                 setIsLoggedIn(true);
                 setIsOpen(false);
                 setFormState(InitialFormState);
+                setNotification({isVisible: true, message: 'Successful Login', type: "success"});
             } else {
                 console.error('Login failed:', data);
                 setFormState((prev) => ({

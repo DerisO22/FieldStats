@@ -1,0 +1,61 @@
+:root {
+    --main-color: white;
+    --bg-color: white;
+    --text-color: #005eb8;
+    --bg2-color: #fcb900;
+    --bg3-color: #00a9e0;
+    --bg4-color: #b4d9e5;
+  }
+
+.popup_notification {
+    width: 10rem;
+    height: 1rem;
+    position:fixed;
+    top: 10px;
+    right: 10px;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.popup_notification.success {
+    background-color: #4CAF50;
+    color: aliceblue;
+    font-weight: 800;
+}
+
+.popup_notification.error {
+    background-color: #f44336;
+    color: aliceblue;
+    font-weight: 800;
+}
+
+.popup_notification.info {
+    background-color: var(--bg3-color);
+    color: white;
+}
+
+.popup_notification .close_button {
+    right: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

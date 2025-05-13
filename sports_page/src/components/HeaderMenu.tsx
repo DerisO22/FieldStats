@@ -6,9 +6,10 @@ interface HeaderMenuProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isLoginOpen: boolean;
   setIsLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotification: any
 }
 
-const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen }: HeaderMenuProps) => {
+const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, setNotification }: HeaderMenuProps) => {
   const handleLoginClick = () => {
     setIsLoginOpen(true);
   };
@@ -39,6 +40,7 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen }: 
           setIsLoggedIn={setIsLoggedIn}
           isOpen={isLoginOpen}
           setIsOpen={setIsLoginOpen}
+          setNotification={setNotification}
         />
       </div>
     </>
