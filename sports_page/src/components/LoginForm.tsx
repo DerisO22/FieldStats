@@ -134,8 +134,8 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotificatio
                         </div>
                         <div className="form_actions">
                             {!formState.isSigningIn ? 
-                                <button onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
-                                <button onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
+                                <button type='button' onClick={handleSignIn} className='toggle_form_button'>Don't Have an Account?</button> :
+                                <button type='button' onClick={handleSignIn} className='toggle_form_button'>Back to Login</button>
                             }
                             <button type="submit" className="submit_button">
                                 {!formState.isSigningIn ? 'Login' : 'Sign Up'}

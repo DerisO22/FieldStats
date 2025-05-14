@@ -11,7 +11,11 @@ interface Sport {
     has_gender_division: boolean,
 }
 
-const SportsPage = () => {
+interface SportPageProps {
+    searchTerm: string
+}
+
+const SportsPage = ({ searchTerm }: SportPageProps) => {
     const [ sportsData, setSportsData ] = useState<Sport[]>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const navigate = useNavigate();
@@ -49,7 +53,9 @@ const SportsPage = () => {
                 {isLoading ? (
                     <p>Loading sports...</p>
                 ) : (
-                    sportsData.map((sport) => (
+                    sportsData
+                    .filter(sport => sport.sport_name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((sport) => (
                         <button 
                             key={sport.sport_id}
                             className='sport_button'

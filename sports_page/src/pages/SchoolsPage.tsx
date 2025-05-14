@@ -14,7 +14,11 @@ interface School {
   website: string,
 }
 
-const SchoolsPage = () => {
+interface SchoolsPageProps {
+  searchTerm: string
+}
+
+const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
   const [ schoolData, setSchoolData ] = useState<School[]>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -53,7 +57,9 @@ const SchoolsPage = () => {
                 {isLoading ? (
                     <p>Loading sports...</p>
                 ) : (
-                    schoolData.map((school) => (
+                    schoolData
+                    .filter(school => school.school_name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((school) => (
                         <button 
                             key={school.school_id}
                             className='sport_button'

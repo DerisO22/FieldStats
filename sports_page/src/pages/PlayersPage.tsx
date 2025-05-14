@@ -13,7 +13,11 @@ interface Player {
   bio: string
 }
 
-const Player = () => {
+interface PlayersPageProps {
+  searchTerm: string
+}
+
+const Player = ({ searchTerm }: PlayersPageProps) => {
   const [ playerData, setPlayerData ] = useState<Player[] | null>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -53,7 +57,9 @@ const Player = () => {
                     <p>Loading players...</p>
                 ) : (
                   <div className='player_button_container'>
-                    {playerData && playerData.map((player) => (
+                    {playerData && playerData
+                    .filter(player => player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((player) => (
                         <button 
                             key={player.player_id}
                             className='player_button'

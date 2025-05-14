@@ -19,6 +19,7 @@ const App = () => {
     onClose: () => void
   }
   >({isVisible: false, message: '', type: 'info', duration: 0, onClose: () => {}});
+  const [searchTerm, setSearchTerm] = useState<string>('');
   
   return (
     <>
@@ -37,9 +38,10 @@ const App = () => {
                 isLoginOpen={isLoginOpen}
                 setIsLoginOpen={setIsLoginOpen}
                 setNotification={setNotification}
+                onSearch={setSearchTerm}
             />
       <SubHeader />
-        <PageRoutes />
+        <PageRoutes searchTerm={searchTerm} />
       <Footer />
     </Router>
     </>

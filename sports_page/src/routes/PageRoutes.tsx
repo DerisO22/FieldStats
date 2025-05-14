@@ -8,16 +8,20 @@ import PlayersPage from '../pages/PlayersPage'
 import PlayerDetailsPage from '../pages/PlayerDetailsPage'
 import SchoolDetailsPage from '../pages/SchoolDetailsPage'
 
-const PageRoutes = () => {
+interface PageRouteProps {
+  searchTerm: string;
+}
+
+const PageRoutes = ({ searchTerm }: PageRouteProps) => {
   return (
     <Routes>
         <Route path='/' element={<HomePage />}/>
-        <Route path='/sports' element={<SportsPage />}/>
+        <Route path='/sports' element={<SportsPage searchTerm={searchTerm} />}/>
         <Route path='/sports/:sportName' element={<SportDetailsPage />} />
-        <Route path='/news' element={<NewsPage />}/>
-        <Route path='/schools' element={<SchoolsPage />}/>
+        <Route path='/news' element={<NewsPage searchTerm={searchTerm} />}/>
+        <Route path='/schools' element={<SchoolsPage searchTerm={searchTerm} />}/>
         <Route path='/schools/:school_id' element={<SchoolDetailsPage />} />
-        <Route path='/players' element={<PlayersPage />} />
+        <Route path='/players' element={<PlayersPage searchTerm={searchTerm} />} />
         <Route path='/players/player_profile/:player_id' element={<PlayerDetailsPage />} />
     </Routes>
   )

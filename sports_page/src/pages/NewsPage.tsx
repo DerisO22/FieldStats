@@ -16,7 +16,11 @@ interface NewsCard {
   features: boolean
 }
 
-const NewsPage = () => {
+interface NewsPageProps {
+  searchTerm: string
+}
+
+const NewsPage = ({ searchTerm }: NewsPageProps) => {
   const [ newsData, setNewsData ] = useState<NewsCard[]>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -52,7 +56,9 @@ const NewsPage = () => {
               ) : (
                 newsData.length > 0 ? (
                   <div className='news_card_container'>
-                    {newsData.slice(newsData.length - 21, newsData.length).map((news) => (
+                    {newsData.slice(newsData.length - 21, newsData.length)
+                    .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((news) => (
                       <div className='news_card' key={news.news_id}>
                         <img className='card_image' src='baseball_img.webp'></img>
                         <div className='card_text_container'>

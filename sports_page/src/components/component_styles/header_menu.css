@@ -40,6 +40,7 @@ html {
     flex-direction: row;
     z-index: 13;
     padding-top: 0.3rem;
+    gap: 1rem;
     padding-bottom: 0.3rem;
 }
 
