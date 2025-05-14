@@ -50,6 +50,7 @@
 }
 
 .menu_details_container_closed {
+    margin-left: 100rem;
     display: block;
     opacity: 0;
 }

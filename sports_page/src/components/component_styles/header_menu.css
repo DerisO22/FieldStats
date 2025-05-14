@@ -55,7 +55,7 @@ html {
 }
 
 .authContainer {
-    width: 10rem;
+    width: fit-content;
     position: absolute;
     right: 0;
     padding: 1rem;

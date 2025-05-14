@@ -49,26 +49,6 @@ const PlayerDetailsPage = () => {
         fetchData();
     }, [player_id])
 
-    // Function to render stats object as formatted text
-    const renderStats = (stats: any) => {
-        if (!stats) return <p>No stats data available</p>;
-        
-        if (typeof stats !== 'object' || stats === null) {
-            return <p>{String(stats)}</p>;
-        }
-        
-        return (
-            <div className="stats-details">
-                {Object.entries(stats).map(([key, value]) => (
-                    <p key={key}>
-                        <span className="text">{key.replace(/_/g, ' ')}: </span>
-                        <span className="text">{value !== null && value !== undefined ? String(value) : 'N/A'}</span>
-                    </p>
-                ))}
-            </div>
-        );
-    };
-
     const organizeChartData = (statsArray: PlayerStats[]): ChartDataEntry[] => {
         const chartData: ChartDataEntry[] = [];
 

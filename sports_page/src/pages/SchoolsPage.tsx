@@ -1,6 +1,6 @@
 import './pageStyles/schoolspage.css'
 import './pageStyles/common_styles.css'
-import { useEffect, useState, useCallback, memo } from 'react'
+import { useEffect, useState, useCallback} from 'react'
 import { getSchools } from '../services/schools_services'
 import { useNavigate } from 'react-router-dom'
 

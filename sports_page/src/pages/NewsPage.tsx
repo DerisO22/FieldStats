@@ -1,7 +1,6 @@
 import './pageStyles/newspage.css'
 import './pageStyles/common_styles.css'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { getAllNews, getFeaturedNews } from '../services/news_services'
 
 interface NewsCard {
@@ -23,7 +22,6 @@ interface NewsPageProps {
 const NewsPage = ({ searchTerm }: NewsPageProps) => {
     const [ newsData, setNewsData ] = useState<NewsCard[]>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     const fetchData = async() => {
         setIsLoading(true);
