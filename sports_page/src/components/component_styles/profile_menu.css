@@ -1,11 +1,4 @@
-:root {
-    --main-color: white;
-    --bg-color: white;
-    --text-color: #005eb8;
-    --bg2-color: #fcb900;
-    --bg3-color: #00a9e0;
-    --bg4-color: #b4d9e5;
-}
+@import url('../../style_vars/page_vars.css');
 
 .profile_container {
     width: 2.5rem;
@@ -34,10 +27,11 @@
 }
 
 .menu_details_container_open {
+    z-index: 2000;
     position: absolute;
     width: 75%;
     height: fit-content;
-    margin-right: 10rem;
+    margin-right: 15rem;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
@@ -50,8 +44,7 @@
 }
 
 .menu_details_container_closed {
-    margin-left: 100rem;
-    display: block;
+    display: none;
     opacity: 0;
 }
 

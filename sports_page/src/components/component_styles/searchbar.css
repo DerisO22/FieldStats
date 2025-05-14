@@ -1,16 +1,10 @@
-:root {
-    --main-color: white;
-    --bg-color: white;
-    --text-color: #005eb8;
-    --bg2-color: #fcb900;
-    --bg3-color: #00a9e0;
-    --bg4-color: #b4d9e5;
-}
+@import url('../../style_vars/page_vars.css');
 
 .searchbar_container {
     display: flex;
     width: 20rem;
     height: fit-content;
+    z-index: 16;
 }
 
 .search_toggle_button {
