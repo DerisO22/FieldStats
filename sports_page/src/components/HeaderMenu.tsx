@@ -32,31 +32,31 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
 
 	return (
 		<>
-		<div className="headerMenuContainer">
-			<img className='logo_image' src='/page_logo.webp'></img>
+			<div className="headerMenuContainer">
+				<img className='logo_image' src='/page_logo.webp'></img>
 
-			<SearchBar 
-				onSearch={onSearch}
-			/>
+				<SearchBar 
+					onSearch={onSearch}
+				/>
 
-			<div className="authContainer">
-				<ProfileDetails 
-				username={currentUsername === '' ? 'Not Signed In' : `Hey ${currentUsername}`}
-				isLoggedIn={isLoggedIn}
-				handleLogoutClick={handleLogoutClick}
-				handleLoginClick={handleLoginClick}
+				<div className="authContainer">
+					<ProfileDetails 
+					username={currentUsername === '' ? 'Not Signed In' : `Hey ${currentUsername}`}
+					isLoggedIn={isLoggedIn}
+					handleLogoutClick={handleLogoutClick}
+					handleLoginClick={handleLoginClick}
+					/>
+				</div>
+
+				<LoginForm 
+					isLoggedIn={isLoggedIn}
+					setIsLoggedIn={setIsLoggedIn}
+					isOpen={isLoginOpen}
+					setIsOpen={setIsLoginOpen}
+					setNotification={setNotification}
+					retrieveCurrentUsername = {retrieveCurrentUsername}
 				/>
 			</div>
-
-			<LoginForm 
-				isLoggedIn={isLoggedIn}
-				setIsLoggedIn={setIsLoggedIn}
-				isOpen={isLoginOpen}
-				setIsOpen={setIsLoginOpen}
-				setNotification={setNotification}
-				retrieveCurrentUsername = {retrieveCurrentUsername}
-			/>
-		</div>
 		</>
 	)
 }
