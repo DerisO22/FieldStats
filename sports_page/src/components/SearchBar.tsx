@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, memo } from "react"
 import './component_styles/searchbar.css'
 
 interface SearchBarProps {
@@ -10,6 +10,7 @@ const SearchBar = ({onSearch} : SearchBarProps) => {
     const [ isOpen, setIsOpen ] = useState<boolean>(false); 
     
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         const value = e.target.value;
         setSearchTerm(value);
         onSearch(value);
@@ -18,7 +19,6 @@ const SearchBar = ({onSearch} : SearchBarProps) => {
     const handleSearchBarToggle = (e: React.MouseEvent) => {
         e.preventDefault();
         setIsOpen(prev => !prev);
-        console.log(isOpen)
     }
 
     return (
@@ -34,4 +34,4 @@ const SearchBar = ({onSearch} : SearchBarProps) => {
     )
 }
 
-export default SearchBar;
+export default memo(SearchBar);

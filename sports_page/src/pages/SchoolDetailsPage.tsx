@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import { getSchoolDetails } from '../services/schools_services'
 
 interface School {
-  school_id: number,
-  school_name: string,
-  school_type_id: number,
-  state: string,
-  city: string,
-  address: string,
-  website: string,
+    school_id: number,
+    school_name: string,
+    school_type_id: number,
+    state: string,
+    city: string,
+    address: string,
+    website: string,
 }
 
 const SchoolDetails = () => {
@@ -58,8 +58,8 @@ const SchoolDetails = () => {
             </div>
         );
     }
-  return (
-    <div className="page_container">
+    return (
+        <div className="page_container">
             {!isLoading && schoolData && (
                 <>
                     <h1 className="header1">{`${schoolData.school_name}`}</h1>
@@ -68,8 +68,8 @@ const SchoolDetails = () => {
                         <div className="sport_info">
                             <p>Location: {`${schoolData.address} ${schoolData.city}, ${schoolData.state}`}</p>
                             <p>School Type: { schoolData.school_type_id === 2 ? 
-                                              'College' :
-                                              'High School'
+                                            'College' :
+                                            'High School'
                                             }</p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ const SchoolDetails = () => {
                 Back to Schools
             </button>
         </div>
-  )
+    )
 }
 
 export default SchoolDetails

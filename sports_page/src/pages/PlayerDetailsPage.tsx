@@ -115,9 +115,6 @@ const PlayerDetailsPage = () => {
             </div>
         );
     }
-
-    console.log(playerData?.stats?.length)
-    console.log(playerData?.stats)
   
     return (
         <div className="page_container">
