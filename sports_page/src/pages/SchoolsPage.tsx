@@ -1,72 +1,77 @@
 import './pageStyles/schoolspage.css'
 import './pageStyles/common_styles.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback} from 'react'
 import { getSchools } from '../services/schools_services'
 import { useNavigate } from 'react-router-dom'
 
 interface School {
-  school_id: number,
-  school_name: string,
-  school_type_id: number,
-  state: string,
-  city: string,
-  address: string,
-  website: string,
+	school_id: number,
+	school_name: string,
+	school_type_id: number,
+	state: string,
+	city: string,
+	address: string,
+	website: string,
 }
 
-const SchoolsPage = () => {
-  const [ schoolData, setSchoolData ] = useState<School[]>([]);
-  const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const navigate = useNavigate();
-  
-  const fetchData = async () => {
-    setIsLoading(true);
+interface SchoolsPageProps {
+  	searchTerm: string
+}
 
-    try {
-      const data = await getSchools();
-      setSchoolData(data);
-    } catch (error) {
-      console.log("Error: ", error);
-    } finally {
-      setIsLoading(false)
-    }
-  }
+const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
+	const [ schoolData, setSchoolData ] = useState<School[]>([]);
+	const [ isLoading, setIsLoading ] = useState<boolean>(false);
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchData();
-  }, [])
+	const fetchData = useCallback(async () => {
+		setIsLoading(true);
 
-  const handleSchoolClick = (school_id: number) => {
-    const schoolUrl = `/schools/${school_id}`;
-    console.log("Navigating to:", schoolUrl);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    navigate(schoolUrl);
-};
+		try {
+			const data = await getSchools();
+			setSchoolData(data);
+		} catch (error) {
+		console.log("Error: ", error);
+		} finally {
+			setIsLoading(false)
+		}
+	}, []);
 
-  return (
-    <>
-        <div className='page_container'>
-            <h1 className='header1'>Schools</h1>
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
 
-            <div className='sports_container'>
-                {isLoading ? (
-                    <p>Loading sports...</p>
-                ) : (
-                    schoolData.map((school) => (
-                        <button 
-                            key={school.school_id}
-                            className='sport_button'
-                            onClick={() => handleSchoolClick(school.school_id)}
-                        >
-                            {school.school_name}
-                        </button>
-                    ))
-                )}
-            </div>
-        </div>
-    </>
-  )
+	const handleSchoolClick = useCallback((school_id: number) => {
+		const schoolUrl = `/schools/${school_id}`;
+		console.log("Navigating to:", schoolUrl);
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+		navigate(schoolUrl);
+	}, [navigate]);
+	
+	return (
+		<>
+			<div className='page_container'>
+				<h1 className='header1'>Schools</h1>
+				<div className='sports_container'>
+				{isLoading ? (
+					<p>Loading sports...</p>
+				) : (
+					schoolData
+					.filter(school => school.school_name.toLowerCase().includes(searchTerm.toLowerCase()))
+					.map((school) => (
+						<button
+						key={school.school_id}
+						className='sport_button'
+						onClick={() => handleSchoolClick(school.school_id)}
+						>
+						{school.school_name}
+						</button>
+					))
+				)}
+				</div>
+			</div>
+		</>
+	)
 }
 
 export default SchoolsPage;

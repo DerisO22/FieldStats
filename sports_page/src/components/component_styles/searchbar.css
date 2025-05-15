@@ -1,0 +1,31 @@
+@import url('../../style_vars/page_vars.css');
+
+.searchbar_container {
+    display: flex;
+    width: 20rem;
+    height: fit-content;
+    z-index: 16;
+}
+
+.search_toggle_button {
+    width: 5rem;
+    height: 3rem;
+    background-color: transparent;
+    border: 2px solid white;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.searchbar_opened {
+    width: 90%;
+    background-color: aliceblue;
+    color: black;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem;
+}
+
+.searchbar_closed {
+    display: none;
+}
+
