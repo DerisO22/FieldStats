@@ -63,7 +63,7 @@ async function setupApp() {
     })
 
     app.use('/sports_data', sportRoutes);
-    app.use('/player_data', playerRoutes);
+    app.use('/players_data', playerRoutes);
     app.use('/schools_data', schoolRoutes);
     app.use('/news_data', newsRoutes);
     app.use('/', authRoutes);
