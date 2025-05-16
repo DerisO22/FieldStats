@@ -77,4 +77,17 @@ router.get('/player_profile/:player_id', async (req, res) => {
     }
 })
 
+router.delete('/:player_id', async(req, res) => {
+    try {
+        const { player_id } = req.params;
+        const query = `DELETE FROM players WHERE player_id = $1;`;
+
+        await req.pgClient.query(query, [ player_id ]);
+        res.status(201).json({ message: 'Player successfully deleted'})
+    } catch (error) {
+        console.error('Error deleting player:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
 export default router;

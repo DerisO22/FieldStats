@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 // import { authenticateToken } from './middleware/auth.js';
-import { signupLimiter } from '../middleware/rate_limiter.js'
+import { signupLimiter, deleteUserLimiter } from '../middleware/rate_limiter.js';
 const router = express.Router();
 
 /**
@@ -51,7 +51,6 @@ router.post('/login', async (req, res) => {
         console.log('Error Logging In');
         res.status(500).json({ error: 'Server Error' });
     }
-    
 })
 
 router.post('/signup', signupLimiter, async (req, res) => {
@@ -80,6 +79,19 @@ router.post('/signup', signupLimiter, async (req, res) => {
 
     } catch (error) {
         console.log('Error Signing Up: ', error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+})
+
+router.delete('/user_id', deleteUserLimiter, async(req, res) => {
+    try {
+        const { username } = req.params;
+        const query = `DELETE FROM users WHERE usename = $1`
+
+        await req.pgClient.query(query, [username]);
+        res.status(201).json({ message: 'User successfully deleted'})
+    } catch (error) {
+        console.log('Error Deleting User: ', error);
         res.status(500).json({ error: 'Server Error' });
     }
 })

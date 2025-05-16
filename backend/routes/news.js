@@ -34,4 +34,17 @@ router.get('/featured', async (req, res) => {
     }
 })
 
+router.delete('/:news_id', async(req, res) => {
+    try {
+        const { news_id } = req.params;
+        const query = `DELETE FROM news WHERE news_id = $1;`;
+
+        await req.pgClient.query(query, [ news_id ]);
+        res.status(201).json({ message: 'News successfully deleted'})
+    } catch (error) {
+        console.error('Error deleting news:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
 export default router;

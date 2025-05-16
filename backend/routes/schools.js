@@ -4,6 +4,7 @@ const router = express.Router();
 /**
  * School Related API Endpoints
  */
+// Get all of em
 router.get('/', async (req, res) => {
     try {
         const query = `SELECT * FROM schools
@@ -17,6 +18,7 @@ router.get('/', async (req, res) => {
     }
 })
 
+// Get individual Schools
 router.get('/:school_id', async (req, res) => {
     try {
         const { school_id } = req.params;
@@ -35,5 +37,18 @@ router.get('/:school_id', async (req, res) => {
         res.status(500).json({ error: error.message});
     }
 })
+
+router.delete('/:school_id', async (req, res) => {
+    try {
+        const { school_id } = req.params;
+        const query = 'DELETE FROM schools WHERE school_id = $1;';
+    
+        await req.pgClient.query(query, [school_id]);
+        res.status(201).json({ message: 'School successfully deleted'})
+    } catch (error) {
+        console.error('Error Deleting school data', error);
+        res.status(500).json({ error: error.message});
+    }
+});
 
 export default router;
