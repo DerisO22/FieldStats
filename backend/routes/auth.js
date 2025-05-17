@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-// import { authenticateToken } from './middleware/auth.js';
+import { authenticateToken } from '../middleware/auth.js';
 import { signupLimiter, deleteUserLimiter } from '../middleware/rate_limiter.js';
 const router = express.Router();
 
@@ -12,7 +12,6 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     
     console.log('Login request received:', req.body);
-    
     console.log(`Username: ${username}, Password: ${password}`);
 
     try {
@@ -64,8 +63,13 @@ router.post('/signup', signupLimiter, async (req, res) => {
         const userExists = await req.pgClient.query(`SELECT username 
                                                     FROM users 
                                                     WHERE username = $1`, [username]);
+
         if (userExists.rows.length > 0) {
             return res.status(400).json({ error: 'Username already exists'});
+        }
+
+        if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+            return res.status(400).json({ error: 'Invalid Username and Password'});
         }
 
         // Hashing with bcrypt
@@ -83,10 +87,15 @@ router.post('/signup', signupLimiter, async (req, res) => {
     }
 })
 
-router.delete('/user_id', deleteUserLimiter, async(req, res) => {
+router.delete('/user_id', deleteUserLimiter, authenticateToken, async(req, res) => {
     try {
         const { username } = req.params;
         const query = `DELETE FROM users WHERE usename = $1`
+
+        // Non Admin. Just in case, but the button to delete will only show for the admin
+        if (username !== process.env.ADMIN_USERNAME) {
+            return res.status(401).json({ error: 'Unauthorized: Only admin can delete users' });
+        }
 
         await req.pgClient.query(query, [username]);
         res.status(201).json({ message: 'User successfully deleted'})

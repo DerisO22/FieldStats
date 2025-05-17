@@ -6,6 +6,9 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 import initializeDatabase from './database/db.js';
 import initializeSampleData from './database/db_data.js';
+import { createClient } from './config/database.js';
+const client = createClient();
+
 dotenv.config();
 
 // Routes and API Endpoints
@@ -16,10 +19,10 @@ import newsRoutes from './routes/news.js';
 import authRoutes from './routes/auth.js';
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT;
 
 app.use(cors({
-    origin: (process.env.NODE_ENV === "production" ? 'domain' : 'http://localhost:5173'),
+    origin: (process.env.NODE_ENV === "production" ? process.env.PROD_URL : `http://localhost:5173`),
     credentials: true,
 }));
 
@@ -38,27 +41,14 @@ async function loadSampleData() {
 
 async function setupApp() {
     try {
-        await initializeDatabase();
+        await initializeDatabase(client);
         await loadSampleData();
     } catch (err) {
         console.error('Failed to initialize database schema:', err);
     }
 
-    const pgClient = new pg.Client({
-        database: process.env.DATABASE_DATABASE,
-        password: process.env.DATABASE_PASSWORD,
-        user: process.env.DATABASE_USERNAME
-    });
-    
-    try {
-        await pgClient.connect();
-        console.log('Database connected successfully');
-    } catch (err) {
-        console.error('Database connection error:', err);
-    }
-
     app.use((req, res, next) => {
-        req.pgClient = pgClient;
+        req.pgClient = client;
         next();
     })
 
