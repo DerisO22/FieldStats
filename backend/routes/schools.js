@@ -7,6 +7,7 @@ const router = express.Router();
 // Get all of em
 router.get('/', async (req, res) => {
     try {
+        // Move this stuff into services, so the queries don't need
         const query = `SELECT * FROM schools
                         LIMIT 200;`
         

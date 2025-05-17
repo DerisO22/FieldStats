@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
 
+// Database related imports
 import initializeDatabase from './database/db.js';
 import initializeSampleData from './database/db_data.js';
 import { createClient } from './config/database.js';
@@ -11,7 +12,7 @@ const client = createClient();
 
 dotenv.config();
 
-// Routes and API Endpoints
+// Routes and API Endpoints imports
 import sportRoutes from './routes/sports.js';
 import playerRoutes from './routes/players.js';
 import schoolRoutes from './routes/schools.js';
@@ -41,6 +42,7 @@ async function loadSampleData() {
 
 async function setupApp() {
     try {
+        // Connect to database and put in data
         await initializeDatabase(client);
         await loadSampleData();
     } catch (err) {
@@ -57,7 +59,6 @@ async function setupApp() {
     app.use('/schools_data', schoolRoutes);
     app.use('/news_data', newsRoutes);
     app.use('/', authRoutes);
-    
 
     app.listen(port, '0.0.0.0', () => {
         console.log(`Server running on port ${port}`);
