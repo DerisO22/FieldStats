@@ -29,3 +29,17 @@
     display: none;
 }
 
+.search_indicator_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.searchbar_img {
+    width: 1.2rem;
+    filter: opacity(0.5) drop-shadow(white white white white);
+}
+
