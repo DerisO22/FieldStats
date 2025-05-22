@@ -54,6 +54,7 @@ async function setupApp() {
         next();
     })
 
+    // Routes
     app.use('/sports_data', sportRoutes);
     app.use('/players_data', playerRoutes);
     app.use('/schools_data', schoolRoutes);
