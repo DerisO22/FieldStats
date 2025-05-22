@@ -37,8 +37,8 @@ router.get('/:sportName', async(req, res) => {
 router.delete('/:sportName', async(req, res) => {
     try {
         const {sportName} = req.params;
-
         await deleteSport(req.pgClient, sportName);
+        
         res.status(201).json({ message: 'Sport successfully deleted'})
     } catch (error) {
         console.error('Error deleting sport:', error);
