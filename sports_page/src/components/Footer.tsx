@@ -49,6 +49,7 @@ const Footer = () => {
                 <Link onClick={() => handleScrollTop()} to="/sports" className="headerMenuItem">Sports</Link>
                 <Link onClick={() => handleScrollTop()} to="/schools" className="headerMenuItem">Schools</Link>
                 <Link onClick={() => handleScrollTop()} to="/news" className="headerMenuItem">News</Link>
+                <Link onClick={() => handleScrollTop()} to="/players" className="headerMenuItem">Players</Link>
             </div>
 
             <h1 className='copyright'>© Deris O'Malley</h1>

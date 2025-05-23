@@ -72,7 +72,6 @@ const SportDetailPage = () => {
                         <img className="sport_detail_image" src={`/sports_logos/${sportData.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
                         <p className="sport_description">{sportData.sport_description}</p>
                         <div className="sport_info">
-                            <p>Sport ID: {sportData.sport_id}</p>
                             <p>Gender Divisions: {sportData.has_gender_division ? 'No' : 'Yes'}</p>
                         </div>
                     </div>
