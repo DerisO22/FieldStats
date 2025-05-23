@@ -46,7 +46,7 @@ const deleteSport = async(pgClient, sportName) => {
 const createSport = async(pgClient, sportData) => {
     try {
         const query = SportQuerys.CREATE;
-        const result = await pgClient.query(query, [ sportData.sport_name, sportData.sportDescription, sportData.has_gender_division, sportData.sport_id ]);
+        const result = await pgClient.query(query, [ ...sportData ]);
 
         return result.rows[0];
     } catch (error) {
@@ -54,10 +54,10 @@ const createSport = async(pgClient, sportData) => {
     }
 };
 
-const editSport = async(pgClient, sportData, sportName) => {
+const editSport = async(pgClient, sportData) => {
     try {
         const query = SportQuerys.EDIT;
-        const result = await pgClient.query(query, [ sportData.sport_description, sportData.has_gender_division, sportData.sport_name ]);
+        const result = await pgClient.query(query, [ ...sportData ]);
 
         return result.rows[0];
     } catch (error) {
