@@ -90,7 +90,7 @@ router.post('/signup', signupLimiter, async (req, res) => {
 router.delete('/user_id', deleteUserLimiter, authenticateToken, async(req, res) => {
     try {
         const { username } = req.params;
-        const query = `DELETE FROM users WHERE usename = $1`
+        const query = `DELETE FROM users WHERE username = $1`
 
         // Non Admin. Just in case, but the button to delete will only show for the admin
         if (username !== process.env.ADMIN_USERNAME) {

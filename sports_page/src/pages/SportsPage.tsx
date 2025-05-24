@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './pageStyles/sportspage.css'
 import './pageStyles/common_styles.css'
 import { useNavigate } from 'react-router-dom'
-import { getSports } from '../services/sports_service'
+import { getSports, deleteSport } from '../services/sports_service'
 
 interface Sport {
     sport_id: number,
@@ -37,6 +37,19 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
         fetchData();
     }, []);
 
+    const handleDelete = async (sport_name: any) => {
+        setIsLoading(true);
+
+        try {
+            await deleteSport(sport_name);
+            fetchData();
+        } catch (error) {
+            console.error('Error fetching sports data:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     const handleSportClick = (sportName: string) => {
         const sportUrl = `/sports/${sportName.toLowerCase()}`;
         console.log("Navigating to:", sportUrl);
@@ -63,6 +76,9 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
                         >
                             <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
                             {sport.sport_name}
+
+                            {/* Needs to be conditionally rendered */}
+                            {/* <button onClick={() => handleDelete(sport.sport_name)} className='delete_button'>Delete</button> */}
                         </button>
                     ))
                 )}

@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import pg from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv'
@@ -30,6 +31,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(errorHandler)
+app.use(cookieParser())
 
 async function loadSampleData() {
     try {

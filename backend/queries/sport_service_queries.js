@@ -3,7 +3,7 @@ const SportQuerys = {
 
     RETRIEVE_SPECIFIC: 'SELECT * FROM sports WHERE LOWER(sport_name) = LOWER($1);',
 
-    DELETE: 'DELETE FROM sports WHERE LOWER(sport_name) = LOWER($1);',
+    DELETE: 'DELETE FROM sports WHERE LOWER(sport_name) = LOWER($1) RETURNING *;',
 
     EDIT: `UPDATE sports SET sport_description = $1, has_gender_divisions = $2
            WHERE sport_name = $3`,

@@ -34,12 +34,13 @@ const deleteSport = async(pgClient, sportName) => {
         const result = await pgClient.query(query, [sportName]);
 
         if (result.rows.length === 0){
-            return null;
+            throw new Error(`Service: Error deleting`, sportName);
         }
 
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error deleting sport:', error);
+        throw error;
     }
 }
 
