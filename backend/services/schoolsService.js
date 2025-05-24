@@ -1,6 +1,10 @@
+import { SchoolQueries } from "../queries/school_service_queries.js";
+/**
+ *  School Related Services
+ */
 const getAllSchools = async(pgClient) => {
     try {
-        const query = `SELECT * FROM schools LIMIT 200;`;
+        const query = SchoolQueries.RETRIEVE_ALL;
         const result = await pgClient.query(query);
 
         return result.rows;
@@ -11,7 +15,7 @@ const getAllSchools = async(pgClient) => {
 
 const getSpecificSchool = async(pgClient, school_id) => {
     try {
-        const query = 'SELECT * FROM schools WHERE school_id = $1';
+        const query = SchoolQueries.RETRIEVE_SPECIFIC;
         const result = await pgClient.query(query, [school_id]);
 
         return result.rows[0];
@@ -22,8 +26,8 @@ const getSpecificSchool = async(pgClient, school_id) => {
 
 const deleteSchool = async(pgClient, school_id) => {
     try {
-        const query = 'DELETE FROM schools WHERE school_id = $1;';
-        const result = await pgClient.query(query, school_id);
+        const query = SchoolQueries.DELETE;
+        const result = await pgClient.query(query, [school_id]);
 
         if (result.rows.length === 0){
             return null;
@@ -32,6 +36,36 @@ const deleteSchool = async(pgClient, school_id) => {
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error Deleting school data', error);
+    }
+};
+
+const createSchool = async(pgClient, school_data) => {
+    try {
+        const query = SchoolQueries.CREATE;
+        const result = await pgClient.query(query, ...school_data);
+
+        if (result.rows.length === 0){
+            return null;
+        }
+
+        return result.rows[0];
+    } catch (error) {
+        console.error('Service: Error editing school data', error);
+    }
+};
+
+const editSchool = async(pgClient, school_data) => {
+    try {
+        const query = SchoolQueries.EDIT;
+        const result = await pgClient.query(query, ...school_data);
+
+        if (result.rows.length === 0){
+            return null;
+        }
+
+        return result.rows[0];
+    } catch (error) {
+        console.error('Service: Error editing school data', error);
     }
 };
 

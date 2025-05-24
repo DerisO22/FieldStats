@@ -15,7 +15,7 @@
     padding: 0.4rem;
     width: 2rem;
     height: 2rem;
-    background-color: #005fb84a;
+    background-color: #34aaffad;
     border-radius: 50%;
 }
 
@@ -26,6 +26,7 @@
     background-color: var(--main-color);
     border-radius: var(--header-menu-border-radius);
     margin-bottom: 2rem;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero_title {

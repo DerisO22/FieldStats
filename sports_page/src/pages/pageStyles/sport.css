@@ -1,12 +1,19 @@
 @import url('../../style_vars/page_vars.css');
 
 .sport_detail_container {
-
+    padding: 1rem 0 0.5rem 0;
+    border-top: 2px solid var(--bg2-color);
+    border-bottom: 2px solid var(--bg2-color);
+    margin-bottom: 1rem;
 }
 
 .sport_description {
+    width: 80%;
     font-size: 1.1rem;
     color: var(--text-color);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
 }
 
 .sport_info p {
@@ -15,4 +22,30 @@
 
 .sport_detail_image {
     width: 5rem;
+}
+
+.return_to_sports_button {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    width: 10rem;
+    height: 2.3rem;
+    background-color: var(--text-color);
+    box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.568);
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    /* border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black; */
+    transition: all 0.3s ease-in-out;
+}
+
+.return_to_sports_button:hover {
+    color: var(--text-color);
+    background-color: #b4d9e5;
+    box-shadow: 0 2px 0px 0px var(--bg2-color);
 }
