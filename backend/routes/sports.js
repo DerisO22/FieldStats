@@ -1,4 +1,6 @@
 import express from 'express';
+import { authenticateToken } from '../middleware/auth.js';
+import { deleteContentLimiter } from '../middleware/rate_limiter.js';
 import { getAllSports, getSpecificSport, deleteSport} from '../services/sportService.js';
 
 const router = express.Router();
@@ -34,10 +36,22 @@ router.get('/:sportName', async(req, res) => {
     }
 })
 
-router.delete('/:sportName', async(req, res) => {
+router.delete('/:sportName', deleteContentLimiter, authenticateToken, async(req, res) => {
     try {
-        const {sportName} = req.params;
-        await deleteSport(req.pgClient, sportName);
+        const { sportName } = req.params;
+
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+        
+        const { username } = req.user;
+        console.log("In backend: ", username);
+        
+        if (username !== process.env.ADMIN_USERNAME) {
+            return res.status(403).json({ error: 'Unauthorized. Only ADMINs can delete sports.' });
+        }
+
+        const result = await deleteSport(req.pgClient, sportName);
         
         res.status(201).json({ message: 'Sport successfully deleted'})
     } catch (error) {
