@@ -77,7 +77,7 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
                             <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
                             {sport.sport_name}
 
-                            {/* Needs to be conditionally rendered */}
+                            {/* Needs to be conditionally rendered with like an isAdmin */}
                             {/* <button onClick={() => handleDelete(sport.sport_name)} className='delete_button'>Delete</button> */}
                         </button>
                     ))

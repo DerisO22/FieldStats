@@ -36,7 +36,7 @@ router.get('/:sportName', async(req, res) => {
     }
 })
 
-router.delete('/:sportName', deleteContentLimiter, authenticateToken, async(req, res) => {
+router.delete('/:sportName', authenticateToken, async(req, res) => {
     try {
         const { sportName } = req.params;
 

@@ -5,6 +5,7 @@
     width: 100%;
     height: fit-content;
     padding-bottom: 1rem;
+    z-index: 100;
 }
 
 .footer_container .header1 {
