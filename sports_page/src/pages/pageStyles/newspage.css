@@ -51,16 +51,16 @@
     transition: all 0.3s ease-in-out;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    border-top-left-radius: 2%;
-    border-top-right-radius: 2%;
+    border-top-left-radius: 1%;
+    border-top-right-radius: 1%;
 }
 
 .card_image {
     position: absolute;
-    object-fit: contain;
+    object-fit: cover;
     background-repeat: no-repeat;
     width: 24rem;
-    height: fit-content;
+    height: 12rem;
     border-radius: 5px;
     box-shadow: 0 0 2px 1px var(--bg3-color);
     transition: all 0.3s ease-in-out;
