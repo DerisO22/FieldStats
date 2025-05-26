@@ -5,8 +5,8 @@ const SportQuerys = {
 
     DELETE: 'DELETE FROM sports WHERE LOWER(sport_name) = LOWER($1) RETURNING *;',
 
-    EDIT: `UPDATE sports SET sport_description = $1, has_gender_divisions = $2
-           WHERE sport_name = $3`,
+    EDIT: `UPDATE sports SET sport_description = $2, has_gender_divisions = $3
+           WHERE sport_name = $1`,
 
     CREATE: `INSERT INTO sports (sport_name, sport_description, has_gender_divisions) 
              VALUES ($1, $2, $3);`

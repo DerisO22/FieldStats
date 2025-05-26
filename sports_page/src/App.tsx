@@ -6,6 +6,7 @@ import SubHeader from './components/SubHeader';
 import Footer from './components/Footer';
 import PageRoutes from './routes/PageRoutes';
 import PopUpNotification from './components/PopUpNotification';
+import { ModalProvider } from './contexts/ModalContext';
 
 const App = () => {
     // Login Auth States
@@ -31,19 +32,21 @@ const App = () => {
               onClose={useCallback(() => setNotification(prev => ({ ...prev, isVisible: false })), [])}
             />
             {/* React Router for navigating between pages */}
-            <Router>
-                <HeaderMenu 
-                          isLoggedIn={isLoggedIn}
-                          setIsLoggedIn={setIsLoggedIn}
-                          isLoginOpen={isLoginOpen}
-                          setIsLoginOpen={setIsLoginOpen}
-                          setNotification={setNotification}
-                          onSearch={useCallback((term: string) => setSearchTerm(term), [])}
-                />
-                <SubHeader />
-                <PageRoutes searchTerm={searchTerm} />
-                <Footer />
-            </Router>
+            <ModalProvider>
+              <Router>
+                  <HeaderMenu 
+                            isLoggedIn={isLoggedIn}
+                            setIsLoggedIn={setIsLoggedIn}
+                            isLoginOpen={isLoginOpen}
+                            setIsLoginOpen={setIsLoginOpen}
+                            setNotification={setNotification}
+                            onSearch={useCallback((term: string) => setSearchTerm(term), [])}
+                  />
+                  <SubHeader />
+                  <PageRoutes searchTerm={searchTerm} />
+                  <Footer />
+              </Router>
+            </ModalProvider>
         </>
     )
 }

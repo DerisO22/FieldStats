@@ -66,4 +66,4 @@ const editSport = async(pgClient, sportData) => {
     }
 };
 
-export {getAllSports, getSpecificSport, deleteSport};
+export { getAllSports, getSpecificSport, deleteSport, createSport, editSport };
