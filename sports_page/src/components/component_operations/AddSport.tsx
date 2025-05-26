@@ -73,7 +73,7 @@ const AddSport = ({ onSubmit, isLoading = false }: AddSportProps) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="add_sport_form">
+        <form onSubmit={handleSubmit} className="operation_form">
             <div className="form_group">
                 <label htmlFor="sport_name" className="form_label">
                     Sport Name

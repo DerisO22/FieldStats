@@ -1,22 +1,25 @@
 @import url('../../../style_vars/page_vars.css');
 
-.add_sport_form {
-    width: 95%;
+.operation_form {
+    width: 100%;
     height: fit-content;
-    margin: auto;
-    background-color: transparent;
+    margin-left: auto;
     color: var(--text-color);
     font-weight: 550;
 }
 
 .form_group {
-    width: 90%;
+    width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
+}
+
+.form_label {
+    width: 85%;
+    align-items: start;
 }
 
 .form_input {
@@ -59,5 +62,7 @@
 }
 
 .error_message {
+    width: 85%;
     text-align: left;
+    align-items: start;
 }
