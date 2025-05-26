@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './component_operation_styles/add_sport.css'
 
 interface AddSportProps {
     onSubmit: (sportData: {
@@ -76,7 +77,7 @@ const AddSport = ({ onSubmit, onCancel, isLoading = false }: AddSportProps) => {
         <form onSubmit={handleSubmit} className="add_sport_form">
             <div className="form_group">
                 <label htmlFor="sport_name" className="form_label">
-                    Sport Name *
+                    Sport Name
                 </label>
                 <input
                     type="text"
@@ -84,7 +85,7 @@ const AddSport = ({ onSubmit, onCancel, isLoading = false }: AddSportProps) => {
                     name="sport_name"
                     value={formData.sport_name}
                     onChange={handleInputChange}
-                    className={`form_input ${errors.sport_name ? 'error' : ''}`}
+                    className={`form_input`}
                     placeholder="Enter sport name"
                     disabled={isLoading}
                 />
@@ -93,14 +94,14 @@ const AddSport = ({ onSubmit, onCancel, isLoading = false }: AddSportProps) => {
 
             <div className="form_group">
                 <label htmlFor="sport_description" className="form_label">
-                    Sport Description *
+                    Sport Description 
                 </label>
                 <textarea
                     id="sport_description"
                     name="sport_description"
                     value={formData.sport_description}
                     onChange={handleInputChange}
-                    className={`form_textarea ${errors.sport_description ? 'error' : ''}`}
+                    className={`form_textarea`}
                     placeholder="Enter sport description"
                     rows={4}
                     disabled={isLoading}
@@ -123,14 +124,6 @@ const AddSport = ({ onSubmit, onCancel, isLoading = false }: AddSportProps) => {
             </div>
 
             <div className="form_actions">
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    className="cancel_button"
-                    disabled={isLoading}
-                >
-                Cancel
-                </button>
                 <button
                     type="submit"
                     className="submit_button"

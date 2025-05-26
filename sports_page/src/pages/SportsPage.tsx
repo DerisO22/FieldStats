@@ -115,7 +115,7 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
                     ))
                 )}
             </div>
-            <button onClick={openAddSportModal} className='sport_button'>Add Sport</button>
+            <button onClick={openAddSportModal} className='add_sport_button'>Add Sport</button>
         </div>
     )
 }

@@ -1,0 +1,63 @@
+@import url('../../../style_vars/page_vars.css');
+
+.add_sport_form {
+    width: 95%;
+    height: fit-content;
+    margin: auto;
+    background-color: transparent;
+    color: var(--text-color);
+    font-weight: 550;
+}
+
+.form_group {
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_input {
+    width: 80%;
+    padding: 0.8rem;
+    margin-top: 0.2rem;
+    border: 1px solid #5a4646;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: black;
+    background-color: aliceblue;
+}
+
+.form_input::placeholder {
+    font-weight: 500;
+}
+
+.form_textarea {
+    width: 80%;
+    padding: 0.8rem;
+    margin-top: 0.2rem;
+    border: 1px solid #5a4646;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    background-color: aliceblue;
+}
+
+.checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: auto;
+    accent-color: green;
+}
+
+.checkbox_label:hover {
+    accent-color: red;
+}
+
+.error_message {
+    text-align: left;
+}
