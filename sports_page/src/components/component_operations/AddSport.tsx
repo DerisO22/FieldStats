@@ -7,11 +7,10 @@ interface AddSportProps {
         sport_description: string;
         has_gender_division: boolean;
     }) => Promise<void>;
-    onCancel: () => void;
     isLoading?: boolean;
 }
 
-const AddSport = ({ onSubmit, onCancel, isLoading = false }: AddSportProps) => {
+const AddSport = ({ onSubmit, isLoading = false }: AddSportProps) => {
     const [formData, setFormData] = useState({
         sport_name: '',
         sport_description: '',

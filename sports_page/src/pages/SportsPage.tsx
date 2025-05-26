@@ -74,9 +74,8 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
     const openAddSportModal = () => {
         openModal(
             <AddSport
-            onSubmit={handleAddSport}
-            onCancel={closeModal}
-            isLoading={isLoading}
+                onSubmit={handleAddSport}
+                isLoading={isLoading}
             />,
             "Add New Sport"
         )
