@@ -3,6 +3,8 @@ import './pageStyles/common_styles.css'
 import './pageStyles/sport.css'
 import { useParams, useNavigate } from "react-router-dom";
 import { getSportDetails } from "../services/sports_service";
+import { useModal } from "../contexts/ModalContext";
+import EditSport from "../components/component_operations/EditSport";
 
 interface Sport {
     sport_id: number;
@@ -17,6 +19,7 @@ const SportDetailPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { openModal, closeModal } = useModal();
 
     const fetchData = async() => {
         if (!sportName) {
@@ -39,6 +42,24 @@ const SportDetailPage = () => {
     useEffect(() => {
         fetchData();
     }, [sportName])
+
+    const handleEditSport = async(sportData: {
+        sport_description: string,
+        has_gender_division: boolean
+    }) => {
+
+    }
+
+    const openEditSportModal = () => {
+        openModal(
+            <EditSport 
+            onSubmit={handleEditSport}
+            isLoading={isLoading}
+            />,
+            `Edit ${sportData?.sport_name}`
+        )
+
+    }
 
     if (isLoading) {
         return (
@@ -84,6 +105,8 @@ const SportDetailPage = () => {
                 }}>
                 Back to Sports
             </button>
+
+            <button onClick={openEditSportModal} className='add_sport_button'>Edit {sportData.sport_name}</button>
         </div>
     );
 }
