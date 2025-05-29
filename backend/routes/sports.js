@@ -63,7 +63,9 @@ router.delete('/:sportName', authenticateToken, async(req, res) => {
 
 router.post('/', authenticateToken, async (req, res) => {
     try {
-        const { sportData } = req.params;
+        const sportData = req.body;
+
+        console.log(sportData);
 
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
@@ -82,7 +84,9 @@ router.post('/', authenticateToken, async (req, res) => {
 
 router.put('/:sportName', authenticateToken, async (req, res) => {
     try {
-        const { sportData } = req.params;
+        const sportData = req.body;
+
+        console.log(sportData);
 
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });

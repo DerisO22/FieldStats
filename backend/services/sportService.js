@@ -47,11 +47,14 @@ const deleteSport = async(pgClient, sportName) => {
 const createSport = async(pgClient, sportData) => {
     try {
         const query = SportQuerys.CREATE;
-        const result = await pgClient.query(query, [ ...sportData ]);
+
+        const { sport_name, sport_description, has_gender_division } = sportData;
+        const result = await pgClient.query(query, [sport_name, sport_description, has_gender_division]);
 
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error deleting sport:', error);
+        throw error;
     }
 };
 

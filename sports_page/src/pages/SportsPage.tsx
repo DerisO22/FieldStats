@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { getSports, deleteSport, addSport } from '../services/sports_service'
 import { useModal } from '../contexts/ModalContext'
 import AddSport from '../components/component_operations/AddSport'
+import { useAuth } from '../contexts/AuthContext'
 
 interface Sport {
     sport_id: number,
@@ -22,6 +23,7 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const navigate = useNavigate();
     const { openModal, closeModal } = useModal();
+    const { isAuthenticated, isAdmin } = useAuth();
 
     const fetchData = async () => {
         setIsLoading(true);
@@ -53,7 +55,7 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
         }
     }
 
-    const handleAddSport = async(sportData: {
+    const handleAddSport = async(newSportData: {
         sport_name: string;
         sport_description: string;
         has_gender_division: boolean;
@@ -61,7 +63,8 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
         setIsLoading(true);
 
         try {
-            await addSport(sportData);
+            await addSport(newSportData);
+            console.log('Data after addition: ', newSportData)
             await fetchData();
             closeModal();
         } catch (error) {
@@ -109,12 +112,14 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
                             {sport.sport_name}
 
                             {/* Needs to be conditionally rendered with like an isAdmin */}
-                            {/* <button onClick={() => handleDelete(sport.sport_name)} className='delete_button'>Delete</button> */}
+                            {/* <div onClick={() => handleDelete(sport.sport_name)} className='delete_button'>Delete</div> */}
                         </button>
                     ))
                 )}
             </div>
-            <button onClick={openAddSportModal} className='add_sport_button'>Add Sport</button>
+            {isAuthenticated && isAdmin && (
+                <button onClick={openAddSportModal} className='add_sport_button'>Add Sport</button>
+            )}
         </div>
     )
 }
