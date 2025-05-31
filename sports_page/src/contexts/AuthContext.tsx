@@ -63,39 +63,39 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     // Login function
     const login = async (username: string, password: string, isSigningIn: boolean = false) => {
         try {
-        const response = await fetch(`${API_URL}/${!isSigningIn ? 'login' : 'signup'}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
-            credentials: 'include',
-        });
+            const response = await fetch(`${API_URL}/${!isSigningIn ? 'login' : 'signup'}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+                credentials: 'include',
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (response.ok && data.success) {
-            // For login, verify the token and get user info
-            if (!isSigningIn) {
-            await checkAuthStatus();
+            if (response.ok && data.success) {
+                // For login, verify the token and get user info
+                if (!isSigningIn) {
+                    await checkAuthStatus();
+                }
+                return { success: true };
+            } else {
+                return { success: false, error: data.error || 'Authentication failed' };
             }
-            return { success: true };
-        } else {
-            return { success: false, error: data.error || 'Authentication failed' };
-        }
         } catch (error) {
-        console.error('Login error:', error);
-        return { success: false, error: 'Network error' };
+            console.error('Login error:', error);
+            return { success: false, error: 'Network error' };
         }
     };
 
     // Logout function
     const logout = async () => {
         try {
-        // Clear the cookie
-        // Currently just deleting the cookies manually in chrome setting for testing
-        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        setUser(null);
+            // Clear the cookie
+            // Currently just deleting the cookies manually in chrome setting for testing
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            setUser(null);
         } catch (error) {
-        console.error('Logout error:', error);
+            console.error('Logout error:', error);
         }
     };
 

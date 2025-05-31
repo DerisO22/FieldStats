@@ -10,8 +10,6 @@ import { ModalProvider } from './contexts/ModalContext';
 import { AuthProvider } from './contexts/AuthContext';
 
 const App = () => {
-    // Login Auth States
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
     const [notification, setNotification] = useState<{
 		isVisible: boolean,
@@ -37,8 +35,6 @@ const App = () => {
 				<ModalProvider> 
 					<Router>
 						<HeaderMenu 
-								isLoggedIn={isLoggedIn}
-								setIsLoggedIn={setIsLoggedIn}
 								isLoginOpen={isLoginOpen}
 								setIsLoginOpen={setIsLoginOpen}
 								setNotification={setNotification}

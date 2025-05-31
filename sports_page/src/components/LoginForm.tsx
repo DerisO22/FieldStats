@@ -1,10 +1,8 @@
 import React, { FormEvent, useState } from 'react'
 import './component_styles/login_form.css'
-import { login } from '../services/authentication_service'
+import { useAuth } from '../contexts/AuthContext';
 
 interface LoginFormProps {
-    isLoggedIn: boolean;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setNotification: any;
@@ -25,8 +23,9 @@ const InitialFormState: FormState = {
     error: ''
 }
 
-const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotification, retrieveCurrentUsername}: LoginFormProps) => {
+const LoginForm = ({isOpen, setIsOpen, setNotification, retrieveCurrentUsername}: LoginFormProps) => {
     const [ formState, setFormState ] = useState<FormState>(InitialFormState);
+    const { login } = useAuth();
 
     const onClose = () => {
         setIsOpen(false);
@@ -63,23 +62,15 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setNotificatio
 
         try {
             console.log('Submitting with:', { username, password });
-            // Use the function in authentication_service.js
-            const res = await login({ 
-                username: username, 
-                password: password, 
-                isSigningIn: formState.isSigningIn
-            });
-            const data = await res.json();
+            // Use the auth context login method
+            const res = await login(username, password, formState.isSigningIn);
             
-            if (res.ok) {
-                console.log('Login successful:', data);
-                setIsLoggedIn(true);
+            if (res.success) {
                 setIsOpen(false);
                 setFormState(InitialFormState);
                 setNotification({isVisible: true, message: 'Successful Login', type: "success"});
                 retrieveCurrentUsername(formState.username);
             } else {
-                console.error('Login failed:', data);
                 setFormState((prev) => ({
                     ...prev,
                     error: "Invalid Credentials"

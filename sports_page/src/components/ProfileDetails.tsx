@@ -1,19 +1,26 @@
 import { useState } from "react";
 import './component_styles/profile_menu.css'
+import { useAuth } from "../contexts/AuthContext";
 
 interface UserProfileDetails {
     username: string,
-    isLoggedIn: boolean,
     handleLogoutClick: () => void,
     handleLoginClick: () => void
 }
 
-const ProfileDetails = ({username, isLoggedIn, handleLogoutClick, handleLoginClick} : UserProfileDetails) => {
+const ProfileDetails = ({username, handleLogoutClick, handleLoginClick} : UserProfileDetails) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const { user, isAuthenticated, logout} = useAuth();
 
     const handleOpen = (e: React.MouseEvent) => {
         e.preventDefault();
         setIsMenuOpen(prev => !prev);
+    }
+
+    const handleLogout = async () => {
+        await logout();
+        handleLogoutClick();
+        setIsMenuOpen(false);
     }
 
     return (
@@ -30,12 +37,8 @@ const ProfileDetails = ({username, isLoggedIn, handleLogoutClick, handleLoginCli
                     </div>
 
                     <div className="button_container">
-                        {isLoggedIn ? (
-                            <button className="authButton" onClick={(e) => {
-                                    handleLogoutClick();
-                                    handleOpen(e);
-                                }
-                            }>
+                        {isAuthenticated ? (
+                            <button className="authButton" onClick={handleLogout}>
                             Logout
                             </button>
                         ) : (
