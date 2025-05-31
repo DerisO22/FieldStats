@@ -3,12 +3,11 @@ import './component_styles/profile_menu.css'
 import { useAuth } from "../contexts/AuthContext";
 
 interface UserProfileDetails {
-    username: string,
     handleLogoutClick: () => void,
     handleLoginClick: () => void
 }
 
-const ProfileDetails = ({username, handleLogoutClick, handleLoginClick} : UserProfileDetails) => {
+const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetails) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const { user, isAuthenticated, logout} = useAuth();
 
@@ -29,7 +28,9 @@ const ProfileDetails = ({username, handleLogoutClick, handleLoginClick} : UserPr
                 <img onClick={(e) => handleOpen(e)} className="profile_image" src="/profile_image2.webp"></img>
 
                 <div className={`menu_details_container_${isMenuOpen ? 'open' : 'closed'}`}>
-                    <h2 className="menu_header">{username}</h2>
+                    <h2 className="menu_header">
+                        {isAuthenticated ? `Hey ${user?.username}` : "Not Signed In"}
+                    </h2>
                     <div className="menu_item_container">
                         <button className="menu_item">MenuItem</button>
                         <button className="menu_item">MenuItem</button>

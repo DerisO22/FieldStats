@@ -6,7 +6,6 @@ interface LoginFormProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setNotification: any;
-    retrieveCurrentUsername: (username: string) => void;
 }
 
 interface FormState {
@@ -23,7 +22,7 @@ const InitialFormState: FormState = {
     error: ''
 }
 
-const LoginForm = ({isOpen, setIsOpen, setNotification, retrieveCurrentUsername}: LoginFormProps) => {
+const LoginForm = ({isOpen, setIsOpen, setNotification}: LoginFormProps) => {
     const [ formState, setFormState ] = useState<FormState>(InitialFormState);
     const { login } = useAuth();
 
@@ -69,7 +68,6 @@ const LoginForm = ({isOpen, setIsOpen, setNotification, retrieveCurrentUsername}
                 setIsOpen(false);
                 setFormState(InitialFormState);
                 setNotification({isVisible: true, message: 'Successful Login', type: "success"});
-                retrieveCurrentUsername(formState.username);
             } else {
                 setFormState((prev) => ({
                     ...prev,

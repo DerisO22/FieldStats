@@ -38,7 +38,6 @@ const HeaderMenu = ({isLoginOpen, setIsLoginOpen, setNotification, onSearch }: H
 
 				<div className="authContainer">
 					<ProfileDetails 
-						username={currentUsername === '' ? 'Not Signed In' : `Hey ${currentUsername}`}
 						handleLogoutClick={handleLogoutClick}
 						handleLoginClick={handleLoginClick}
 					/>
@@ -48,7 +47,6 @@ const HeaderMenu = ({isLoginOpen, setIsLoginOpen, setNotification, onSearch }: H
 					isOpen={isLoginOpen}
 					setIsOpen={setIsLoginOpen}
 					setNotification={setNotification}
-					retrieveCurrentUsername = {retrieveCurrentUsername}
 				/>
 			</div>
 		</>
