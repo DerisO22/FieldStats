@@ -108,13 +108,14 @@ const NewsDetailPage = () => {
             {!isLoading && newsData && (
                 <>
                     <h1 className="header1">{newsData.headline}</h1>
-                    {/* <div className="sport_detail_container">
-                        <img className="sport_detail_image" src={`/sports_logos/${sportData.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
-                        <p className="sport_description">{sportData.sport_description}</p>
+                    <p className="text">Author - {newsData.author}</p>
+                    <p className="text">{(newsData.publish_date).substring(0,10)}</p>
+                    <p className="text">Sport: {newsData.sport_id}</p>
+                    <div className="sport_detail_container">
                         <div className="sport_info">
-                            <p>Gender Divisions: {sportData.has_gender_division ? 'No' : 'Yes'}</p>
+                            <p className="text">{newsData.content}</p>
                         </div>
-                    </div> */}
+                    </div>
                 </>
             )}
             <button className="return_to_sports_button" onClick={() => {

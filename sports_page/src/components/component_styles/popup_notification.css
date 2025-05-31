@@ -39,6 +39,8 @@
 .popup_notification.info {
     background-color: var(--bg3-color);
     color: white;
+    font-weight: 800;
+    border: 1px solid white;
 }
 
 .popup_notification .close_button {
@@ -64,7 +66,7 @@
         opacity: 0;
     }
     to {
-        transform: translateX(10);
+        transform: translateX(10px);
         opacity: 0.5;
     }
     to {

@@ -18,7 +18,7 @@ const App = () => {
 		duration: number,
 		onClose: () => void
     }
-    >({isVisible: false, message: '', type: 'info', duration: 0, onClose: () => {}});
+    >({isVisible: false, message: '', type: 'info', duration: 3000, onClose: () => {}});
     const [searchTerm, setSearchTerm] = useState<string>('');
     
     return (
@@ -28,7 +28,7 @@ const App = () => {
 				message={notification.message}
 				type={notification?.type}
 				duration={notification?.duration}
-				onClose={useCallback(() => setNotification(prev => ({ ...prev, isVisible: false })), [])}
+				onClose={() => setNotification(prev => ({ ...prev, isVisible: false }))}
             />
             {/* React Router for navigating between pages */}
             <AuthProvider>
