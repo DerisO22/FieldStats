@@ -50,10 +50,20 @@ const EditSport = ({ onSubmit, isLoading }: EditSportProps) => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
+
+        let newValue;
+
+        if(type === "checkbox"){
+            newValue = (e.target as HTMLInputElement).checked;
+        } else {
+            newValue = value;
+        }
+
+        console.log(newValue);
         
         setFormData(prev => ({
             ...prev,
-            [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+            [name]: newValue
         }))
 
         if(errors[name]){
