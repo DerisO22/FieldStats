@@ -2,7 +2,10 @@ import { useEffect, useState } from "react"
 import './pageStyles/common_styles.css'
 import './pageStyles/sport.css'
 import { useParams, useNavigate } from "react-router-dom";
-import { getSportDetails } from "../services/sports_service";
+import { getSportDetails, editSport } from "../services/sports_service";
+import { useModal } from "../contexts/ModalContext";
+import EditSport from "../components/component_operations/EditSport";
+import { useAuth } from "../contexts/AuthContext";
 
 interface Sport {
     sport_id: number;
@@ -17,6 +20,8 @@ const SportDetailPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { openModal, closeModal } = useModal();
+    const { isAuthenticated, isAdmin } = useAuth();
 
     const fetchData = async() => {
         if (!sportName) {
@@ -39,6 +44,37 @@ const SportDetailPage = () => {
     useEffect(() => {
         fetchData();
     }, [sportName])
+
+    const handleEditSport = async(data: {
+        sport_description: string,
+        has_gender_division: boolean
+    }) => {
+        setIsLoading(true);
+
+        const newData = { sport_name: sportData?.sport_name || '', ...data}
+
+        try {
+            await editSport(newData);
+            await fetchData();
+            closeModal();
+        } catch {
+            console.error("Error fetching sport data:", error);
+            setError("Network Error");
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const openEditSportModal = () => {
+        openModal(
+            <EditSport 
+                onSubmit={handleEditSport}
+                isLoading={isLoading}
+            />,
+            `Edit ${sportData?.sport_name}`
+        )
+
+    }
 
     if (isLoading) {
         return (
@@ -78,12 +114,16 @@ const SportDetailPage = () => {
                 </>
             )}
             <button className="return_to_sports_button" onClick={() => {
-                navigate('/sports');
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
+                    navigate('/sports');
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
                 }}>
                 Back to Sports
             </button>
+
+            {isAuthenticated && isAdmin && 
+                <button onClick={openEditSportModal} className='add_sport_button'>Edit {sportData.sport_name}</button>
+            }
         </div>
     );
 }

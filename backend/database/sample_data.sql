@@ -938,4 +938,3 @@ CROSS JOIN (
   SELECT sport_id FROM sports ORDER BY random() LIMIT 1
 ) s
 ON CONFLICT DO NOTHING;
-

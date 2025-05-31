@@ -34,35 +34,40 @@ const deleteSport = async(pgClient, sportName) => {
         const result = await pgClient.query(query, [sportName]);
 
         if (result.rows.length === 0){
-            return null;
+            throw new Error(`Service: Error deleting`, sportName);
         }
 
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error deleting sport:', error);
+        throw error;
     }
 }
 
 const createSport = async(pgClient, sportData) => {
     try {
         const query = SportQuerys.CREATE;
-        const result = await pgClient.query(query, [ ...sportData ]);
+
+        const { sport_name, sport_description, has_gender_division } = sportData;
+        const result = await pgClient.query(query, [sport_name, sport_description, has_gender_division]);
 
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error deleting sport:', error);
+        throw error;
     }
 };
 
 const editSport = async(pgClient, sportData) => {
     try {
         const query = SportQuerys.EDIT;
-        const result = await pgClient.query(query, [ ...sportData ]);
-
+        const { sport_name, sport_description, has_gender_division } = sportData;
+        const result = await pgClient.query(query, [sport_name, sport_description, has_gender_division]);
+        console.log('Successful Query');
         return result.rows[0];
     } catch (error) {
         console.error('Service: Error deleting sport:', error);
     }
 };
 
-export {getAllSports, getSpecificSport, deleteSport};
+export { getAllSports, getSpecificSport, deleteSport, createSport, editSport };

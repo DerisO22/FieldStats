@@ -5,15 +5,13 @@ import ProfileDetails from './ProfileDetails';
 import SearchBar from './SearchBar';
 
 interface HeaderMenuProps {
-	isLoggedIn: boolean;
-	setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 	isLoginOpen: boolean;
 	setIsLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setNotification: any;
 	onSearch: (searchTerm: string) => void;
 }
 
-const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, setNotification, onSearch }: HeaderMenuProps) => {
+const HeaderMenu = ({isLoginOpen, setIsLoginOpen, setNotification, onSearch }: HeaderMenuProps) => {
 	const [ currentUsername, setCurrentUsername ] = useState<string>('');
 
 	const handleLoginClick = () => {
@@ -23,7 +21,6 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
 	const handleLogoutClick = () => {
 		setNotification({isVisible: true, message: 'Logged out', type: "info"});
 		setCurrentUsername('');
-		setIsLoggedIn(false);
 	};
 
 	const retrieveCurrentUsername = (username: string) => {
@@ -41,20 +38,15 @@ const HeaderMenu = ({ isLoggedIn, setIsLoggedIn, isLoginOpen, setIsLoginOpen, se
 
 				<div className="authContainer">
 					<ProfileDetails 
-					username={currentUsername === '' ? 'Not Signed In' : `Hey ${currentUsername}`}
-					isLoggedIn={isLoggedIn}
-					handleLogoutClick={handleLogoutClick}
-					handleLoginClick={handleLoginClick}
+						handleLogoutClick={handleLogoutClick}
+						handleLoginClick={handleLoginClick}
 					/>
 				</div>
 
 				<LoginForm 
-					isLoggedIn={isLoggedIn}
-					setIsLoggedIn={setIsLoggedIn}
 					isOpen={isLoginOpen}
 					setIsOpen={setIsLoginOpen}
 					setNotification={setNotification}
-					retrieveCurrentUsername = {retrieveCurrentUsername}
 				/>
 			</div>
 		</>

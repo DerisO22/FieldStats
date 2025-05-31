@@ -1,5 +1,5 @@
 import express from 'express';
-import pg from 'pg';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/errorHandler.js';
@@ -30,6 +30,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(errorHandler)
+app.use(cookieParser())
 
 async function loadSampleData() {
     try {

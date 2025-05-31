@@ -1,152 +1,151 @@
 @import url('../../style_vars/page_vars.css');
   
 .modal_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* background:
-    linear-gradient(217deg, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0) 20.71%),
-    linear-gradient(127deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0) 20.71%),
-    linear-gradient(336deg, rgba(0, 0, 255, 0.2), rgba(0, 0, 255, 0) 20.71%); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* background:
+      linear-gradient(217deg, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0) 20.71%),
+      linear-gradient(127deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0) 20.71%),
+      linear-gradient(336deg, rgba(0, 0, 255, 0.2), rgba(0, 0, 255, 0) 20.71%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto;
 }
 
 .modal_content {
-  padding: 15px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  border: 2px solid rgb(215, 223, 230);
-  box-shadow: 0 2px 5px 5px rgba(110, 185, 255, 0.202);
-  background-color: aliceblue;
+    padding: 15px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    border: 2px solid rgb(215, 223, 230);
+    box-shadow: 0 2px 5px 5px rgba(110, 185, 255, 0.202);
+    background-color: aliceblue;
 }
 
 .text {
-  font-size: 1rem;
-  color: var(--text-color);
-  font-weight: 550;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 550;
 }
 
 .form_header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 0.7rem;
-  color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 0.7rem;
+    color: var(--text-color);
 }
 
 .form_header .form_title {
-  text-decoration: underline;
-  text-decoration-thickness: 0.2rem;
+    text-decoration: underline;
+    text-decoration-thickness: 0.2rem;
 }
 
 .toggle_form_button {
-  margin-bottom: 1rem;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-weight: 750;
-  font-size: 1rem;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-decoration-thickness: 2px; 
-  transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-weight: 750;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px; 
+    transition: all 0.3s ease-in-out;
 }
 
 .toggle_form_button:hover {
-  text-decoration-color: var(--bg3-color);
+    text-decoration-color: var(--bg3-color);
 }
 
 .form_exit_container {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  justify-content: right;
+    width: 100%;
+	height: fit-content;
+	display: flex;
+	justify-content: right;
 }
 
 .close_button {
-  position: absolute;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 1rem;
-  color: #666;
-  transition: all 0.3s ease-in-out;
+    position: absolute;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+    color: #666;
+    transition: all 0.3s ease-in-out;
 }
 
 .close_button:hover {
-  font-size: 2.4rem;
-  color: var(--text-color);
+    font-size: 2.4rem;
+    color: var(--text-color);
 }
 
 .form_fields {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
 }
 
 .form_fields .text {
-  margin-bottom: 0;
-  
+    margin-bottom: 0; 
 }
 
 .form_fields input,
 .form_fields select {
-  margin: auto;
-  width: 90%;
-  padding: 0.8rem;
-  border: 1px solid #5a4646;
-  border-radius: 4px;
-  font-size: 13px;
-  color: black;
-  background-color: aliceblue;
-  box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.55);
+    margin: auto;
+    width: 90%;
+    padding: 0.8rem;
+    border: 1px solid #5a4646;
+    border-radius: 4px;
+    font-size: 13px;
+    color: black;
+    background-color: aliceblue;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.55);
 }
 
 .form_actions {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
 }
 
 .submit_button {
-  width: 7.5rem;
-  height: 2.5rem;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--text-color);
-  background-color: var(--bg4-color);
-  border-radius: 10px;
-  font-weight: 700;
-  margin-top: -0.3rem;
-  margin-bottom: 0.5rem;
-  border: 2px solid rgb(253, 249, 249);
-  transition: all 0.3s ease-in-out;
+    width: 7.5rem;
+    height: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-color);
+    background-color: var(--bg4-color);
+    border-radius: 10px;
+    font-weight: 700;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid rgb(253, 249, 249);
+    transition: all 0.3s ease-in-out;
 }
 
 .submit_button:hover {
-  border-radius: 0;
-  color: aliceblue;
-  background-color: var(--text-color);
+    border-radius: 0;
+    color: aliceblue;
+    background-color: var(--text-color);
 }
 
 .error_message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
-  text-align: center;
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }

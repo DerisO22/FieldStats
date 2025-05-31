@@ -43,10 +43,15 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
         fetchData();
     }, [])
 
+    const getImageForNews = (newsID: number) => {
+        const imageIndex = newsID % 5 + 1;
+        return `/news_page_images/news_poster_image${imageIndex}.webp`;
+    }
+
     return (
       <>
           <div className='page_container'>
-              <h1 className='header1'>News Page</h1>
+              <h1 className='header1'>Featured News</h1>
 
               <div className='cards_container'>
                   {isLoading ? (
@@ -58,7 +63,11 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
                             .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
                             .map((news) => (
                               <div className='news_card' key={news.news_id}>
-                                <img className='card_image' src='baseball_img.webp'></img>
+                                <img 
+                                    className='card_image' 
+                                    src={getImageForNews(news.news_id)} 
+                                    alt='News Poster'>
+                                </img>
                                 <div className='card_text_container'>
                                   <h1 className='header2'>{news.headline}</h1>
                                   <p className='text'>Author - {news.author}</p>

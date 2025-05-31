@@ -8,6 +8,9 @@
     justify-content: space-evenly;
     gap: 3rem;
     margin: auto;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--bg2-color);
+    border-top: 2px solid var(--bg2-color);
 }
 
 .news_card {
@@ -25,31 +28,42 @@
     transform: scale(1.05);
     
     .card_text_container {
+        opacity: 1;
         background-color: rgba(240, 248, 255, 0.9);
     }
+
+    .card_image {
+        box-shadow: 0 0 10px 0 rgb(105, 0, 128);
+    }
+}
+
+.news_card:active {
+    transform: scale(0.9);
 }
 
 .card_text_container {
     width: 24rem;
     height: fit-content;
     z-index: 10;
+    opacity: 0;
     background-color: rgba(240, 248, 255, 0.767);
     box-shadow: 0 0 5px 1px rgba(46, 118, 134, 0.353);
     transition: all 0.3s ease-in-out;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 2%;
-    border-top-right-radius: 2%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 1%;
+    border-top-right-radius: 1%;
 }
 
 .card_image {
     position: absolute;
-    object-fit: contain;
+    object-fit: cover;
     background-repeat: no-repeat;
     width: 24rem;
-    height: fit-content;
-    border-radius: 10px;
-    box-shadow: 0 0 2px 1px var(--bg2-color);
+    height: 12rem;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px var(--bg3-color);
+    transition: all 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 1100px) {
