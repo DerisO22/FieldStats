@@ -24,6 +24,17 @@ const getFeaturedNews = async(pgClient) => {
     }
 };
 
+const getSpecificNews = async(pgClient, news_id) => {
+    try {
+        const query = NewsQueries.RETRIEVE_SPECIFIC;
+        const result = await pgClient.query(query, [news_id]);
+
+        return result.rows[0];
+    } catch (error) {
+        console.error("Service: Error fetching specific article: ", error);
+    }
+}
+
 const deleteNews = async(pgClient, news_id) => {
     try {
         const query = NewsQueries.DELETE;
@@ -70,4 +81,4 @@ const editNews = async(pgClient, news_data) => {
 };
 
 
-export { getAllNews, getFeaturedNews, deleteNews };
+export { getAllNews, getFeaturedNews, deleteNews, getSpecificNews };

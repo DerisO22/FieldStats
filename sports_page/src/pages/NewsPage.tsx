@@ -2,6 +2,7 @@ import './pageStyles/newspage.css'
 import './pageStyles/common_styles.css'
 import { useEffect, useState } from 'react'
 import { getAllNews, getFeaturedNews } from '../services/news_services'
+import { useNavigate } from 'react-router-dom'
 
 interface NewsCard {
     news_id: number,
@@ -22,6 +23,7 @@ interface NewsPageProps {
 const NewsPage = ({ searchTerm }: NewsPageProps) => {
     const [ newsData, setNewsData ] = useState<NewsCard[]>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const fetchData = async() => {
         setIsLoading(true);
@@ -48,6 +50,13 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
         return `/news_page_images/news_poster_image${imageIndex}.webp`;
     }
 
+    const handleNewsClick = (news_id: number) => {
+        const news_URL = `/news/articles/${news_id}`;
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        navigate(news_URL);
+    }
+
     return (
       <>
           <div className='page_container'>
@@ -62,7 +71,7 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
                             {newsData.slice(newsData.length - 21, newsData.length)
                             .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
                             .map((news) => (
-                              <div className='news_card' key={news.news_id}>
+                              <div onClick={() => handleNewsClick(news.news_id)} className='news_card' key={news.news_id}>
                                 <img 
                                     className='card_image' 
                                     src={getImageForNews(news.news_id)} 

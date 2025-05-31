@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllNews, getFeaturedNews, deleteNews } from '../services/newsService.js';
+import { getAllNews, getFeaturedNews, deleteNews, getSpecificNews } from '../services/newsService.js';
 
 const router = express.Router();
 
@@ -24,6 +24,19 @@ router.get('/featured', async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error('Error fetching featured news data: ', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
+// Specific news article
+router.get('/:news_id', async (req, res) => {
+    try {  
+        const { news_id } = req.params;
+
+        const result = await getSpecificNews(req.pgClient, news_id);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching specific news data: ', error);
         res.status(500).json({ error: error.message });
     }
 })

@@ -45,4 +45,26 @@ const getFeaturedNews = async () => {
     }
 }
 
-export { getAllNews, getFeaturedNews };
+const getSpecificNews = async (news_id: string) => {
+    try {
+        const res = await fetch(`${API_URL}/news_data/${news_id}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+        })
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`API error (${res.status}): ${errorText || 'Unknown error'}`);
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error in getSpecificNews service:', error);
+        throw error; 
+    }
+
+}
+
+export { getAllNews, getFeaturedNews, getSpecificNews };
