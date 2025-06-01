@@ -31,11 +31,13 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                     <h2 className="menu_header">
                         {isAuthenticated ? `Hey ${user?.username}` : "Not Signed In"}
                     </h2>
-                    <div className="menu_item_container">
-                        <button className="menu_item">Alerts</button>
-                        <button className="menu_item">Account</button>
-                        <button className="menu_item">Theme</button>
-                    </div>
+                    {isAuthenticated &&
+                        <div className="menu_item_container">
+                            <button className="menu_item">Notifications</button>
+                            <button className="menu_item">Account Settings</button>
+                            <button className="menu_item">Theme</button>
+                        </div>
+                    }
 
                     <div className="button_container">
                         {isAuthenticated ? (
