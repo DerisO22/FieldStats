@@ -32,9 +32,9 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                         {isAuthenticated ? `Hey ${user?.username}` : "Not Signed In"}
                     </h2>
                     <div className="menu_item_container">
-                        <button className="menu_item">MenuItem</button>
-                        <button className="menu_item">MenuItem</button>
-                        <button className="menu_item">MenuItem</button>
+                        <button className="menu_item">Alerts</button>
+                        <button className="menu_item">Account</button>
+                        <button className="menu_item">Theme</button>
                     </div>
 
                     <div className="button_container">
