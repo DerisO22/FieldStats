@@ -42,7 +42,7 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                     <div className="button_container">
                         {isAuthenticated ? (
                             <button className="authButton" onClick={handleLogout}>
-                            Logout
+                                Logout
                             </button>
                         ) : (
                             <button className="authButton" onClick={(e) => {
@@ -50,7 +50,7 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                                     handleOpen(e);
                                 }
                             }>
-                            Login
+                                Login
                             </button>
                         )}
                     </div>

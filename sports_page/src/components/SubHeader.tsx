@@ -10,10 +10,6 @@ const SubHeader = () => {
 
     return (
         <div className="subheaderMenuContainer">
-            {/* <div className="headerLogo">
-                <img src={logo} alt="Logo" />
-            </div> */}
-
             <div className="headerMenu">
                 <Link onClick={() => handleScrollTop()} to="/" className="headerMenuItem">Home</Link>
                 <Link onClick={() => handleScrollTop()} to="/sports" className="headerMenuItem">Sports</Link>
@@ -25,4 +21,4 @@ const SubHeader = () => {
     )
 }
 
-export default SubHeader
+export default SubHeader;

@@ -123,21 +123,21 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
                                 {newsData.slice(newsData.length - 21, newsData.length)
                                 .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
                                 .map((news) => (
-                                <div onClick={() => handleNewsClick(news.news_id)} className='news_card' key={news.news_id}>
-                                    <img 
-                                        className='card_image' 
-                                        src={getImageForNews(news.news_id)} 
-                                        alt='News Poster'>
-                                    </img>
-                                    <div className='card_text_container'>
-                                    <h1 className='header2'>{news.headline}</h1>
-                                    <p className='text'>Author - {news.author}</p>
+                                    <div onClick={() => handleNewsClick(news.news_id)} className='news_card' key={news.news_id}>
+                                        <img 
+                                            className='card_image' 
+                                            src={getImageForNews(news.news_id)} 
+                                            alt='News Poster'>
+                                        </img>
+                                        <div className='card_text_container'>
+                                            <h1 className='header2'>{news.headline}</h1>
+                                            <p className='text'>Author - {news.author}</p>
+                                        </div>
+                                        
+                                        {isAuthenticated && isAdmin && 
+                                            <div onClick={() => handleDelete(news.news_id)} className='delete_button'>Delete</div>
+                                        }
                                     </div>
-                                    {/* Needs to be conditionally rendered with like an isAdmin */}
-                                    {isAuthenticated && isAdmin && 
-                                        <div onClick={() => handleDelete(news.news_id)} className='delete_button'>Delete</div>
-                                    }
-                                </div>
                                 ))}
                             </div>
 

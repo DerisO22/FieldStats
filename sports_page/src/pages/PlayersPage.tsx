@@ -77,4 +77,4 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
     )
 }
 
-export default Player
+export default Player;

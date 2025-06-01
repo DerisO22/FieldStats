@@ -60,11 +60,11 @@ const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
 					.filter(school => school.school_name.toLowerCase().includes(searchTerm.toLowerCase()))
 					.map((school) => (
 						<button
-						key={school.school_id}
-						className='sport_button'
-						onClick={() => handleSchoolClick(school.school_id)}
+							key={school.school_id}
+							className='sport_button'
+							onClick={() => handleSchoolClick(school.school_id)}
 						>
-						{school.school_name}
+							{school.school_name}
 						</button>
 					))
 				)}

@@ -51,7 +51,7 @@ const SchoolDetails = () => {
                     navigate('/schools');
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    }}>
+                }}>
                     Back to Schools
                 </button>
             </div>
@@ -66,10 +66,7 @@ const SchoolDetails = () => {
                         <a target='_blank' href={`https://${schoolData.website}`} className="sport_description">{schoolData.website}</a>
                         <div className="sport_info">
                             <p>Location: {`${schoolData.address} ${schoolData.city}, ${schoolData.state}`}</p>
-                            <p>School Type: { schoolData.school_type_id === 2 ? 
-                                            'College' :
-                                            'High School'
-                                            }</p>
+                            <p>School Type: { schoolData.school_type_id === 2 ? 'College' : 'High School'}</p>
                         </div>
                     </div>
                 </>
@@ -78,11 +75,11 @@ const SchoolDetails = () => {
                 navigate('/schools');
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
-                }}>
+            }}>
                 Back to Schools
             </button>
         </div>
     )
 }
 
-export default SchoolDetails
+export default SchoolDetails;

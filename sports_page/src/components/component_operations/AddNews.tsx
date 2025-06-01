@@ -19,7 +19,7 @@ const AddNews = ({ onSubmit, isLoading = false }: AddNewsProps) => {
     const [formData, setFormData] = useState({
         headline: '',
         author: '',
-        publish_date: new Date().toISOString().split('T')[0], // Default to today
+        publish_date: new Date().toISOString().split('T')[0], 
         content: '',
         image_url: '',
         sport_id: 1,

@@ -107,7 +107,7 @@ const NewsDetailPage = () => {
                     navigate('/news');
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    }}>
+                }}>
                     Back to News
                 </button>
             </div>
@@ -130,10 +130,10 @@ const NewsDetailPage = () => {
                 </>
             )}
             <button className="return_to_sports_button" onClick={() => {
-                    navigate('/news');
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                }}>
+                navigate('/news');
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }}>
                 Back to Featured News
             </button>
 
