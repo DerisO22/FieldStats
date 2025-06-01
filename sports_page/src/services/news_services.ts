@@ -66,8 +66,28 @@ const getSpecificNews = async (news_id: string) => {
     }
 }
 
+const deleteNews = async (news_id: number) => {
+    try {
+        const res = await fetch(`${API_URL}/news_data/${news_id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+        })
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`API error (${res.status}): ${errorText || 'Unknown error'}`);
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error in deleteNews service:', error);
+        throw error; 
+    }
+}
+
 const addNews = async ( newsData: {
-    news_id: string,
     headline: string,
     author: string,
     publish_date: string,
@@ -93,7 +113,7 @@ const addNews = async ( newsData: {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error in addSport service:', error);
+        console.error('Error in addNews service:', error);
         throw error; 
     }
 }
@@ -130,4 +150,4 @@ const editNews = async ( newsData: {
     }
 }
 
-export { getAllNews, getFeaturedNews, getSpecificNews, editNews, addNews };
+export { getAllNews, getFeaturedNews, getSpecificNews, editNews, addNews, deleteNews };
