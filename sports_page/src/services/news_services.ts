@@ -64,7 +64,70 @@ const getSpecificNews = async (news_id: string) => {
         console.error('Error in getSpecificNews service:', error);
         throw error; 
     }
-
 }
 
-export { getAllNews, getFeaturedNews, getSpecificNews };
+const addNews = async ( newsData: {
+    news_id: string,
+    headline: string,
+    author: string,
+    publish_date: string,
+    content: string,
+    image_url: string,
+    sport_id: number,
+    team_id: number,
+    features: boolean
+} ) => {
+    try {
+        const res = await fetch(`${API_URL}/news_data`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+            body: JSON.stringify(newsData)
+        });
+        
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(`API error (${res.status}): ${errorData.error || 'Unknown error'}`);
+        }
+        
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error in addSport service:', error);
+        throw error; 
+    }
+}
+
+const editNews = async ( newsData: {
+    news_id: number,
+    headline: string,
+    author: string,
+    publish_date: string,
+    content: string,
+    image_url: string,
+    sport_id: number,
+    team_id: number,
+    features: boolean
+} ) => {
+    try {
+        const res = await fetch(`${API_URL}/news_data/${newsData.news_id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+            body: JSON.stringify(newsData)
+        });
+        
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(`API error (${res.status}): ${errorData.error || 'Unknown error'}`);
+        }
+        
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error in editNews service:', error);
+        throw error; 
+    }
+}
+
+export { getAllNews, getFeaturedNews, getSpecificNews, editNews, addNews };

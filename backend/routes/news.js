@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAllNews, getFeaturedNews, deleteNews, getSpecificNews } from '../services/newsService.js';
+import { getAllNews, getFeaturedNews, deleteNews, getSpecificNews, editNews, createNews } from '../services/newsService.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -49,6 +50,48 @@ router.delete('/:news_id', async(req, res) => {
         res.status(201).json({ message: 'News successfully deleted'})
     } catch (error) {
         console.error('Error deleting news:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.post('/', authenticateToken, async (req, res) => {
+    try {
+        const newsData = req.body;
+
+        console.log(newsData);
+
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+        
+        const { username } = req.user;
+        console.log("In backend: ", username);
+
+        const result = await createNews(req.pgClient, newsData);
+        res.status(201).json({ message: 'Article Successfully Created' });
+    } catch (error) {
+        console.error('Error creating article:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.put('/:news_id', authenticateToken, async (req, res) => {
+    try {
+        const newsData = req.body;
+
+        console.log(newsData);
+
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+        
+        const { username } = req.user;
+        console.log("In backend: ", username);
+
+        const result = await editNews(req.pgClient, newsData);
+        res.status(201).json({ message: 'Article Successfully Updated' });
+    } catch (error) {
+        console.error('Error editing article:', error);
         res.status(500).json({ error: error.message });
     }
 })
