@@ -1,1 +1,75 @@
 @import url('../../style_vars/page_vars.css');
+
+.schools_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 2px solid var(--bg2-color);
+    border-bottom: 2px solid var(--bg2-color);
+}
+
+.school_container {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid white;
+    transition: all 0.2s ease-in-out;
+    color: var(--text-color);
+    font-weight: 700;
+    border-top: 2px solid rgba(181, 181, 181, 0.325);
+    border-bottom: 2px solid rgba(181, 181, 181, 0.325);
+    border-left: 2px solid var(--text-color);
+}
+
+.school_container div {
+    text-align: left;
+    width: 80%;
+    color: var(--text-color);
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-left: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.header3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+
+.text {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.school_container:hover {
+    background-color: #005fb855;
+    background-image: linear-gradient(to right, #005fb855, rgba(240, 248, 255, 0.66));
+    .header3 {
+        color: aliceblue;
+        background-image: linear-gradient(to right, #005fb855, rgba(240, 248, 255, 0));
+        padding-left: 2.8rem;
+    }
+    .text {
+        color: aliceblue;
+        background-image: linear-gradient(to right, #005fb855, rgba(240, 248, 255, 0));
+        padding-left: 2.8rem;
+    }
+}
+
+.school_container:active {
+    transform: scale(0.9);
+}

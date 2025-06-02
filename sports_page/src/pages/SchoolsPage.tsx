@@ -1,5 +1,4 @@
 import './pageStyles/schoolspage.css'
-import './pageStyles/common_styles.css'
 import { useEffect, useState, useCallback} from 'react'
 import { deleteSchool, getSchools, createSchool } from '../services/schools_services'
 import { useNavigate } from 'react-router-dom'
@@ -103,29 +102,32 @@ const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
 		<>
 			<div className='page_container'>
 				<h1 className='header1'>Schools</h1>
-				<div className='sports_container'>
+				<div className='schools_container'>
 				{isLoading ? (
-					<p>Loading sports...</p>
+					<p>Loading schools...</p>
 				) : (
 					schoolData
 					.filter(school => school.school_name.toLowerCase().includes(searchTerm.toLowerCase()))
 					.map((school) => (
-						<button
+						<div
 							key={school.school_id}
-							className='sport_button'
+							className='school_container'
 							onClick={() => handleSchoolClick(school.school_id)}
 						>
-							{school.school_name}
+								<div className='header3'>{school.school_name}</div>
+								<div className='text'>{school.school_type_id === 29 ? "High School" : "College"}</div>
+								<div className='text'>{school.city}, {school.state}</div>
+								<div className='text'>{school.address}</div>
 							{isAuthenticated && isAdmin &&
                                 <div onClick={() => handleDelete(school.school_id)} className='delete_button'>Delete</div>
                             }
-						</button>
+						</div>
 					))
 				)}
 				</div>
 
 				{isAuthenticated && isAdmin && (
-                <button onClick={openAddSchoolModal} className='add_sport_button'>Add School</button>
+                	<button onClick={openAddSchoolModal} className='add_sport_button'>Add School</button>
             	)}
 			</div>
 		</>

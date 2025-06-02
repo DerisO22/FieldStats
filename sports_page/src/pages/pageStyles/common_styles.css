@@ -30,6 +30,12 @@
     transition: all 0.1s ease-in-out;
 }
 
+.header3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
 .header1:hover {
     color: var(--bg3-color);
 }
