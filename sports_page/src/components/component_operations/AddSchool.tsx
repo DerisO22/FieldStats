@@ -16,7 +16,7 @@ interface AddSchoolProps {
 const AddSchool = ({ onSubmit, isLoading = false }: AddSchoolProps) => {
     const [formData, setFormData] = useState({
         school_name: '',
-        school_type_id: 1, // Default to High School
+        school_type_id: 28,
         state: '',
         city: '',
         address: '',
@@ -81,7 +81,7 @@ const AddSchool = ({ onSubmit, isLoading = false }: AddSchoolProps) => {
             // Reset form on successful submission
             setFormData({
                 school_name: '',
-                school_type_id: 1,
+                school_type_id: 28,
                 state: '',
                 city: '',
                 address: '',
