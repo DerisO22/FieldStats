@@ -31,16 +31,18 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                     <h2 className="menu_header">
                         {isAuthenticated ? `Hey ${user?.username}` : "Not Signed In"}
                     </h2>
-                    <div className="menu_item_container">
-                        <button className="menu_item">MenuItem</button>
-                        <button className="menu_item">MenuItem</button>
-                        <button className="menu_item">MenuItem</button>
-                    </div>
+                    {isAuthenticated &&
+                        <div className="menu_item_container">
+                            <button className="menu_item">Notifications</button>
+                            <button className="menu_item">Account Settings</button>
+                            <button className="menu_item">Theme</button>
+                        </div>
+                    }
 
                     <div className="button_container">
                         {isAuthenticated ? (
                             <button className="authButton" onClick={handleLogout}>
-                            Logout
+                                Logout
                             </button>
                         ) : (
                             <button className="authButton" onClick={(e) => {
@@ -48,7 +50,7 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                                     handleOpen(e);
                                 }
                             }>
-                            Login
+                                Login
                             </button>
                         )}
                     </div>

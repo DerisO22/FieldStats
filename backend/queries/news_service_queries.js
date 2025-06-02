@@ -11,8 +11,8 @@ const NewsQueries = {
     DELETE: `DELETE FROM news WHERE news_id = $1;`,
 
     EDIT: `UPDATE news 
-           SET headline = $1, author = $2, publish_date = $3, content = $4, image_url = $5, sport_id = $6, team_id = $7, featured = $8 
-           WHERE news_id = $9;`,
+           SET headline = $2, author = $3, publish_date = $4, content = $5, image_url = $6, sport_id = $7, team_id = $8, featured = $9
+           WHERE news_id = $1;`,
 
     CREATE: `INSERT INTO news (headline, author, publish_date, content, image_url, sport_id, team_id, featured) 
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`

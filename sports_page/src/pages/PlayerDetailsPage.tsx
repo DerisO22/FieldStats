@@ -60,6 +60,7 @@ const PlayerDetailsPage = () => {
             if (stats && typeof stats === 'object'){
                 Object.entries(stats).forEach(([key, value]) => {
                     if(key === 'stat_id') return;
+
                     if (typeof value === 'number'){
                         chartData.push({
                             name: key.replace(/_/g, ' '),
@@ -89,7 +90,7 @@ const PlayerDetailsPage = () => {
                     navigate('/players');
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    }}>
+                }}>
                     Back to Players
                 </button>
             </div>

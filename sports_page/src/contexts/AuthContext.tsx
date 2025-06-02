@@ -91,7 +91,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const logout = async () => {
         try {
             // Clear the cookie
-            // Currently just deleting the cookies manually in chrome setting for testing
             document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             setUser(null);
         } catch (error) {

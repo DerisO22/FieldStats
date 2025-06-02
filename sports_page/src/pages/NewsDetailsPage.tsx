@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import './pageStyles/common_styles.css'
 import './pageStyles/sport.css'
+import EditNews from "../components/component_operations/EditNews";
 import { useParams, useNavigate } from "react-router-dom";
 import { getSpecificNews } from "../services/news_services";
+import { editNews } from "../services/news_services";
 import { useModal } from "../contexts/ModalContext";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -20,12 +22,12 @@ interface News {
 
 const NewsDetailPage = () => {
     const { news_id } = useParams();
-    const [newsData, setNewsData] = useState<News | null>(null);
+    const [newsData, setNewsData] = useState<News | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-    // const { openModal, closeModal } = useModal();
-    // const { isAuthenticated, isAdmin } = useAuth();
+    const { openModal, closeModal } = useModal();
+    const { isAuthenticated, isAdmin } = useAuth();
 
     const fetchData = async() => {
         if (!news_id) {
@@ -38,7 +40,7 @@ const NewsDetailPage = () => {
             const data = await getSpecificNews(`${news_id}`);
             setNewsData(data);
         } catch (error) {
-            console.error("Error fetching sport data:", error);
+            console.error("Error fetching news data:", error);
             setError("Network Error");
         } finally {
             setIsLoading(false);
@@ -49,36 +51,45 @@ const NewsDetailPage = () => {
         fetchData();
     }, [news_id])
 
-    // const handleEditSport = async(data: {
-    //     sport_description: string,
-    //     has_gender_division: boolean
-    // }) => {
-    //     setIsLoading(true);
+    const handleEditNews = async(data: {
+        news_id: number,
+        headline: string,
+        author: string,
+        publish_date: string,
+        content: string,
+        image_url: string,
+        sport_id: number,
+        team_id: number,
+        features: boolean
+    }) => {
+        setIsLoading(true);
 
-    //     const newData = { sport_name: sportData?.sport_name || '', ...data}
+        const { news_id: _, ...restData } = data;
+        const newData = { news_id: Number(newsData?.news_id) || 0, ...restData };
 
-    //     try {
-    //         await editSport(newData);
-    //         await fetchData();
-    //         closeModal();
-    //     } catch {
-    //         console.error("Error fetching sport data:", error);
-    //         setError("Network Error");
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // }
+        try {
+            await editNews(newData);
+            await fetchData();
+            closeModal();
+        } catch {
+            console.error("Error fetching news data:", error);
+            setError("Network Error");
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
-    // const openEditSportModal = () => {
-    //     openModal(
-    //         <EditSport 
-    //             onSubmit={handleEditSport}
-    //             isLoading={isLoading}
-    //         />,
-    //         `Edit ${sportData?.sport_name}`
-    //     )
+    const openEditSportModal = () => {
+        openModal(
+            <EditNews
+                currentNews={newsData}
+                onSubmit={handleEditNews}
+                isLoading={isLoading}
+            />,
+            `Edit ${newsData?.news_id}`
+        )
 
-    // }
+    }
 
     if (isLoading) {
         return (
@@ -96,7 +107,7 @@ const NewsDetailPage = () => {
                     navigate('/news');
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    }}>
+                }}>
                     Back to News
                 </button>
             </div>
@@ -119,16 +130,16 @@ const NewsDetailPage = () => {
                 </>
             )}
             <button className="return_to_sports_button" onClick={() => {
-                    navigate('/news');
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                }}>
+                navigate('/news');
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }}>
                 Back to Featured News
             </button>
 
-            {/* {isAuthenticated && isAdmin && 
-                <button onClick={openEditSportModal} className='add_sport_button'>Edit {sportData.sport_name}</button>
-            } */}
+            {isAuthenticated && isAdmin && 
+                <button onClick={openEditSportModal} className='add_sport_button'>Edit Article{newsData.news_id}</button>
+            }
         </div>
     );
 }

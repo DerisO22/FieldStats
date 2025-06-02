@@ -53,7 +53,8 @@ const deleteNews = async(pgClient, news_id) => {
 const createNews = async(pgClient, news_data) => {
     try {
         const query = NewsQueries.CREATE;
-        const result = await pgClient.query(query, ...news_data);
+        const { headline, author, publish_date, content, image_url, sport_id, team_id, features } = news_data;
+        const result = await pgClient.query(query, [headline, author, publish_date, content, image_url, sport_id, team_id, features]);
 
         if (result.rows.length === 0){
             return null;
@@ -68,7 +69,9 @@ const createNews = async(pgClient, news_data) => {
 const editNews = async(pgClient, news_data) => {
     try {
         const query = NewsQueries.EDIT;
-        const result = await pgClient.query(query, ...news_data);
+        const { news_id, headline, author, publish_date, content, image_url, sport_id, team_id, features } = news_data;
+
+        const result = await pgClient.query(query, [news_id, headline, author, publish_date, content, image_url, sport_id, team_id, features]);
 
         if (result.rows.length === 0){
             return null;
@@ -81,4 +84,4 @@ const editNews = async(pgClient, news_data) => {
 };
 
 
-export { getAllNews, getFeaturedNews, deleteNews, getSpecificNews };
+export { getAllNews, getFeaturedNews, deleteNews, getSpecificNews, createNews, editNews };

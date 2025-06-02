@@ -8,6 +8,17 @@
     font-weight: 550;
 }
 
+.news_operation_form {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 1rem;
+    margin-left: auto;
+    color: var(--text-color);
+    font-weight: 550;
+}
+
 .form_group {
     width: 100%;
     height: fit-content;
