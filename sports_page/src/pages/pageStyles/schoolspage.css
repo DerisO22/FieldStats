@@ -55,6 +55,11 @@
     font-weight: 600;
 }
 
+.delete_button {
+    height: 3rem;
+    width: 6rem;
+}
+
 .school_container:hover {
     background-color: #005fb855;
     background-image: linear-gradient(to right, #005fb855, rgba(240, 248, 255, 0.66));

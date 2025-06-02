@@ -119,7 +119,7 @@ const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
 								<div className='text'>{school.city}, {school.state}</div>
 								<div className='text'>{school.address}</div>
 							{isAuthenticated && isAdmin &&
-                                <div onClick={() => handleDelete(school.school_id)} className='delete_button'>Delete</div>
+                                <button onClick={() => handleDelete(school.school_id)} className='delete_button'>Delete</button>
                             }
 						</div>
 					))
