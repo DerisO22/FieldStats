@@ -44,8 +44,8 @@ const PlayerQueries = {
 
     DELETE: `DELETE FROM players WHERE player_id = $1;`,
 
-    EDIT: `UPDATE players SET first_name = $1, last_name = $2, date_of_birth = $3, gender_id = $4, bio = $5
-           WHERE player_id = $6`,
+    EDIT: `UPDATE players SET first_name = $2, last_name = $3, date_of_birth = $4, gender_id = $5, bio = $6
+           WHERE player_id = $1`,
 
     CREATE: `INSERT INTO players (first_name, last_name, date_of_birth, gender_id, bio)
              VALUES ($1, $2, $3, $4, $5)`

@@ -1,6 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { getSchoolDetails } from '../services/schools_services'
+import { getSchoolDetails, editSchool } from '../services/schools_services'
+import { useModal } from '../contexts/ModalContext';
+import { useAuth } from '../contexts/AuthContext';
+import EditSchool from '../components/component_operations/EditSchool';
 
 interface School {
     school_id: number,
@@ -18,6 +21,8 @@ const SchoolDetails = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { openModal, closeModal } = useModal();
+    const { isAuthenticated, isAdmin } = useAuth();
   
     const fetchData = async () => {
         try {
@@ -34,6 +39,32 @@ const SchoolDetails = () => {
     useEffect(() => {
         fetchData();
     }, [school_id])
+
+    const handleEditSchool = async (schoolData: School) => {
+        setIsLoading(true);
+
+        try {
+            const newSchoolData = await editSchool(schoolData);
+            setSchoolData(newSchoolData);
+            fetchData();
+            closeModal();
+        } catch (error) {
+            console.error("Error editing school: ", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const openEditSchoolModal = () => {
+        openModal(
+            <EditSchool
+                currentSchool={schoolData || undefined}
+                onSubmit={handleEditSchool}
+                isLoading={isLoading}
+            />,
+            `Edit School ${schoolData?.school_id}`
+        )
+    }
 
     if (isLoading) {
         return (
@@ -78,6 +109,10 @@ const SchoolDetails = () => {
             }}>
                 Back to Schools
             </button>
+
+            {isAuthenticated && isAdmin && 
+                <button onClick={openEditSchoolModal} className='add_sport_button'>Edit School Info</button>
+            }
         </div>
     )
 }

@@ -42,7 +42,8 @@ const deleteSchool = async(pgClient, school_id) => {
 const createSchool = async(pgClient, school_data) => {
     try {
         const query = SchoolQueries.CREATE;
-        const result = await pgClient.query(query, ...school_data);
+        const {school_name, school_type_id, state, city, address, website} = school_data;
+        const result = await pgClient.query(query, [school_name, school_type_id, state, city, address, website]);
 
         if (result.rows.length === 0){
             return null;
@@ -57,7 +58,8 @@ const createSchool = async(pgClient, school_data) => {
 const editSchool = async(pgClient, school_data) => {
     try {
         const query = SchoolQueries.EDIT;
-        const result = await pgClient.query(query, ...school_data);
+        const {school_id, school_name, school_type_id, state, city, address, website} = school_data;
+        const result = await pgClient.query(query, [school_id, school_name, school_type_id, state, city, address, website]);
 
         if (result.rows.length === 0){
             return null;
@@ -69,4 +71,4 @@ const editSchool = async(pgClient, school_data) => {
     }
 };
 
-export { getAllSchools, getSpecificSchool, deleteSchool };
+export { getAllSchools, getSpecificSchool, deleteSchool, createSchool, editSchool };
