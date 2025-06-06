@@ -2,9 +2,8 @@
 
 .schools_container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
     gap: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -77,4 +76,11 @@
 
 .school_container:active {
     transform: scale(0.9);
+}
+
+
+@media  screen and (max-width: 1200px) {
+    .schools_container {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

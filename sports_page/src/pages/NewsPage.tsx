@@ -130,8 +130,8 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
                                             alt='News Poster'>
                                         </img>
                                         <div className='card_text_container'>
-                                            <h1 className='header2'>{news.headline}</h1>
-                                            <p className='text'>Author - {news.author}</p>
+                                            <h1 className='headline'>{news.headline}</h1>
+                                            <p className='author'>Author - {news.author}</p>
                                         </div>
                                         
                                         {isAuthenticated && isAdmin && 
