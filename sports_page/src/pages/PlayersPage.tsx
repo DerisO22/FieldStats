@@ -56,20 +56,51 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
                     {isLoading ? (
                         <p>Loading players...</p>
                     ) : (
-                      <div className='player_button_container'>
-                        {playerData && playerData
-                        .filter(player => player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase()))
-                        .map((player) => (
-                            <button 
-                                key={player.player_id}
-                                className='player_button'
-                                onClick={() => handleSportClick(player.player_id)}
-                            >
-                                <img className='player_profile_image' src='/empty_user_image.png'></img>
-                                {`${player.first_name} ${player.last_name}`}
-                            </button>
-                        ))}
-                      </div>
+                        <>
+                            {/* Male Players */}
+                            <p className='category'>Male Players</p>
+                            <div className='player_button_container'>
+                                {playerData && playerData
+                                .filter(player => 
+                                    player.gender_id === 28 && 
+                                    player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase())
+                                )
+                                .map((player) => (
+                                    <div 
+                                        key={player.player_id}
+                                        className='player_button'
+                                        onClick={() => handleSportClick(player.player_id)}
+                                    >
+                                        <img className='player_profile_image' src='/empty_user_image.png'></img>
+                                        {`${player.first_name} ${player.last_name}`}
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Female Players */}
+                            <p className='category'>Female Players</p>
+                            <div className='player_button_container'>
+                                {playerData && playerData
+                                .filter(player => 
+                                    player.gender_id !== 28 && 
+                                    player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase())
+                                )
+                                .map((player) => (
+                                    <div 
+                                        key={player.player_id}
+                                        className='player_button'
+                                        onClick={() => handleSportClick(player.player_id)}
+                                    >
+                                        <img className='player_profile_image' src='/empty_user_image.png'></img>
+                                        <div className='player_info_container'>
+                                            <div className='player_name'>{`${player.first_name} ${player.last_name}`}</div>
+                                            {/* Haven't implemented junction between schools and players so just use DOB */}
+                                            <div className='player_school'>{`${player.date_of_birth.substring(0,10)}`}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
                     )}
                 </div>
             </div>
