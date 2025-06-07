@@ -15,7 +15,20 @@ const NewsQueries = {
            WHERE news_id = $1;`,
 
     CREATE: `INSERT INTO news (headline, author, publish_date, content, image_url, sport_id, team_id, featured) 
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
+
+	// Probably will have some sort of filtering menu that get 20 articles from the selected sport
+    RETRIEVE_SPORT_SPECIFIC: `SELECT *
+							  FROM news n
+							  JOIN sports s ON n.sport_id = s.sport_id
+							  WHERE s.sport_name = $1
+							  LIMIT 20;`,
+	
+	RETRIEVE_MOST_RECENT: `SELECT *
+						   FROM news 
+						   ORDER BY publish_date DESC
+						   LIMIT 20;`
+	
 };
 
 export { NewsQueries };

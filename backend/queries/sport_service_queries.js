@@ -9,7 +9,14 @@ const SportQuerys = {
            WHERE sport_name = $1`,
 
     CREATE: `INSERT INTO sports (sport_name, sport_description, has_gender_divisions) 
-             VALUES ($1, $2, $3);`
+             VALUES ($1, $2, $3);`,
+
+	// Probably in the detail pages of sports
+    RETRIEVE_NEWS_BY_SPORT: `SELECT * 
+							 FROM news n
+							 JOIN sports s ON n.sport_id = s.sport_id
+							 WHERE s.sport_id = $1;`
+	
 }
 
 export { SportQuerys };
