@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPlayerDetails } from "../services/players_service";
+import { getPlayerDetails, editPlayer } from "../services/players_service";
 import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { useModal } from "../contexts/ModalContext";
+import { useAuth } from "../contexts/AuthContext";
+import EditPlayer from "../components/component_operations/EditPlayer";
 
 interface PlayerStats {
     stat_id: number,
@@ -21,6 +24,15 @@ interface Player {
     stats?: PlayerStats[]
 }
 
+interface EditPlayerDetails {
+    player_id: number,
+    first_name: string,
+    last_name: string,
+    date_of_birth: string,
+    gender_id: number,
+    bio: string,
+}
+
 interface ChartDataEntry {
     name: string;
     value: number;
@@ -32,7 +44,9 @@ const PlayerDetailsPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-  
+    const { openModal, closeModal } = useModal();
+    const { isAuthenticated, isAdmin } = useAuth();
+    
     const fetchData = async () => {
         try {
             const data = await getPlayerDetails(`${player_id}`);
@@ -48,6 +62,30 @@ const PlayerDetailsPage = () => {
     useEffect(() => {
         fetchData();
     }, [player_id])
+
+    const handleEditPlayer = async(player_data: EditPlayerDetails) => {
+        setIsLoading(true);
+
+        try {
+            const newData = await editPlayer(player_data);
+            setPlayerData(newData);
+            closeModal();
+        } catch(error) {
+            console.error('Error fetching players data:', error);
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const openEditPlayerModal = () => {
+        openModal(
+            <EditPlayer
+                onSubmit={handleEditPlayer}
+                isLoading={isLoading}
+            />
+        ),
+        'Edit Player Details'
+    }
 
     const organizeChartData = (statsArray: PlayerStats[]): ChartDataEntry[] => {
         const chartData: ChartDataEntry[] = [];
@@ -174,6 +212,10 @@ const PlayerDetailsPage = () => {
                 }}>
                 Back to Players
             </button>
+
+            {isAuthenticated && isAdmin && 
+                <button onClick={openEditPlayerModal} className='add_sport_button'>Edit Player</button>
+            }
         </div>
     )
 }

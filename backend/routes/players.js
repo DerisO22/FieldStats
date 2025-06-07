@@ -59,7 +59,7 @@ router.post('/', authenticateToken, async(req, res) => {
             return res.status(401).json({ error: "Authentication Required"});
         }
 
-        const result = createPlayer(req.pgClient, player_data);
+        const result = await createPlayer(req.pgClient, player_data);
         res.status(201).json({ message: "Player successfully added"});
     } catch(error) {
         console.error('Error adding player:', error);

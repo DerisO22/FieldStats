@@ -46,8 +46,8 @@ const deletePlayer = async(pgClient, player_id) => {
 const createPlayer = async(pgClient, player_data) => {
     try {
         const query = PlayerQueries.CREATE;
-        const { player_id, first_name, last_name, date_of_birth, gender_id, bio } = player_data;
-        const result = await pgClient.query(query, [player_id, first_name, last_name, date_of_birth, gender_id, bio])
+        const { first_name, last_name, date_of_birth, gender_id, bio } = player_data;
+        const result = await pgClient.query(query, [first_name, last_name, date_of_birth, gender_id, bio])
         if (result.rows.length === 0){
             return null;
         }
