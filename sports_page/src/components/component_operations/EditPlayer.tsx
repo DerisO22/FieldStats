@@ -22,7 +22,7 @@ const EditPlayer = ({ currentPlayer, onSubmit, isLoading }: EditPlayerProps) => 
         first_name: '',
         last_name: '',
         date_of_birth: '',
-        gender_id: 28,
+        gender_id: 7,
         bio: ''
     });
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -166,8 +166,8 @@ const EditPlayer = ({ currentPlayer, onSubmit, isLoading }: EditPlayerProps) => 
                     className="form_input"
                     disabled={isLoading}
                 >
-                    <option value={28}>Male</option>
-                    <option value={29}>Female</option>
+                    <option value={7}>Male</option>
+                    <option value={8}>Female</option>
                 </select>
             </div>
 

@@ -17,7 +17,7 @@ const AddPlayer = ({ onSubmit, isLoading = false }: AddPlayerProps) => {
         first_name: '',
         last_name: '',
         date_of_birth: '',
-        gender_id: 28, // Default to male (based on your gender filtering logic)
+        gender_id: 7, 
         bio: ''
     });
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -157,8 +157,8 @@ const AddPlayer = ({ onSubmit, isLoading = false }: AddPlayerProps) => {
                     className="form_input"
                     disabled={isLoading}
                 >
-                    <option value={28}>Male</option>
-                    <option value={29}>Female</option>
+                    <option value={7}>Male</option>
+                    <option value={8}>Female</option>
                 </select>
             </div>
 

@@ -144,7 +144,7 @@ const PlayerDetailsPage = () => {
                         <p className="sport_description">{playerData.bio}</p>
                         <section className="sport_info">
                             <p className="text">Player ID: {playerData.player_id}</p>
-                            <p className="text">Date of Birth: {(playerData.date_of_birth).substring(0,10)}</p>
+                            <p className="text">Date of Birth: {(playerData.date_of_birth)}</p>
                         </section>
 
                         <section className="player_stats">
@@ -220,4 +220,4 @@ const PlayerDetailsPage = () => {
     )
 }
 
-export default PlayerDetailsPage
+export default PlayerDetailsPage;
