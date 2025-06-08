@@ -67,8 +67,8 @@ const PlayerDetailsPage = () => {
         setIsLoading(true);
 
         try {
-            const newData = await editPlayer(player_data);
-            setPlayerData(newData);
+            await editPlayer(player_data);
+            await fetchData();
             closeModal();
         } catch(error) {
             console.error('Error fetching players data:', error);
