@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import { Player } from "../../pages/PlayerDetailsPage";
 
 interface PlayerData {
     player_id: number;
@@ -11,19 +12,19 @@ interface PlayerData {
 }
 
 interface EditPlayerProps {
-    currentPlayer?: PlayerData; 
-    onSubmit: (playerData: PlayerData) => Promise<void>;
+    currentPlayer?: Player; 
+    onSubmit: (playerData: Omit<Player, 'stats'>) => Promise<void>; 
     isLoading: boolean;
 }
 
 const EditPlayer = ({ currentPlayer, onSubmit, isLoading }: EditPlayerProps) => {
     const [formData, setFormData] = useState({
-        player_id: -1,
-        first_name: '',
-        last_name: '',
-        date_of_birth: '',
-        gender_id: 7,
-        bio: ''
+        player_id: currentPlayer?.player_id || -1,
+        first_name: currentPlayer?.first_name || '',
+        last_name: currentPlayer?.last_name || '',
+        date_of_birth: currentPlayer?.date_of_birth?.substring(0, 10) || '',
+        gender_id: currentPlayer?.gender_id || 28,
+        bio: currentPlayer?.bio || ''
     });
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 

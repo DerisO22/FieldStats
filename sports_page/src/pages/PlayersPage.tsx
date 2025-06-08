@@ -84,9 +84,9 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
             <AddPlayer
                 onSubmit={handleAddPlayer}
                 isLoading={isLoading}
-            />
-        ),
-        'Add New Player'
+            />,
+            'Add New Player'
+        )
     }
  
     const handleSportClick = (player_id: number) => {

@@ -14,7 +14,7 @@ interface PlayerStats {
     stats: any
 }
 
-interface Player {
+export interface Player {
     player_id: number,
     first_name: string,
     last_name: string,
@@ -80,11 +80,12 @@ const PlayerDetailsPage = () => {
     const openEditPlayerModal = () => {
         openModal(
             <EditPlayer
+                currentPlayer={playerData || undefined}
                 onSubmit={handleEditPlayer}
                 isLoading={isLoading}
-            />
-        ),
-        'Edit Player Details'
+            />,
+            'Edit Player Details'
+        )
     }
 
     const organizeChartData = (statsArray: PlayerStats[]): ChartDataEntry[] => {
