@@ -46,7 +46,8 @@ const deletePlayer = async(pgClient, player_id) => {
 const createPlayer = async(pgClient, player_data) => {
     try {
         const query = PlayerQueries.CREATE;
-        const result = await pgClient.query(query, ...player_data)
+        const { first_name, last_name, date_of_birth, gender_id, bio } = player_data;
+        const result = await pgClient.query(query, [first_name, last_name, date_of_birth, gender_id, bio])
         if (result.rows.length === 0){
             return null;
         }
@@ -60,7 +61,8 @@ const createPlayer = async(pgClient, player_data) => {
 const editPlayer = async(pgClient, player_data) => {
     try {
         const query = PlayerQueries.EDIT;
-        const result = await pgClient.query(query, ...player_data)
+        const { player_id, first_name, last_name, date_of_birth, gender_id, bio } = player_data;
+        const result = await pgClient.query(query, [player_id, first_name, last_name, date_of_birth, gender_id, bio])
         if (result.rows.length === 0){
             return null;
         }
@@ -71,4 +73,4 @@ const editPlayer = async(pgClient, player_data) => {
     }
 };
 
-export { getAllPlayers, getSpecificPlayer, deletePlayer };
+export { getAllPlayers, getSpecificPlayer, deletePlayer, createPlayer, editPlayer };

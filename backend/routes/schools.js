@@ -48,7 +48,7 @@ router.delete('/:school_id', authenticateToken, async (req, res) => {
             return res.status(401).json({ error: "Authentication Required"})
         }
     
-        await await deleteSchool(req.pgClient, school_id);
+        await deleteSchool(req.pgClient, school_id);
         res.status(200).json({ message: 'School successfully deleted'})
     } catch (error) {
         console.error('Error Deleting school data', error);

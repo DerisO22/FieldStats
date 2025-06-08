@@ -114,7 +114,7 @@ const editSport = async ( sportData: {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error in addSport service:', error);
+        console.error('Error in editSport service:', error);
         throw error; 
     }
 }

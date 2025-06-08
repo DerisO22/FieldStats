@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAllPlayers, getSpecificPlayer, deletePlayer } from '../services/playersService.js';
+import { getAllPlayers, getSpecificPlayer, deletePlayer, createPlayer, editPlayer } from '../services/playersService.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -34,14 +35,53 @@ router.get('/player_profile/:player_id', async (req, res) => {
     }
 })
 
-router.delete('/:player_id', async(req, res) => {
+router.delete('/:player_id', authenticateToken, async(req, res) => {
     try {
         const { player_id } = req.params;
+
+        if(!req.user) {
+            return res.status(401).json({ error: "Authentication Required"})
+        }
 
         await deletePlayer(req.pgClient, player_id)
         res.status(201).json({ message: 'Player successfully deleted'})
     } catch (error) {
         console.error('Error deleting player:', error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.post('/', authenticateToken, async(req, res) => {
+    try {
+        const player_data = req.body;
+
+        if(!req.user) {
+            return res.status(401).json({ error: "Authentication Required"});
+        }
+
+        const result = await createPlayer(req.pgClient, player_data);
+        res.status(201).json({ message: "Player successfully added"});
+    } catch(error) {
+        console.error('Error adding player:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.put('/:player_id', authenticateToken, async(req, res) => {
+    try {
+        const player_data = req.body;
+
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+        
+        const { username } = req.user;
+        console.log("In backend: ", username);
+
+        const result = await editPlayer(req.pgClient, player_data);
+        res.status(200).json({ message: 'Player details Successfully Updated' });
+    } catch(error) {
+        console.error('Error editing player details:', error);
         res.status(500).json({ error: error.message });
     }
 })
