@@ -7,8 +7,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const dbPath = path.resolve(__dirname, "sample_data.sql")
 
+// Used to execute queries in sample_data.sql
 async function initializeSampleData() {
     const client = new pg.Client({
+        // Environment Variables
         database: process.env.DATABASE_DATABASE,
         password: process.env.DATABASE_PASSWORD,
         user: process.env.DATABASE_USERNAME
