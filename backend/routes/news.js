@@ -42,9 +42,21 @@ router.get('/:news_id', async (req, res) => {
     }
 })
 
+/**
+ * Protected Endpoints
+ */
+// Delete news post
 router.delete('/:news_id', async(req, res) => {
     try {
         const { news_id } = req.params;
+
+        // Check Authentication
+        if (!req.user) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+
+        const { username } = req.user;
+        console.log("In backend: ", username);
 
         await deleteNews(req.pgClient, news_id);
         res.status(201).json({ message: 'News successfully deleted'})
@@ -54,16 +66,18 @@ router.delete('/:news_id', async(req, res) => {
     }
 })
 
+// Create news posts
 router.post('/', authenticateToken, async (req, res) => {
     try {
         const newsData = req.body;
 
         console.log(newsData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }
-        
+
         const { username } = req.user;
         console.log("In backend: ", username);
 
@@ -75,12 +89,14 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 })
 
+// Edit news post
 router.put('/:news_id', authenticateToken, async (req, res) => {
     try {
         const newsData = req.body;
 
         console.log(newsData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }

@@ -36,11 +36,15 @@ router.get('/:sportName', async(req, res) => {
     }
 })
 
+/**
+ * Protected Endpoints
+ */
 // Delete a Sport (ADMINS Only)
 router.delete('/:sportName', authenticateToken, async(req, res) => {
     try {
         const { sportName } = req.params;
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }
@@ -61,12 +65,14 @@ router.delete('/:sportName', authenticateToken, async(req, res) => {
     }
 })
 
+// Create Sport
 router.post('/', authenticateToken, async (req, res) => {
     try {
         const sportData = req.body;
 
         console.log(sportData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }
@@ -82,12 +88,14 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 })
 
+// Edit Sport Details
 router.put('/:sportName', authenticateToken, async (req, res) => {
     try {
         const sportData = req.body;
 
         console.log(sportData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }

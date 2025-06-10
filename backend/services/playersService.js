@@ -29,6 +29,9 @@ const getSpecificPlayer = async(pgClient, player_id) => {
     }
 };
 
+/**
+ * Protected Services
+ */
 const deletePlayer = async(pgClient, player_id) => {
     try {
         const query = PlayerQueries.DELETE;

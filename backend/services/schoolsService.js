@@ -24,6 +24,9 @@ const getSpecificSchool = async(pgClient, school_id) => {
     }
 };
 
+/**
+ * Protected Services
+ */
 const deleteSchool = async(pgClient, school_id) => {
     try {
         const query = SchoolQueries.DELETE;

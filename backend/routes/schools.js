@@ -40,10 +40,12 @@ router.get('/:school_id', async (req, res) => {
 /**
  * ADMIN and Protected Endpoints
  */
+// Delete School
 router.delete('/:school_id', authenticateToken, async (req, res) => {
     try {
         const { school_id } = req.params;
 
+        // Check Authentication
         if(!req.user) {
             return res.status(401).json({ error: "Authentication Required"})
         }
@@ -56,12 +58,14 @@ router.delete('/:school_id', authenticateToken, async (req, res) => {
     }
 });
 
+// Create School
 router.post('/', authenticateToken, async (req, res) => {
     try {
         const schoolData = req.body;
 
         console.log(schoolData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }
@@ -77,11 +81,13 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 })
 
+// Edit School Info
 router.put('/:school_id', authenticateToken, async (req, res) => {
     try {
         const schoolData = req.body;
         console.log(schoolData);
 
+        // Check Authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }

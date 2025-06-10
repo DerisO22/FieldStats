@@ -35,10 +35,15 @@ router.get('/player_profile/:player_id', async (req, res) => {
     }
 })
 
+/**
+ * Protected Endpoints
+ */
+// Delete player
 router.delete('/:player_id', authenticateToken, async(req, res) => {
     try {
         const { player_id } = req.params;
 
+        // Check authentication
         if(!req.user) {
             return res.status(401).json({ error: "Authentication Required"})
         }
@@ -51,10 +56,12 @@ router.delete('/:player_id', authenticateToken, async(req, res) => {
     }
 })
 
+// Add Player
 router.post('/', authenticateToken, async(req, res) => {
     try {
         const player_data = req.body;
 
+        // Check authentication
         if(!req.user) {
             return res.status(401).json({ error: "Authentication Required"});
         }
@@ -67,10 +74,12 @@ router.post('/', authenticateToken, async(req, res) => {
     }
 });
 
+// Edit Player
 router.put('/:player_id', authenticateToken, async(req, res) => {
     try {
         const player_data = req.body;
 
+        // Check authentication
         if (!req.user) {
             return res.status(401).json({ error: 'Authentication required' });
         }

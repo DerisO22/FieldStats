@@ -53,3 +53,7 @@ export const deleteContentLimiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false
 });
+
+/**
+ * Other Limiters
+ */

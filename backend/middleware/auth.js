@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 
+// Use cookies for authentication
 const authenticateToken = (req, res, next) => {
     // Check cookies are available
     if (!req.cookies) {
