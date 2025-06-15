@@ -35,6 +35,9 @@ const getSpecificNews = async(pgClient, news_id) => {
     }
 }
 
+/**
+ * Protected Services
+ */
 const deleteNews = async(pgClient, news_id) => {
     try {
         const query = NewsQueries.DELETE;
@@ -82,6 +85,5 @@ const editNews = async(pgClient, news_data) => {
         console.error('Service: Error editing news:', error);
     }
 };
-
 
 export { getAllNews, getFeaturedNews, deleteNews, getSpecificNews, createNews, editNews };

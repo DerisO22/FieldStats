@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './component_styles/profile_menu.css'
 import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface UserProfileDetails {
     handleLogoutClick: () => void,
@@ -10,6 +11,7 @@ interface UserProfileDetails {
 const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetails) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const { user, isAuthenticated, logout} = useAuth();
+    const { theme, toggleTheme } = useTheme();
 
     const handleOpen = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -20,6 +22,10 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
         await logout();
         handleLogoutClick();
         setIsMenuOpen(false);
+    }
+
+    const handleThemeToggle = () => {
+        toggleTheme();
     }
 
     return (
@@ -35,7 +41,9 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                         <div className="menu_item_container">
                             <button className="menu_item">Notifications</button>
                             <button className="menu_item">Account Settings</button>
-                            <button className="menu_item">Theme</button>
+                            <button className="menu_item theme_toggle" onClick={handleThemeToggle}>
+                                {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+                            </button>
                         </div>
                     }
 

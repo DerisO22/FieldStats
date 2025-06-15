@@ -29,10 +29,18 @@
     color: var(--text-color);
 }
 
+[data-theme="dark"] .player_button {
+    color: white;
+}
+
 .player_button:hover {
     color: var(--text-color);
     background-color: #b4d9e580;
     box-shadow: 0 2px 0px 0px var(--bg2-color);
+}
+
+[data-theme="dark"] .player_button:hover {
+    color: white;
 }
 
 .player_info_container {
@@ -63,6 +71,10 @@
     border-radius: 50%;
     margin-left: 1rem;
     box-shadow: 0 0 3px 0.2px var(--bg4-color);
+}
+
+[data-theme="dark"] .player_profile_image {
+    background-color: white;
 }
 
 .chart_container {

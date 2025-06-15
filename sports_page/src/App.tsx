@@ -8,6 +8,7 @@ import PageRoutes from './routes/PageRoutes';
 import PopUpNotification from './components/PopUpNotification';
 import { ModalProvider } from './contexts/ModalContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const App = () => {
     const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
@@ -31,21 +32,24 @@ const App = () => {
 				onClose={() => setNotification(prev => ({ ...prev, isVisible: false }))}
             />
             {/* React Router for navigating between pages */}
-            <AuthProvider>
-				<ModalProvider> 
-					<Router>
-						<HeaderMenu 
-								isLoginOpen={isLoginOpen}
-								setIsLoginOpen={setIsLoginOpen}
-								setNotification={setNotification}
-								onSearch={useCallback((term: string) => setSearchTerm(term), [])}
-						/>
-						<SubHeader />
-						<PageRoutes searchTerm={searchTerm} />
-						<Footer />
-					</Router>
-				</ModalProvider>
-            </AuthProvider>
+			<ThemeProvider>
+				<AuthProvider>
+					<ModalProvider> 
+						<Router>
+							<HeaderMenu 
+									isLoginOpen={isLoginOpen}
+									setIsLoginOpen={setIsLoginOpen}
+									setNotification={setNotification}
+									onSearch={useCallback((term: string) => setSearchTerm(term), [])}
+							/>
+							<SubHeader />
+							<PageRoutes searchTerm={searchTerm} />
+							<Footer />
+						</Router>
+					</ModalProvider>
+				</AuthProvider>
+			</ThemeProvider>
+            
         </>
     )
 }

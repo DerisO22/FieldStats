@@ -20,6 +20,14 @@
     color: var(--text-color);
 }
 
+[data-theme="dark"] .sport_description {
+    color: white;
+}
+
+[data-theme="dark"] .sport_info p {
+    color: white;
+}
+
 .sport_detail_image {
     width: 5rem;
 }

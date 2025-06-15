@@ -28,6 +28,9 @@ const getSpecificSport = async(pgClient, sportName) => {
     }
 };  
 
+/**
+ * Protected Services
+ */
 const deleteSport = async(pgClient, sportName) => {
     try {
         const query = SportQuerys.DELETE;

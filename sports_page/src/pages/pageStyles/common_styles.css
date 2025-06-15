@@ -23,6 +23,14 @@
     transition: all 0.1s ease-in-out;
 }
 
+[data-theme='dark'] .header1 {
+    color: white;
+}
+
+[data-theme='dark'] .header1:hover {
+    color: white;
+}
+
 .header2 {
     color: var(--text-color);
     font-size: 1.8rem;
@@ -43,6 +51,19 @@
     text-align: left;
 }
 
+
+[data-theme='dark'] .text {
+    color: white;
+}
+
+[data-theme='dark'] .header3 {
+    color: white;
+}
+
+[data-theme='dark'] .category {
+    color: white;
+}
+
 .header1:hover {
     color: var(--bg3-color);
 }
@@ -55,8 +76,4 @@
     font-size: 1rem;
     color: var(--text-color);
     font-weight: 550;
-}
-
-button {
-
 }
