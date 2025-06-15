@@ -22,6 +22,10 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
         setIsMenuOpen(false);
     }
 
+    const handleThemeToggle = () => {
+        
+    }
+
     return (
         <>
             <div className='profile_container'>
@@ -35,7 +39,7 @@ const ProfileDetails = ({handleLogoutClick, handleLoginClick} : UserProfileDetai
                         <div className="menu_item_container">
                             <button className="menu_item">Notifications</button>
                             <button className="menu_item">Account Settings</button>
-                            <button className="menu_item">Theme</button>
+                            <button onClick={() => handleThemeToggle()} className="menu_item">Theme</button>
                         </div>
                     }
 
