@@ -24,7 +24,7 @@
 }
 
 [data-theme='dark'] .header1 {
-    color: var(--bg3-color);
+    color: white;
 }
 
 [data-theme='dark'] .header1:hover {

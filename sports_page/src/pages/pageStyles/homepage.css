@@ -20,7 +20,7 @@
 }
 
 [data-theme="dark"] .home_logo {
-    background-color: var(--bg3-color);
+    background-color: white;
 }
 
 .hero_section {
