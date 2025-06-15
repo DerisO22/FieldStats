@@ -5,15 +5,18 @@
   --bg2-color: #fcb900;
   --bg3-color: #00a9e0;
   --bg4-color: #b4d9e5;
+  --page-bg: rgb(232, 237, 242);
 }
 
+/* Dark mode variables */
 [data-theme="dark"] {
-  --main-color: #1a1a1a;
-  --bg-color: #2d2d2d;
+  --main-color: #2d2d2d;
+  --bg-color: #1a1a1a;
   --text-color: #4da6ff;
-  --bg2-color: #ffa500;
+  --bg2-color: #e6a800;
   --bg3-color: #0099cc;
   --bg4-color: #5a8a9a;
+  --page-bg: #0f0f0f;
 }
 
 #root {
@@ -22,7 +25,7 @@
   margin: 0rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  background-color: rgb(232, 237, 242);
+  background-color: var(--page-bg);
   box-sizing: border-box;
 }
 
@@ -30,6 +33,35 @@ body,
 html {
   margin: 0;
   padding: 0;
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .page_container {
+  background-color: black;
+  box-shadow: 0 0 3px 0px var(--text-color);
+}
+
+[data-theme="dark"] .headerMenuContainer {
+  background-color: #1a1a1a;
+  border-top: 1px solid var(--bg4-color);
+  border-bottom: 1px solid var(--bg4-color);
+}
+
+[data-theme="dark"] .subheaderMenuContainer {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid white;
+}
+
+[data-theme="dark"] .modal_content {
+  background-color: var(--main-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .form_input,
+[data-theme="dark"] .form_textarea {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--bg4-color);
 }
 
 /* ScrollBar */

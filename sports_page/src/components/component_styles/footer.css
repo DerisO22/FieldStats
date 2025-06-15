@@ -46,10 +46,18 @@
     color: #005eb8;
 }
 
+[data-theme="dark"] .footer_menu .headerMenuItem {
+    color: white;
+}
+
 .copyright {
     color: var(--text-color);
     text-align: center;
     font-size: 1rem;
+}
+
+[data-theme="dark"] .copyright {
+    color: white;
 }
 
 @media screen and (max-width: 800px) {
