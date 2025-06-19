@@ -26,7 +26,7 @@ const SearchBar = ({onSearch} : SearchBarProps) => {
             <button className="search_toggle_button" onClick={handleSearchBarToggle}>
                 <div className="search_indicator_container">
                     {isOpen ? 'close' : 'open'}
-                    <img className="searchbar_img" src="search_interface_symbol.png"></img>
+                    <img className="searchbar_img" src="/search_interface_symbol.png"></img>
                 </div>
             </button>
             <input 

@@ -26,7 +26,7 @@ router.get('/:school_id', async (req, res) => {
         const result = await getSpecificSchool(req.pgClient, school_id);
 
         if(result.length === 0){
-            res.status(404).json({ error: "School Not Found"});
+            return res.status(404).json({ error: "School Not Found"});
         }
 
         res.json(result);
@@ -107,19 +107,20 @@ router.put('/:school_id', authenticateToken, async (req, res) => {
  * Endpoints For Advanced Queries
  */
 // Get all sports a school has
-router.get(':school_id', async(req, res) => {
+router.get('/sports/:school_id', async(req, res) => {
     try {
-        const school_id = req.params;
+        const { school_id } = req.params;
 
         const result = await getSchoolSports(req.pgClient, school_id);
 
         if(result.length === 0){
-            res.status(404).json({ error: "School has no sports"});
+            return res.status(404).json({ error: "School has no sports"});
         }
 
         res.json(result);
     } catch (error) {
-
+        console.error('Error fetching schools sport data', error);
+        res.status(500).json({ error: error.message});
     }
 })
 

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { getSchoolDetails, editSchool } from '../services/schools_services'
+import { getSchoolDetails, editSchool, getSchoolSports } from '../services/schools_services'
 import { useModal } from '../contexts/ModalContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditSchool from '../components/component_operations/EditSchool';
@@ -15,9 +15,15 @@ interface School {
     website: string,
 }
 
+interface School_Sport {
+    sport_id: number,
+    sport_name: string
+}
+
 const SchoolDetails = () => {
     const { school_id } = useParams();
     const [schoolData, setSchoolData] = useState<School | null>(null);
+    const [schoolSports, setSchoolSports] = useState<School_Sport[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -26,8 +32,12 @@ const SchoolDetails = () => {
   
     const fetchData = async () => {
         try {
-            const data = await getSchoolDetails(`${school_id}`);
-            setSchoolData(data);
+            const schoolData = await getSchoolDetails(`${school_id}`);
+            const schoolSportData = await getSchoolSports(Number(school_id) || 0);
+            setSchoolData(schoolData);
+            setSchoolSports(schoolSportData);
+
+            console.log("school sport data:", schoolSportData);
         } catch (error) {
             console.log("error: ", error);
             setError("error");

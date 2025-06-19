@@ -125,4 +125,28 @@ const editSchool = async (schoolData: {
     }
 }
 
-export { getSchools, getSchoolDetails, deleteSchool, editSchool, createSchool };
+/**
+ * For Advanced Queries
+ */
+const getSchoolSports = async(school_id: number) => {
+    try {
+        const res = await fetch(`${API_URL}/schools_data/sports/${school_id}`, {
+            method: "GET",
+            headers: { "Content-Type": "Application/json"},
+            credentials: 'include'
+        })
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`API error (${res.status}): ${errorText || 'Unknown error'}`);
+        }
+
+        const data = await res.json();
+        return data;
+    } catch(error) {
+        console.error('Error in getSchoolSports service:', error);
+        throw error; 
+    }
+}
+
+export { getSchools, getSchoolDetails, deleteSchool, editSchool, createSchool, getSchoolSports };
