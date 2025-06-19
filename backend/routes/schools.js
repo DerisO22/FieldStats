@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllSchools, getSpecificSchool, deleteSchool, createSchool, editSchool } from '../services/schoolsService.js';
+import { getAllSchools, getSpecificSchool, deleteSchool, createSchool, editSchool, getSchoolSports } from '../services/schoolsService.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -100,6 +100,26 @@ router.put('/:school_id', authenticateToken, async (req, res) => {
     } catch (error) {
         console.error('Error editing school:', error);
         res.status(500).json({ error: error.message });
+    }
+})
+
+/**
+ * Endpoints For Advanced Queries
+ */
+// Get all sports a school has
+router.get(':school_id', async(req, res) => {
+    try {
+        const school_id = req.params;
+
+        const result = await getSchoolSports(req.pgClient, school_id);
+
+        if(result.length === 0){
+            res.status(404).json({ error: "School has no sports"});
+        }
+
+        res.json(result);
+    } catch (error) {
+
     }
 })
 

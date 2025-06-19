@@ -2,13 +2,13 @@ import express from 'express';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { authenticateToken } from '../middleware/auth.js';
-import { signupLimiter, deleteUserLimiter } from '../middleware/rate_limiter.js';
+import { signupLimiter, deleteUserLimiter, loginLimiter } from '../middleware/rate_limiter.js';
 const router = express.Router();
 
 /**
  * Authentication Endpoints
  */
-router.post('/login', async (req, res) => {
+router.post('/login', loginLimiter,  async (req, res) => {
     const { username, password } = req.body;
     
     console.log('Login request received:', req.body);

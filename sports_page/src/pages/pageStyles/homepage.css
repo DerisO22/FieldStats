@@ -84,8 +84,11 @@
 }
 
 .feature_card p {
+    margin: auto;
+    text-align: center;
     color: var(--text-color);
     margin-bottom: 1.5rem;
+    width: 70%;
 }
 
 [data-theme="dark"] .feature_card h2{

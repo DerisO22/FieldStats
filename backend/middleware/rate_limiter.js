@@ -6,10 +6,19 @@ const HOUR = 60 * 60 * 1000;
 /**
  * Authentication Limiters
  */
-export const signupLimiter = rateLimit({
-    // 5 max per 15mins
+export const loginLimiter = rateLimit({
+    // 5 per 15 mins
     windowMs: 15 * MINUTE,
     max: 5,
+    message: {error: "Too many login attempts, please try again later."},
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+export const signupLimiter = rateLimit({
+    // 2 max per 15mins
+    windowMs: 15 * MINUTE,
+    max: 2,
     message: { error: 'Too many signup attempts, please try again later.'},
     standardHeaders: true,
     legacyHeaders: false
@@ -25,7 +34,7 @@ export const deleteUserLimiter = rateLimit({
 })
 
 /**
- * Protected Endpoint Limiters
+ * Content Protected Endpoint Limiters
  */
 export const editContentLimiter = rateLimit({
     // 2 per 5 mins

@@ -74,4 +74,19 @@ const editSchool = async(pgClient, school_data) => {
     }
 };
 
-export { getAllSchools, getSpecificSchool, deleteSchool, createSchool, editSchool };
+/**
+ * Advanced services / queries
+ */
+// Get a school's sports
+const getSchoolSports = async(pgClient, school_id) => {
+    try {
+        const query = SchoolQueries.RETRIEVE_SCHOOL_SPORTS;
+        const result = await pgClient.query(query, [school_id]);
+
+        return result.rows;
+    } catch(error) {
+        console.error('Error fetching school sports data', error);
+    }
+}
+
+export { getAllSchools, getSpecificSchool, deleteSchool, createSchool, editSchool, getSchoolSports };
