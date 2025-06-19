@@ -36,8 +36,6 @@ const SchoolDetails = () => {
             const schoolSportData = await getSchoolSports(Number(school_id) || 0);
             setSchoolData(schoolData);
             setSchoolSports(schoolSportData);
-
-            console.log("school sport data:", schoolSportData);
         } catch (error) {
             console.log("error: ", error);
             setError("error");
@@ -100,7 +98,7 @@ const SchoolDetails = () => {
     }
     return (
         <div className="page_container">
-            {!isLoading && schoolData && (
+            {!isLoading && schoolData && schoolSports && (
                 <>
                     <h1 className="header1">{`${schoolData.school_name}`}</h1>
                     <div className="sport_detail_container">
@@ -109,6 +107,22 @@ const SchoolDetails = () => {
                             <p>Location: {`${schoolData.address} ${schoolData.city}, ${schoolData.state}`}</p>
                             <p>School Type: { schoolData.school_type_id === 2 ? 'College' : 'High School'}</p>
                         </div>
+                        
+                        
+                    </div>
+
+                    <h1 className='header2'>School Sports</h1>
+                    <div className='school_sports_container'>
+                        {schoolSports
+                        .map((sport) => (
+                            <button 
+                                key={sport.sport_id}
+                                className='sport_button'
+                            >
+                                <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
+                                {sport.sport_name}
+                            </button>
+                        ))}
                     </div>
                 </>
             )}

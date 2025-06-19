@@ -78,9 +78,34 @@
     transform: scale(0.9);
 }
 
+.school_sports_container {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 5fr);
+    justify-content: space-evenly;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 5rem;
+}
 
-@media  screen and (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
+    .school_sports_container {
+        grid-template-columns: repeat(4, 4fr);
+    }
     .schools_container {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .school_sports_container {
+        grid-template-columns: repeat(3, 3fr);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .school_sports_container {
+        grid-template-columns: repeat(2, 2fr);
     }
 }
