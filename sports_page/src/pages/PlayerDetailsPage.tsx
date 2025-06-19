@@ -184,7 +184,7 @@ const PlayerDetailsPage = () => {
                                                           <text
                                                             x={xPos}
                                                             y={yPos}
-                                                            fill="black"
+                                                            fill="white"
                                                             textAnchor={xPos > cx ? "start" : "end"}
                                                             dominantBaseline="central"
                                                             fontSize={12}
