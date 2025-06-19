@@ -113,9 +113,9 @@ router.get('/sports/:school_id', async(req, res) => {
 
         const result = await getSchoolSports(req.pgClient, school_id);
 
-        if(result.length === 0){
-            return res.status(404).json({ error: "School has no sports"});
-        }
+        // if(result.length === 0){
+        //     res.status(404).json({ error: "School has no sports"});
+        // }
 
         res.json(result);
     } catch (error) {

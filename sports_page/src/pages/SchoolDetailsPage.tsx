@@ -98,7 +98,7 @@ const SchoolDetails = () => {
     }
     return (
         <div className="page_container">
-            {!isLoading && schoolData && schoolSports && (
+            {(!isLoading && schoolData || schoolSports) && (
                 <>
                     <h1 className="header1">{`${schoolData.school_name}`}</h1>
                     <div className="sport_detail_container">
@@ -113,8 +113,8 @@ const SchoolDetails = () => {
 
                     <h1 className='header2'>School Sports</h1>
                     <div className='school_sports_container'>
-                        {schoolSports
-                        .map((sport) => (
+                        {schoolSports && schoolSports.length > 0 &&
+                        schoolSports.map((sport) => (
                             <button 
                                 key={sport.sport_id}
                                 className='sport_button'
