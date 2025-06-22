@@ -113,16 +113,19 @@ const SchoolDetails = () => {
 
                     <h1 className='header2'>School Sports</h1>
                     <div className='school_sports_container'>
-                        {schoolSports && schoolSports.length > 0 &&
-                        schoolSports.map((sport) => (
-                            <button 
-                                key={sport.sport_id}
-                                className='sport_button'
-                            >
-                                <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
-                                {sport.sport_name}
-                            </button>
-                        ))}
+                        {(schoolSports && schoolSports.length > 0) ?
+                            schoolSports.map((sport) => (
+                                <button 
+                                    key={sport.sport_id}
+                                    className='sport_button'
+                                >
+                                    <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
+                                    {sport.sport_name}
+                                </button>
+                            )
+                        ) : 
+                            <span className='header3'>This School Has No Current Sports</span>
+                        }
                     </div>
                 </>
             )}
