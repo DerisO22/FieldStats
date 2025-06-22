@@ -110,9 +110,9 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
                             {/* Male Players */}
                             <p className='category'>Male Players</p>
                             <div className='player_button_container'>
-                                {playerData && playerData
+                                {playerData && playerData.slice(0, playerData.length / 4)
                                 .filter(player => 
-                                    player.gender_id === 28 && 
+                                    player.gender_id === 7 && 
                                     player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map((player) => (
@@ -139,7 +139,34 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
                             <div className='player_button_container'>
                                 {playerData && playerData
                                 .filter(player => 
-                                    player.gender_id !== 28 && 
+                                    player.gender_id === 8 && 
+                                    player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase())
+                                )
+                                .map((player) => (
+                                    <div 
+                                        key={player.player_id}
+                                        className='player_button'
+                                        onClick={() => handleSportClick(player.player_id)}
+                                    >
+                                        <img className='player_profile_image' src='/empty_user_image.png'></img>
+                                        <div className='player_info_container'>
+                                            <div className='player_name'>{`${player.first_name} ${player.last_name}`}</div>
+                                            {/* Haven't implemented junction between schools and players so just use DOB */}
+                                            <div className='player_school'>{`${player.date_of_birth.substring(0,10)}`}</div>
+                                        </div>
+                                        {isAuthenticated && isAdmin &&
+                                            <div onClick={() => handleDelete(player.player_id)} className='delete_button'>Delete</div>
+                                        }
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Other */}
+                            <p className='category'>Other Gender Players</p>
+                            <div className='player_button_container'>
+                                {playerData && playerData
+                                .filter(player => 
+                                    player.gender_id > 8 && 
                                     player.first_name.concat(' ', player.last_name).toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map((player) => (

@@ -5,6 +5,7 @@ import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { useModal } from "../contexts/ModalContext";
 import { useAuth } from "../contexts/AuthContext";
 import EditPlayer from "../components/component_operations/EditPlayer";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface PlayerStats {
     stat_id: number,
@@ -46,11 +47,13 @@ const PlayerDetailsPage = () => {
     const navigate = useNavigate();
     const { openModal, closeModal } = useModal();
     const { isAuthenticated, isAdmin } = useAuth();
-    
+    const { theme } = useTheme();
+
     const fetchData = async () => {
         try {
             const data = await getPlayerDetails(`${player_id}`);
             setPlayerData(data);
+            console.log(data)
         } catch (error) {
             console.log("error: ", error);
             setError("error");
@@ -160,46 +163,51 @@ const PlayerDetailsPage = () => {
                                             <div key={stat?.stat_id || `stat-${index}`} className="stat-item">
                                                 <h3 className="header1">{stat?.sport_name || 'No sport name'}</h3>
                                                 <h4 className="header1">Season: {stat?.season || 'N/A'}</h4>
+                                                {playerData.stats && (
+                                                    <ResponsiveContainer className="chart_container" width='100%' height={400}>
+                                                        <PieChart width={500} height={500}>
+                                                            <Pie 
+                                                                data={organizeChartData([playerData.stats[index]])} 
+                                                                dataKey="value" 
+                                                                nameKey="name" 
+                                                                cx="50%" 
+                                                                cy="50%" 
+                                                                outerRadius={80} 
+                                                                fill="#005eb8" 
+                                                                label={({ name, value, x, y, cx, cy, midAngle, outerRadius, percent }) => {
+                                                                    const RADIAN = Math.PI / 180;
+                                                                    const radius = outerRadius + 30;
+                                                                    const xPos = cx + radius * Math.cos(-midAngle * RADIAN);
+                                                                    const yPos = cy + radius * Math.sin(-midAngle * RADIAN);
+                                                            
+                                                                    return (
+                                                                    <text
+                                                                        x={xPos}
+                                                                        y={yPos}
+                                                                        fill={theme === "dark" ? "white" : "#005eb8"}
+                                                                        textAnchor={xPos > cx ? "start" : "end"}
+                                                                        dominantBaseline="central"
+                                                                        fontSize={12}
+                                                                        fontWeight="bold"
+                                                                    >
+                                                                        {`${name}: ${value}`}
+                                                                    </text>
+                                                                    );
+                                                                }}
+                                                            />
+                                                            <Tooltip />
+                                                            <Legend 
+                                                                wrapperStyle={{
+                                                                    color: 'white'
+                                                                }}
+                                                            />
+                                                        </PieChart>
+                                                    </ResponsiveContainer>
+                                                )}
                                             </div>
                                         ))
                                     }
-                                    {playerData.stats && (
-                                        <ResponsiveContainer className="chart_container" width='100%' height={400}>
-                                            <PieChart width={500} height={500}>
-                                                <Pie 
-                                                    data={organizeChartData(playerData.stats)} 
-                                                    dataKey="value" 
-                                                    nameKey="name" 
-                                                    cx="50%" 
-                                                    cy="50%" 
-                                                    outerRadius={80} 
-                                                    fill="#005eb8" 
-                                                    label={({ name, value, x, y, cx, cy, midAngle, outerRadius, percent }) => {
-                                                        const RADIAN = Math.PI / 180;
-                                                        const radius = outerRadius + 30;
-                                                        const xPos = cx + radius * Math.cos(-midAngle * RADIAN);
-                                                        const yPos = cy + radius * Math.sin(-midAngle * RADIAN);
-                                                  
-                                                        return (
-                                                          <text
-                                                            x={xPos}
-                                                            y={yPos}
-                                                            fill="white"
-                                                            textAnchor={xPos > cx ? "start" : "end"}
-                                                            dominantBaseline="central"
-                                                            fontSize={12}
-                                                            fontWeight="bold"
-                                                          >
-                                                            {`${name}: ${value}`}
-                                                          </text>
-                                                        );
-                                                    }}
-                                                />
-                                                <Tooltip />
-                                                <Legend />
-                                            </PieChart>
-                                        </ResponsiveContainer>
-                                    )}
+                                    
                                 </>
                             )}
                         </section>
