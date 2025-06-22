@@ -120,7 +120,7 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
                     ) : (
                         newsData.length > 0 ? (
                             <div className='news_card_container'>
-                                {newsData.slice(newsData.length - 21, newsData.length)
+                                {newsData.slice(newsData.length - 20, newsData.length)
                                 .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
                                 .map((news) => (
                                     <div onClick={() => handleNewsClick(news.news_id)} className='news_card' key={news.news_id}>
