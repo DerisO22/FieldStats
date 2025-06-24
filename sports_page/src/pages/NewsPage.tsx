@@ -6,18 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddNews from '../components/component_operations/AddNews'
-
-interface NewsCard {
-    news_id: number,
-    headline: string,
-    author: string,
-    publish_date: string,
-    content: string,
-    image_url: string,
-    sport_id: number,
-    team_id: number,
-    features: boolean
-}
+import { NewsCard } from '../types/news_types'
 
 interface NewsPageProps {
     searchTerm: string

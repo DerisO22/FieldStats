@@ -6,30 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddPlayer from '../components/component_operations/AddPlayer'
-
-interface Player {
-    player_id: number,
-    first_name: string,
-    last_name: string,
-    date_of_birth: string,
-    gender_id: number,
-    bio: string
-}
-
-interface AddNewPlayer {
-    first_name: string,
-    last_name: string,
-    date_of_birth: string,
-    gender_id: number,
-    bio: string
-}
+import { PlayerData, AddNewPlayer } from '../types/players_types'
 
 interface PlayersPageProps {
     searchTerm: string
 }
 
 const Player = ({ searchTerm }: PlayersPageProps) => {
-    const [ playerData, setPlayerData ] = useState<Player[] | null>([]);
+    const [ playerData, setPlayerData ] = useState<PlayerData[] | null>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const navigate = useNavigate();
     const { openModal, closeModal } = useModal();

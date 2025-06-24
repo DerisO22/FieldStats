@@ -6,14 +6,7 @@ import { useModal } from "../contexts/ModalContext";
 import { useAuth } from "../contexts/AuthContext";
 import EditPlayer from "../components/component_operations/EditPlayer";
 import { useTheme } from "../contexts/ThemeContext";
-
-interface PlayerStats {
-    stat_id: number,
-    player_id: number,
-    sport_name: string,
-    season: string,
-    stats: any
-}
+import { PlayerStats, EditPlayerDetails, ChartDataEntry } from "../types/players_types";
 
 export interface Player {
     player_id: number,
@@ -23,20 +16,6 @@ export interface Player {
     gender_id: number,
     bio: string,
     stats?: PlayerStats[]
-}
-
-interface EditPlayerDetails {
-    player_id: number,
-    first_name: string,
-    last_name: string,
-    date_of_birth: string,
-    gender_id: number,
-    bio: string,
-}
-
-interface ChartDataEntry {
-    name: string;
-    value: number;
 }
 
 const PlayerDetailsPage = () => {

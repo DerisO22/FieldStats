@@ -5,20 +5,8 @@ import { useModal } from '../contexts/ModalContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditSchool from '../components/component_operations/EditSchool';
 
-interface School {
-    school_id: number,
-    school_name: string,
-    school_type_id: number,
-    state: string,
-    city: string,
-    address: string,
-    website: string,
-}
-
-interface School_Sport {
-    sport_id: number,
-    sport_name: string
-}
+// Custom Types
+import { School, School_Sport } from '../types/schools_types';
 
 const SchoolDetails = () => {
     const { school_id } = useParams();

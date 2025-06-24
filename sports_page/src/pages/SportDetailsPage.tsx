@@ -6,13 +6,7 @@ import { getSportDetails, editSport } from "../services/sports_service";
 import { useModal } from "../contexts/ModalContext";
 import EditSport from "../components/component_operations/EditSport";
 import { useAuth } from "../contexts/AuthContext";
-
-interface Sport {
-    sport_id: number;
-    sport_name: string;
-    sport_description: string;
-    has_gender_division: boolean;
-}
+import { Sport } from "../types/sports_types";
 
 const SportDetailPage = () => {
     const { sportName } = useParams();

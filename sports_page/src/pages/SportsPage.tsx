@@ -6,13 +6,7 @@ import { getSports, deleteSport, addSport } from '../services/sports_service'
 import { useModal } from '../contexts/ModalContext'
 import AddSport from '../components/component_operations/AddSport'
 import { useAuth } from '../contexts/AuthContext'
-
-interface Sport {
-    sport_id: number,
-    sport_name: string,
-    sport_description: string,
-    has_gender_division: boolean,
-}
+import { Sport } from '../types/sports_types'
 
 interface SportPageProps {
     searchTerm: string

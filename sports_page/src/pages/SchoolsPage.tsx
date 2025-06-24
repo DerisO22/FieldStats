@@ -6,24 +6,8 @@ import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddSchool from '../components/component_operations/AddSchool'
 
-interface School {
-	school_id: number,
-	school_name: string,
-	school_type_id: number,
-	state: string,
-	city: string,
-	address: string,
-	website: string,
-}
-
-interface newSchool {
-	school_name: string,
-	school_type_id: number,
-	state: string,
-	city: string,
-	address: string,
-	website: string,
-}
+// Custom Types
+import { School, newSchool } from '../types/schools_types'
 
 interface SchoolsPageProps {
   	searchTerm: string
