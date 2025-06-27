@@ -7,6 +7,7 @@ import EditSchool from '../components/component_operations/EditSchool';
 
 // Custom Types
 import { School, School_Sport } from '../types/schools_types';
+import Loader from '../components/Loader';
 
 const SchoolDetails = () => {
     const { school_id } = useParams();
@@ -65,7 +66,7 @@ const SchoolDetails = () => {
     if (isLoading) {
         return (
             <div className="page_container">
-                <h2>Loading...</h2>
+                <Loader />
             </div>
         );
     }

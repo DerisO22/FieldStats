@@ -7,6 +7,7 @@ import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddPlayer from '../components/component_operations/AddPlayer'
 import { PlayerData, AddNewPlayer } from '../types/players_types'
+import Loader from '../components/Loader'
 
 interface PlayersPageProps {
     searchTerm: string
@@ -88,7 +89,7 @@ const Player = ({ searchTerm }: PlayersPageProps) => {
 
                 <div className='players_container'>
                     {isLoading ? (
-                        <p>Loading players...</p>
+                        <Loader />
                     ) : (
                         <>
                             {/* Male Players */}

@@ -7,6 +7,7 @@ import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddNews from '../components/component_operations/AddNews'
 import { NewsCard } from '../types/news_types'
+import Loader from '../components/Loader'
 
 interface NewsPageProps {
     searchTerm: string
@@ -105,7 +106,7 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
 
                 <div className='cards_container'>
                     {isLoading ? (
-                        <p className='text'>Loading news data...</p>
+                        <Loader />
                     ) : (
                         newsData.length > 0 ? (
                             <div className='news_card_container'>

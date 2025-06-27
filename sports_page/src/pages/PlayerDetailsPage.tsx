@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import EditPlayer from "../components/component_operations/EditPlayer";
 import { useTheme } from "../contexts/ThemeContext";
 import { PlayerStats, EditPlayerDetails, ChartDataEntry } from "../types/players_types";
+import Loader from "../components/Loader";
 
 export interface Player {
     player_id: number,
@@ -98,7 +99,7 @@ const PlayerDetailsPage = () => {
     if (isLoading) {
         return (
             <div className="page_container">
-                <h2>Loading...</h2>
+                <Loader />
             </div>
         );
     }

@@ -8,6 +8,7 @@ import { editNews } from "../services/news_services";
 import { useModal } from "../contexts/ModalContext";
 import { useAuth } from "../contexts/AuthContext";
 import { News } from "../types/news_types";
+import Loader from "../components/Loader";
 
 const NewsDetailPage = () => {
     const { news_id } = useParams();
@@ -83,7 +84,7 @@ const NewsDetailPage = () => {
     if (isLoading) {
         return (
             <div className="page_container">
-                <h2>Loading...</h2>
+                <Loader />
             </div>
         );
     }

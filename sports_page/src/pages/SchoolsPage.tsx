@@ -8,6 +8,7 @@ import AddSchool from '../components/component_operations/AddSchool'
 
 // Custom Types
 import { School, newSchool } from '../types/schools_types'
+import Loader from '../components/Loader'
 
 interface SchoolsPageProps {
   	searchTerm: string
@@ -88,7 +89,7 @@ const SchoolsPage = ({ searchTerm }: SchoolsPageProps) => {
 				<h1 className='header1'>Schools</h1>
 				<div className='schools_container'>
 				{isLoading ? (
-					<p>Loading schools...</p>
+					<Loader />
 				) : (
 					schoolData
 					.filter(school => school.school_name.toLowerCase().includes(searchTerm.toLowerCase()))

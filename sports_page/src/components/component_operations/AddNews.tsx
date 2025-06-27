@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import Loader from "../Loader";
 
 interface AddNewsProps {
     onSubmit: (newsData: {
@@ -246,7 +247,7 @@ const AddNews = ({ onSubmit, isLoading = false }: AddNewsProps) => {
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Adding Article...' : 'Add Article'}
+                    {isLoading ? <Loader /> : 'Add Article'}
                 </button>
             </div>
         </form>
