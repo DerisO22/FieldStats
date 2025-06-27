@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { getSports, getSportGenders, deleteSport, addSport } from '../services/sports_service'
 import { useModal } from '../contexts/ModalContext'
 import AddSport from '../components/component_operations/AddSport'
+import Loader from '../components/Loader'
 import { useAuth } from '../contexts/AuthContext'
 import { Sport, SportGenders } from '../types/sports_types'
 
@@ -119,7 +120,7 @@ const SportsPage = ({ searchTerm }: SportPageProps) => {
 
             <div className='sports_container'>
                 {isLoading ? (
-                    <p>Loading sports...</p>
+                    <Loader />
                 ) : (
                     <>
                         {getUniqueGenders().map((gender) => {
