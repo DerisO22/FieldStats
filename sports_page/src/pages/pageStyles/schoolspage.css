@@ -89,6 +89,14 @@
     padding-bottom: 5rem;
 }
 
+.school_sports_container span {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 @media screen and (max-width: 1200px) {
     .school_sports_container {
         grid-template-columns: repeat(4, 4fr);

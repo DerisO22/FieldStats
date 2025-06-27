@@ -28,6 +28,15 @@ CREATE TABLE IF NOT EXISTS sports (
     has_gender_divisions BOOLEAN DEFAULT TRUE  
 );
 
+CREATE TABLE IF NOT EXISTS sport_genders (
+    sport_id INTEGER NOT NULL,
+    gender_id INTEGER NOT NULL,
+
+    PRIMARY KEY (sport_id, gender_is),
+    FOREIGN KEY (sport_id) REFERENCES sports(sport_id),
+    FOREIGN KEY (gender_id) REFERENCES genders (gender_id)
+);
+
 -- Schools
 CREATE TABLE IF NOT EXISTS schools (
     school_id SERIAL PRIMARY KEY,

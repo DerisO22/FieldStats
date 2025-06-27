@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticateToken } from '../middleware/auth.js';
 import { deleteContentLimiter } from '../middleware/rate_limiter.js';
-import { getAllSports, getSpecificSport, deleteSport, createSport, editSport } from '../services/sportService.js';
+import { getAllSports, getAllSportGenders, getSpecificSport, deleteSport, createSport, editSport } from '../services/sportService.js';
 
 const router = express.Router();
 
@@ -15,6 +15,17 @@ router.get('/', async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error('Error fetching sports data:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// All sports and their gender divisions
+router.get('/genders', async (req, res) => {
+    try {
+        const result = await getAllSportGenders(req.pgClient);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching sports gender data:', error);
         res.status(500).json({ error: error.message });
     }
 });

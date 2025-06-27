@@ -77,6 +77,16 @@
     background-color: white;
 }
 
+/* Target Recharts Legend text in dark mode */
+[data-theme="dark"] .recharts-legend-item-text {
+    color: white !important;
+}
+
+/* You might also need to target other recharts text elements */
+[data-theme="dark"] .recharts-text {
+    fill: white !important;
+}
+
 .chart_container {
     transform: scale(.9);
 }

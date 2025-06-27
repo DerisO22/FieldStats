@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import Loader from "../Loader";
 
 interface AddPlayerProps {
     onSubmit: (playerData: {
@@ -185,7 +186,7 @@ const AddPlayer = ({ onSubmit, isLoading = false }: AddPlayerProps) => {
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Adding Player...' : 'Add Player'}
+                    {isLoading ? <Loader /> : 'Add Player'}
                 </button>
             </div>
         </form>

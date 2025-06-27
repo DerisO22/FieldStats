@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import Loader from "../Loader";
 
 interface AddSchoolProps {
     onSubmit: (schoolData: {
@@ -221,7 +222,7 @@ const AddSchool = ({ onSubmit, isLoading = false }: AddSchoolProps) => {
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Adding School...' : 'Add School'}
+                    {isLoading ? <Loader /> : 'Add School'}
                 </button>
             </div>
         </form>

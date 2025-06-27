@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import Loader from "../Loader";
 
 interface SchoolData {
     school_id: number;
@@ -229,7 +230,7 @@ const EditSchool = ({ currentSchool, onSubmit, isLoading }: EditSchoolProps) => 
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Updating School...' : 'Update School'}
+                    {isLoading ? <Loader /> : 'Update School'}
                 </button>
             </div>
         </form>

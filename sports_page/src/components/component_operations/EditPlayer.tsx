@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import './component_operation_styles/modal_operation_form.css'
 import { Player } from "../../pages/PlayerDetailsPage";
+import Loader from "../Loader";
 
 interface PlayerData {
     player_id: number;
@@ -195,7 +196,7 @@ const EditPlayer = ({ currentPlayer, onSubmit, isLoading }: EditPlayerProps) => 
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Updating Player...' : 'Update Player'}
+                    {isLoading ? <Loader /> : 'Update Player'}
                 </button>
             </div>
         </form>

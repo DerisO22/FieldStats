@@ -5,20 +5,9 @@ import { useModal } from '../contexts/ModalContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditSchool from '../components/component_operations/EditSchool';
 
-interface School {
-    school_id: number,
-    school_name: string,
-    school_type_id: number,
-    state: string,
-    city: string,
-    address: string,
-    website: string,
-}
-
-interface School_Sport {
-    sport_id: number,
-    sport_name: string
-}
+// Custom Types
+import { School, School_Sport } from '../types/schools_types';
+import Loader from '../components/Loader';
 
 const SchoolDetails = () => {
     const { school_id } = useParams();
@@ -77,7 +66,7 @@ const SchoolDetails = () => {
     if (isLoading) {
         return (
             <div className="page_container">
-                <h2>Loading...</h2>
+                <Loader />
             </div>
         );
     }
@@ -113,16 +102,19 @@ const SchoolDetails = () => {
 
                     <h1 className='header2'>School Sports</h1>
                     <div className='school_sports_container'>
-                        {schoolSports && schoolSports.length > 0 &&
-                        schoolSports.map((sport) => (
-                            <button 
-                                key={sport.sport_id}
-                                className='sport_button'
-                            >
-                                <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
-                                {sport.sport_name}
-                            </button>
-                        ))}
+                        {(schoolSports && schoolSports.length > 0) ?
+                            schoolSports.map((sport) => (
+                                <button 
+                                    key={sport.sport_id}
+                                    className='sport_button'
+                                >
+                                    <img className='button_icon' src={`/sports_logos/${sport.sport_name.replace(/\s/g, '').toLowerCase()}.png`}></img>
+                                    {sport.sport_name}
+                                </button>
+                            )
+                        ) : 
+                            <span className='header3'>This School Has No Current Sports</span>
+                        }
                     </div>
                 </>
             )}

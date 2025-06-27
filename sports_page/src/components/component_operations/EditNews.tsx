@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './component_operation_styles/modal_operation_form.css'
+import Loader from "../Loader";
 
 interface NewsData {
     news_id: number,
@@ -243,7 +244,7 @@ const EditNews = ({ currentNews, onSubmit, isLoading }: EditNewsProps) => {
                     className="submit_button"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Updating News...' : 'Update News'}
+                    {isLoading ? <Loader /> : 'Update News'}
                 </button>
             </div>
         </form>
