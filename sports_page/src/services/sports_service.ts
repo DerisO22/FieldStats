@@ -25,6 +25,28 @@ const getSports = async () => {
     }
 }
 
+const getSportGenders = async () => {
+    try {
+        const res = await fetch(`${API_URL}/sports_data/genders`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+        });
+        
+        
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`API error (${res.status}): ${errorText || 'Unknown error'}`);
+        }
+        
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error in getSportGenders service:', error);
+        throw error; 
+    }
+}
+
 const getSportDetails = async (sportName: string) => {
     try {
         const res = await fetch(`${API_URL}/sports_data/${sportName}`, {
@@ -119,4 +141,4 @@ const editSport = async ( sportData: {
     }
 }
 
-export { getSports, getSportDetails, deleteSport, addSport, editSport };
+export { getSports, getSportGenders, getSportDetails, deleteSport, addSport, editSport };

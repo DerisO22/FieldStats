@@ -13,6 +13,17 @@ const getAllSports = async(pgClient) => {
     } 
 };
 
+const getAllSportGenders = async(pgClient) => {
+    try {
+        const query = SportQuerys.RETRIEVE_SPORT_GENDERS;
+        const result = await pgClient.query(query);
+
+        return result.rows;
+    } catch (error) {
+        console.error('Service: Error fetching all sports genders:', error);
+    } 
+};
+
 const getSpecificSport = async(pgClient, sportName) => {
     try {
         const query = SportQuerys.RETRIEVE_SPECIFIC;
@@ -73,4 +84,4 @@ const editSport = async(pgClient, sportData) => {
     }
 };
 
-export { getAllSports, getSpecificSport, deleteSport, createSport, editSport };
+export { getAllSports, getAllSportGenders, getSpecificSport, deleteSport, createSport, editSport };

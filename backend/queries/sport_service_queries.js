@@ -11,6 +11,8 @@ const SportQuerys = {
     CREATE: `INSERT INTO sports (sport_name, sport_description, has_gender_divisions) 
              VALUES ($1, $2, $3);`,
 
+    RETRIEVE_SPORT_GENDERS: `SELECT * FROM sport_genders`,
+
 	// Probably in the detail pages of sports
     RETRIEVE_NEWS_BY_SPORT: `SELECT * 
 							 FROM news n

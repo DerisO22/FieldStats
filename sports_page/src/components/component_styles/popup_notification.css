@@ -5,7 +5,7 @@
     --bg2-color: #fcb900;
     --bg3-color: #00a9e0;
     --bg4-color: #b4d9e5;
-  }
+}
 
 .popup_notification {
     width: 10rem;
@@ -18,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000;
+    z-index: 100;
     animation: slideIn 0.3s ease-in-out;
 }
 
