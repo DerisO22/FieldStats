@@ -6,18 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { useModal } from '../contexts/ModalContext'
 import { useAuth } from '../contexts/AuthContext'
 import AddNews from '../components/component_operations/AddNews'
-
-interface NewsCard {
-    news_id: number,
-    headline: string,
-    author: string,
-    publish_date: string,
-    content: string,
-    image_url: string,
-    sport_id: number,
-    team_id: number,
-    features: boolean
-}
+import { NewsCard } from '../types/news_types'
+import Loader from '../components/Loader'
 
 interface NewsPageProps {
     searchTerm: string
@@ -116,11 +106,11 @@ const NewsPage = ({ searchTerm }: NewsPageProps) => {
 
                 <div className='cards_container'>
                     {isLoading ? (
-                        <p className='text'>Loading news data...</p>
+                        <Loader />
                     ) : (
                         newsData.length > 0 ? (
                             <div className='news_card_container'>
-                                {newsData.slice(newsData.length - 21, newsData.length)
+                                {newsData.slice(newsData.length - 20, newsData.length)
                                 .filter(news => news.headline.toLowerCase().includes(searchTerm.toLowerCase()))
                                 .map((news) => (
                                     <div onClick={() => handleNewsClick(news.news_id)} className='news_card' key={news.news_id}>

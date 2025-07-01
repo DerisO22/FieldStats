@@ -7,18 +7,8 @@ import { getSpecificNews } from "../services/news_services";
 import { editNews } from "../services/news_services";
 import { useModal } from "../contexts/ModalContext";
 import { useAuth } from "../contexts/AuthContext";
-
-interface News {
-    news_id: number,
-    headline: string,
-    author: string,
-    publish_date: string,
-    content: string,
-    image_url: string,
-    sport_id: number,
-    team_id: number,
-    features: boolean
-}
+import { News } from "../types/news_types";
+import Loader from "../components/Loader";
 
 const NewsDetailPage = () => {
     const { news_id } = useParams();
@@ -94,7 +84,7 @@ const NewsDetailPage = () => {
     if (isLoading) {
         return (
             <div className="page_container">
-                <h2>Loading...</h2>
+                <Loader />
             </div>
         );
     }
