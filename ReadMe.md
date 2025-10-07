@@ -3,7 +3,7 @@
 </h1>
 
 Sports Information and Analytics Full Stack React Application. 
-This is a sample repo of my project from an earlier version. The deployed website is currently paused, unfortunately, due to costs
+The deployed website is currently down since I ran out of free Railway trial.
 
 # Tech Stack
 - React
